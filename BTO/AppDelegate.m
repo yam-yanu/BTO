@@ -12,10 +12,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [GMSServices provideAPIKey:@"AIzaSyDiH_9H7-GylvuCQg5dqzcC1ELqg-7PHio"];
+    
+    // メインウインドウ
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    
+    // フレームをデバイスのスクリーンサイズにセット
+    self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height-20);
+    
+    // ルートビューコントローラを生成
+    _rootViewController= [[RootViewController alloc] init];
+    
+    // メインウインドウのrootViewControllerをセット
+    self.window.rootViewController = _rootViewController;
+    
+    // レンダリング
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
