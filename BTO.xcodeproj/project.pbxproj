@@ -31,6 +31,23 @@
 		A12E73D917E825C300963CDA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12E73D317E825C300963CDA /* SystemConfiguration.framework */; };
 		A12E73DC17E8264D00963CDA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E73DB17E8264D00963CDA /* RootViewController.m */; };
 		A12E73DE17E8299B00963CDA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A12E73DD17E8299B00963CDA /* libc++.dylib */; };
+		A12E73F317E831A700963CDA /* SSDialogView.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E73E117E831A700963CDA /* SSDialogView.m */; };
+		A12E73F417E831A700963CDA /* SSGentleAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E73E317E831A700963CDA /* SSGentleAlertView.m */; };
+		A12E73F517E831A700963CDA /* SSGentleAlertButtonBlack.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73E517E831A700963CDA /* SSGentleAlertButtonBlack.xib */; };
+		A12E73F617E831A700963CDA /* SSGentleAlertViewBlack.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A12E73E617E831A700963CDA /* SSGentleAlertViewBlack.bundle */; };
+		A12E73F717E831A700963CDA /* SSGentleAlertViewBlack.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73E717E831A700963CDA /* SSGentleAlertViewBlack.xib */; };
+		A12E73F817E831A700963CDA /* SSGentleAlertButtonDefault.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73E917E831A700963CDA /* SSGentleAlertButtonDefault.xib */; };
+		A12E73F917E831A700963CDA /* SSGentleAlertViewDefault.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A12E73EA17E831A700963CDA /* SSGentleAlertViewDefault.bundle */; };
+		A12E73FA17E831A700963CDA /* SSGentleAlertViewDefault.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73EB17E831A700963CDA /* SSGentleAlertViewDefault.xib */; };
+		A12E73FB17E831A700963CDA /* SSGentleAlertButtonNative.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73ED17E831A700963CDA /* SSGentleAlertButtonNative.xib */; };
+		A12E73FC17E831A700963CDA /* SSGentleAlertViewNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A12E73EE17E831A700963CDA /* SSGentleAlertViewNative.bundle */; };
+		A12E73FD17E831A700963CDA /* SSGentleAlertViewNative.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12E73EF17E831A700963CDA /* SSGentleAlertViewNative.xib */; };
+		A12E73FE17E831A700963CDA /* SSOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E73F217E831A700963CDA /* SSOverlayWindow.m */; };
+		A12E744917E97BD200963CDA /* R9HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E744817E97BD200963CDA /* R9HTTPRequest.m */; };
+		A12E744D17E9808C00963CDA /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E744C17E9808C00963CDA /* SearchViewController.m */; };
+		A12E745017E9814600963CDA /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E744F17E9814600963CDA /* MissionViewController.m */; };
+		A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745617E9828500963CDA /* MakeBTOViewController.m */; };
+		A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745917E982BC00963CDA /* MissionForBTOViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +80,32 @@
 		A12E73DA17E8264D00963CDA /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A12E73DB17E8264D00963CDA /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		A12E73DD17E8299B00963CDA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A12E73E017E831A700963CDA /* SSDialogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDialogView.h; sourceTree = "<group>"; };
+		A12E73E117E831A700963CDA /* SSDialogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSDialogView.m; sourceTree = "<group>"; };
+		A12E73E217E831A700963CDA /* SSGentleAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSGentleAlertView.h; sourceTree = "<group>"; };
+		A12E73E317E831A700963CDA /* SSGentleAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSGentleAlertView.m; sourceTree = "<group>"; };
+		A12E73E517E831A700963CDA /* SSGentleAlertButtonBlack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertButtonBlack.xib; sourceTree = "<group>"; };
+		A12E73E617E831A700963CDA /* SSGentleAlertViewBlack.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SSGentleAlertViewBlack.bundle; sourceTree = "<group>"; };
+		A12E73E717E831A700963CDA /* SSGentleAlertViewBlack.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertViewBlack.xib; sourceTree = "<group>"; };
+		A12E73E917E831A700963CDA /* SSGentleAlertButtonDefault.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertButtonDefault.xib; sourceTree = "<group>"; };
+		A12E73EA17E831A700963CDA /* SSGentleAlertViewDefault.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SSGentleAlertViewDefault.bundle; sourceTree = "<group>"; };
+		A12E73EB17E831A700963CDA /* SSGentleAlertViewDefault.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertViewDefault.xib; sourceTree = "<group>"; };
+		A12E73ED17E831A700963CDA /* SSGentleAlertButtonNative.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertButtonNative.xib; sourceTree = "<group>"; };
+		A12E73EE17E831A700963CDA /* SSGentleAlertViewNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SSGentleAlertViewNative.bundle; sourceTree = "<group>"; };
+		A12E73EF17E831A700963CDA /* SSGentleAlertViewNative.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SSGentleAlertViewNative.xib; sourceTree = "<group>"; };
+		A12E73F017E831A700963CDA /* SSGentleAlertViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSGentleAlertViewStyle.h; sourceTree = "<group>"; };
+		A12E73F117E831A700963CDA /* SSOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSOverlayWindow.h; sourceTree = "<group>"; };
+		A12E73F217E831A700963CDA /* SSOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSOverlayWindow.m; sourceTree = "<group>"; };
+		A12E744717E97BD200963CDA /* R9HTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R9HTTPRequest.h; sourceTree = "<group>"; };
+		A12E744817E97BD200963CDA /* R9HTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = R9HTTPRequest.m; sourceTree = "<group>"; };
+		A12E744B17E9808C00963CDA /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		A12E744C17E9808C00963CDA /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		A12E744E17E9814600963CDA /* MissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
+		A12E744F17E9814600963CDA /* MissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionViewController.m; sourceTree = "<group>"; };
+		A12E745517E9828500963CDA /* MakeBTOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MakeBTOViewController.h; path = ../MakeBTOViewController.h; sourceTree = "<group>"; };
+		A12E745617E9828500963CDA /* MakeBTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MakeBTOViewController.m; path = ../MakeBTOViewController.m; sourceTree = "<group>"; };
+		A12E745817E982BC00963CDA /* MissionForBTOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionForBTOViewController.h; path = ../MissionForBTOViewController.h; sourceTree = "<group>"; };
+		A12E745917E982BC00963CDA /* MissionForBTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionForBTOViewController.m; path = ../MissionForBTOViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +183,10 @@
 				A12E73B117E8214300963CDA /* AppDelegate.m */,
 				A12E73DA17E8264D00963CDA /* RootViewController.h */,
 				A12E73DB17E8264D00963CDA /* RootViewController.m */,
+				A12E745B17E982EE00963CDA /* ForBTOView */,
+				A12E745117E9820200963CDA /* ForSearcherView */,
+				A12E744A17E97BF000963CDA /* HTTP */,
+				A12E73DF17E831A700963CDA /* SSGentleAlertView */,
 				A12E73A817E8214300963CDA /* Supporting Files */,
 			);
 			path = BTO;
@@ -157,6 +204,84 @@
 				A12E73B717E8214300963CDA /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A12E73DF17E831A700963CDA /* SSGentleAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				A12E73E017E831A700963CDA /* SSDialogView.h */,
+				A12E73E117E831A700963CDA /* SSDialogView.m */,
+				A12E73E217E831A700963CDA /* SSGentleAlertView.h */,
+				A12E73E317E831A700963CDA /* SSGentleAlertView.m */,
+				A12E73E417E831A700963CDA /* SSGentleAlertViewBlack */,
+				A12E73E817E831A700963CDA /* SSGentleAlertViewDefault */,
+				A12E73EC17E831A700963CDA /* SSGentleAlertViewNative */,
+				A12E73F017E831A700963CDA /* SSGentleAlertViewStyle.h */,
+				A12E73F117E831A700963CDA /* SSOverlayWindow.h */,
+				A12E73F217E831A700963CDA /* SSOverlayWindow.m */,
+			);
+			path = SSGentleAlertView;
+			sourceTree = "<group>";
+		};
+		A12E73E417E831A700963CDA /* SSGentleAlertViewBlack */ = {
+			isa = PBXGroup;
+			children = (
+				A12E73E517E831A700963CDA /* SSGentleAlertButtonBlack.xib */,
+				A12E73E617E831A700963CDA /* SSGentleAlertViewBlack.bundle */,
+				A12E73E717E831A700963CDA /* SSGentleAlertViewBlack.xib */,
+			);
+			path = SSGentleAlertViewBlack;
+			sourceTree = "<group>";
+		};
+		A12E73E817E831A700963CDA /* SSGentleAlertViewDefault */ = {
+			isa = PBXGroup;
+			children = (
+				A12E73E917E831A700963CDA /* SSGentleAlertButtonDefault.xib */,
+				A12E73EA17E831A700963CDA /* SSGentleAlertViewDefault.bundle */,
+				A12E73EB17E831A700963CDA /* SSGentleAlertViewDefault.xib */,
+			);
+			path = SSGentleAlertViewDefault;
+			sourceTree = "<group>";
+		};
+		A12E73EC17E831A700963CDA /* SSGentleAlertViewNative */ = {
+			isa = PBXGroup;
+			children = (
+				A12E73ED17E831A700963CDA /* SSGentleAlertButtonNative.xib */,
+				A12E73EE17E831A700963CDA /* SSGentleAlertViewNative.bundle */,
+				A12E73EF17E831A700963CDA /* SSGentleAlertViewNative.xib */,
+			);
+			path = SSGentleAlertViewNative;
+			sourceTree = "<group>";
+		};
+		A12E744A17E97BF000963CDA /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				A12E744717E97BD200963CDA /* R9HTTPRequest.h */,
+				A12E744817E97BD200963CDA /* R9HTTPRequest.m */,
+			);
+			name = HTTP;
+			sourceTree = "<group>";
+		};
+		A12E745117E9820200963CDA /* ForSearcherView */ = {
+			isa = PBXGroup;
+			children = (
+				A12E744B17E9808C00963CDA /* SearchViewController.h */,
+				A12E744C17E9808C00963CDA /* SearchViewController.m */,
+				A12E744E17E9814600963CDA /* MissionViewController.h */,
+				A12E744F17E9814600963CDA /* MissionViewController.m */,
+			);
+			name = ForSearcherView;
+			sourceTree = "<group>";
+		};
+		A12E745B17E982EE00963CDA /* ForBTOView */ = {
+			isa = PBXGroup;
+			children = (
+				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
+				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
+				A12E745517E9828500963CDA /* MakeBTOViewController.h */,
+				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
+			);
+			name = ForBTOView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +340,15 @@
 				A12E73B617E8214300963CDA /* Default@2x.png in Resources */,
 				A12E73B817E8214300963CDA /* Default-568h@2x.png in Resources */,
 				A12E73C117E8243F00963CDA /* GoogleMaps.bundle in Resources */,
+				A12E73F517E831A700963CDA /* SSGentleAlertButtonBlack.xib in Resources */,
+				A12E73F617E831A700963CDA /* SSGentleAlertViewBlack.bundle in Resources */,
+				A12E73F717E831A700963CDA /* SSGentleAlertViewBlack.xib in Resources */,
+				A12E73F817E831A700963CDA /* SSGentleAlertButtonDefault.xib in Resources */,
+				A12E73F917E831A700963CDA /* SSGentleAlertViewDefault.bundle in Resources */,
+				A12E73FA17E831A700963CDA /* SSGentleAlertViewDefault.xib in Resources */,
+				A12E73FB17E831A700963CDA /* SSGentleAlertButtonNative.xib in Resources */,
+				A12E73FC17E831A700963CDA /* SSGentleAlertViewNative.bundle in Resources */,
+				A12E73FD17E831A700963CDA /* SSGentleAlertViewNative.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +362,14 @@
 				A12E73AE17E8214300963CDA /* main.m in Sources */,
 				A12E73B217E8214300963CDA /* AppDelegate.m in Sources */,
 				A12E73DC17E8264D00963CDA /* RootViewController.m in Sources */,
+				A12E73F317E831A700963CDA /* SSDialogView.m in Sources */,
+				A12E73F417E831A700963CDA /* SSGentleAlertView.m in Sources */,
+				A12E73FE17E831A700963CDA /* SSOverlayWindow.m in Sources */,
+				A12E744917E97BD200963CDA /* R9HTTPRequest.m in Sources */,
+				A12E744D17E9808C00963CDA /* SearchViewController.m in Sources */,
+				A12E745017E9814600963CDA /* MissionViewController.m in Sources */,
+				A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */,
+				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +454,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTO/BTO-Prefix.pch";
+				IBC_OTHER_FLAGS = "";
 				INFOPLIST_FILE = "BTO/BTO-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -329,6 +472,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTO/BTO-Prefix.pch";
+				IBC_OTHER_FLAGS = "";
 				INFOPLIST_FILE = "BTO/BTO-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

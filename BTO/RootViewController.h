@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
-//#import "SSGentleAlertView.h"
+#import "SSGentleAlertView.h"
+#import "R9HTTPRequest.h"
 
 @interface RootViewController : UIViewController<GMSMapViewDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;
