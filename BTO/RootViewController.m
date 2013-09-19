@@ -30,15 +30,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    results = [[[DataBaseAccess alloc]init] PicLocation];
     
-    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/hello.php"];
-    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
-    [request setHTTPMethod:@"POST"];
-    [request addBody:@"test" forKey:@"TestKey"];
-    [request setCompletionHandler:^(NSHTTPURLResponse *responseHeader, NSString *responseString){
-        NSLog(@"%@", responseString);
-    }];
-    [request startRequest];
+    for(int i = 0;i<15;i++){
+        [NSThread sleepForTimeInterval:1.0];
+        NSLog(@"AAA");
+    }
+    for (NSDictionary *obj in results)
+    {
+        NSLog(@"%@",[obj objectForKey:@"title"]);
+        NSLog(@"%@",[obj objectForKey:@"content"]);
+        //        Entry *entry = [[Entry alloc] init];
+        //        entry.title = [obj objectForKey:@"title"];
+        //        entry.content = [obj objectForKey:@"content"];
+        //        [results addObject:issue];
+    }
     
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
                                                             longitude:151.20
