@@ -30,37 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSMutableArray *results = [[NSMutableArray alloc] init];
-    results = [[[DataBaseAccess alloc]init] PicLocation];
     
-    for(int i = 0;i<15;i++){
-        [NSThread sleepForTimeInterval:1.0];
-        NSLog(@"AAA");
-    }
-    for (NSDictionary *obj in results)
-    {
-        NSLog(@"%@",[obj objectForKey:@"title"]);
-        NSLog(@"%@",[obj objectForKey:@"content"]);
-        //        Entry *entry = [[Entry alloc] init];
-        //        entry.title = [obj objectForKey:@"title"];
-        //        entry.content = [obj objectForKey:@"content"];
-        //        [results addObject:issue];
-    }
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
+                                                            longitude:136.5
+                                                                 zoom:5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     self.view = mapView_;
     
-    
-    // Creates a marker in the center of the map.
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
-    marker.map = mapView_;
+    [DataBaseAccess PicLocation:mapView_];
 
 }
 
@@ -78,6 +56,20 @@
     [alert addButtonWithTitle:@"OK"];
     alert.cancelButtonIndex = 0;
     [alert show];
+    
+    DataBaseAccess *database = [[DataBaseAccess alloc]init];
+    [database DetailBTO:1];
+//    alert.title = [[database detailBTO]objectAtIndex:0];
+//    alert.message = [[database detailBTO]objectAtIndex:1];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        sleep(2);
+//        alert.title = @"2回目";
+//        alert.message = @"いけてるかな？";
+//        [alert show];
+//    });
+
+    
     return YES;
 }
 

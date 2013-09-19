@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import "R9HTTPRequest.h"
 
-@interface DataBaseAccess : NSObject
-@property (copy, nonatomic) NSMutableArray *array;
 
--(NSMutableArray *) PicLocation;
+@interface DataBaseAccess : NSObject<GMSMapViewDelegate>
+
+@property (nonatomic)BOOL isFinished;
+@property (copy,nonatomic)NSMutableArray *detailBTO;
+
++(void) PicLocation:(GMSMapView *)mapView;
+-(NSMutableArray *) DetailBTO:(int)BTOid;
 
 @end
