@@ -10,7 +10,6 @@
 
 @implementation DataBaseAccess
 @synthesize isFinished;
-@synthesize detailBTO;
 
 
 +(void) PicLocation:(GMSMapView *)mapView{
@@ -45,9 +44,8 @@
     [request startRequest];
 }
 
--(NSMutableArray *) DetailBTO :(int)BTOid alert:(SSGentleAlertView *)alert{
+-(void) DetailBTO :(int)BTOid alert:(SSGentleAlertView *)alert{
     
-    detailBTO = [NSMutableArray array];
     isFinished = NO;
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/detailBTO.php"];
@@ -62,19 +60,11 @@
         
         // JSON を NSArray に変換する
         NSError *error;
-        detailBTO = [NSJSONSerialization JSONObjectWithData:jsonData
+        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                 options:NSJSONReadingAllowFragments
                                                                   error:&error];
 
-//        detailBTO = [NSMutableArray array];
-//        [detailBTO insertObject:@"2回目" atIndex:0];
-//        [detailBTO insertObject:@"いけてるかな？" atIndex:1];
-//        
-//        alert.title = [detailBTO objectAtIndex:0];
-//        alert.message = [detailBTO objectAtIndex:1];
-
-        
-        for (NSDictionary *obj in detailBTO)
+        for (NSDictionary *obj in array)
         {
             alert.title = [NSString stringWithFormat:@"%@さんの情報",[obj objectForKey:@"name"]];
             alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
@@ -102,8 +92,7 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
-    
-    return detailBTO;
+
 }
 
 @end

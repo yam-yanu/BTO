@@ -15,7 +15,9 @@
 
 //基本的には地図と過去の位置を表したピンが刺さっている。
 //ほかにも探している人数、見つけた人数、その人の情報などをのせたい
-@implementation MissionViewController
+@implementation MissionViewController{
+    GMSMapView *mapView_;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning

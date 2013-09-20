@@ -15,9 +15,8 @@
 @interface DataBaseAccess : NSObject<GMSMapViewDelegate>
 
 @property (nonatomic)BOOL isFinished;
-@property (copy,nonatomic)NSMutableArray *detailBTO;
 
 +(void) PicLocation:(GMSMapView *)mapView;
--(NSMutableArray *) DetailBTO:(int)BTOid alert:(SSGentleAlertView *)alert;
+-(void) DetailBTO:(int)BTOid alert:(SSGentleAlertView *)alert;
 
 @end

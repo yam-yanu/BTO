@@ -11,8 +11,11 @@
 #import "SSGentleAlertView.h"
 #import "R9HTTPRequest.h"
 #import "DataBaseAccess.h"
+#import "MissionViewController.h"
 
 @interface RootViewController : UIViewController<GMSMapViewDelegate>
+@property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, weak) GMSMapView *mapView;
+@property (strong, nonatomic) MissionViewController *missionViewController;
 
 @end

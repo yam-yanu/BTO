@@ -75,7 +75,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
-            NSLog(@"OKが押されたよ！");
             break;
     }
     
