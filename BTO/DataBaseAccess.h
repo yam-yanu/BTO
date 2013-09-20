@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "R9HTTPRequest.h"
+#import "SSGentleAlertView.h"
 
 
 @interface DataBaseAccess : NSObject<GMSMapViewDelegate>
@@ -17,6 +18,6 @@
 @property (copy,nonatomic)NSMutableArray *detailBTO;
 
 +(void) PicLocation:(GMSMapView *)mapView;
--(NSMutableArray *) DetailBTO:(int)BTOid;
+-(NSMutableArray *) DetailBTO:(int)BTOid alert:(SSGentleAlertView *)alert;
 
 @end

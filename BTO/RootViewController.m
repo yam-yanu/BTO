@@ -42,35 +42,43 @@
 
 }
 
+//マーカーをクリックしたとき
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(id)marker{
+    // ロード中インジケータを表示させる
+    UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] init];
+    ai.frame = CGRectMake(0, 0, 50, 50);
+    ai.center = self.view.center;
+    ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [self.view addSubview:ai];
+    [ai startAnimating];
+
+    //データベースから必要な情報を取得
     SSGentleAlertView* alert = [SSGentleAlertView new];
     alert.delegate = self;
-    alert.title = @"SSGentleAlertView";
-    alert.message = [marker title];
-    //    alert.dialogImageView.image = [UIImage imageNamed:@"alert.png"];
-    //
-    //    UIImageView* image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"alert.png"]];
-    //    image.center = CGPointMake(142, 194);
-    //    [alert addSubview:image];
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"OK"];
-    alert.cancelButtonIndex = 0;
-    [alert show];
-    
     DataBaseAccess *database = [[DataBaseAccess alloc]init];
-    [database DetailBTO:1];
-//    alert.title = [[database detailBTO]objectAtIndex:0];
-//    alert.message = [[database detailBTO]objectAtIndex:1];
+    [database DetailBTO:[[marker title] intValue] alert:alert];
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        sleep(2);
-//        alert.title = @"2回目";
-//        alert.message = @"いけてるかな？";
-//        [alert show];
-//    });
+    //ロードインジケータを止める
+    [ai stopAnimating];
 
-    
     return YES;
+}
+
+// アラートのボタンが押された時に呼ばれるデリゲート
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0:
+            //キャンセルのボタンが押されたときの処理を記述する
+            break;
+        case 1:
+            //「この人を捜す」のボタンが押されたときの処理を記述する
+            //ここに画面遷移を記述
+            NSLog(@"OKが押されたよ！");
+            break;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

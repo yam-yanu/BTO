@@ -15,7 +15,7 @@
 
 +(void) PicLocation:(GMSMapView *)mapView{
 
-    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/hello.php"];
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/allBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request setCompletionHandler:^(
@@ -39,17 +39,18 @@
             marker.map = mapView;
         }
     }];
+    [request setFailedHandler:^(NSError *error){
+        NSLog(@"失敗しました");
+    }];
     [request startRequest];
 }
 
--(NSMutableArray *) DetailBTO :(int)BTOid{
+-(NSMutableArray *) DetailBTO :(int)BTOid alert:(SSGentleAlertView *)alert{
     
     detailBTO = [NSMutableArray array];
-    [detailBTO insertObject:@"1回目" atIndex:0];
-    [detailBTO insertObject:@"いけてるかな？" atIndex:1];
     isFinished = NO;
     
-    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/hello.php"];
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/detailBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
@@ -65,22 +66,43 @@
                                                                 options:NSJSONReadingAllowFragments
                                                                   error:&error];
 
-        detailBTO = [NSMutableArray array];
-        [detailBTO insertObject:@"2回目" atIndex:0];
-        [detailBTO insertObject:@"いけてるかな？" atIndex:1];
+//        detailBTO = [NSMutableArray array];
+//        [detailBTO insertObject:@"2回目" atIndex:0];
+//        [detailBTO insertObject:@"いけてるかな？" atIndex:1];
+//        
+//        alert.title = [detailBTO objectAtIndex:0];
+//        alert.message = [detailBTO objectAtIndex:1];
+
+        
+        for (NSDictionary *obj in detailBTO)
+        {
+            alert.title = [NSString stringWithFormat:@"%@さんの情報",[obj objectForKey:@"name"]];
+            alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
+        }
+        [alert addButtonWithTitle:@"やめとく"];
+        [alert addButtonWithTitle:@"この人を捜す"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+        
         isFinished = YES;
-        NSLog(@"終わった");
+    }];
+    [request setFailedHandler:^(NSError *error){
+        alert.title = @"通信エラー";
+        alert.message = @"何かおかしいようです\n少し時間をおいてみてください";
+        [alert addButtonWithTitle:@"OK"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+        
+        isFinished = YES;
     }];
     [request startRequest];
-    
-    for(int i = 0; i< 5;i++){
-        sleep(1);
-        NSLog(@"%@",[detailBTO objectAtIndex:0]);
-        if(isFinished == YES){
-            NSLog(@"回ってる");
-            break;
-        }
+
+    //通信処理が終了するまで待つ
+    while (!isFinished) {
+        [[NSRunLoop currentRunLoop]
+         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+    
     return detailBTO;
 }
 
