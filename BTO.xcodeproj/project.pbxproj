@@ -48,6 +48,7 @@
 		A12E745017E9814600963CDA /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E744F17E9814600963CDA /* MissionViewController.m */; };
 		A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745617E9828500963CDA /* MakeBTOViewController.m */; };
 		A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745917E982BC00963CDA /* MissionForBTOViewController.m */; };
+		DA9D53CA17EDCAB200180CEB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9D53C917EDCAB200180CEB /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,8 @@
 		A12E745617E9828500963CDA /* MakeBTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MakeBTOViewController.m; path = ../MakeBTOViewController.m; sourceTree = "<group>"; };
 		A12E745817E982BC00963CDA /* MissionForBTOViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MissionForBTOViewController.h; path = ../MissionForBTOViewController.h; sourceTree = "<group>"; };
 		A12E745917E982BC00963CDA /* MissionForBTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionForBTOViewController.m; path = ../MissionForBTOViewController.m; sourceTree = "<group>"; };
+		DA9D53C817EDCAB200180CEB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DA9D53C917EDCAB200180CEB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 			children = (
 				A12E73B017E8214300963CDA /* AppDelegate.h */,
 				A12E73B117E8214300963CDA /* AppDelegate.m */,
+				DA9D53C817EDCAB200180CEB /* MainViewController.h */,
+				DA9D53C917EDCAB200180CEB /* MainViewController.m */,
 				A12E73DA17E8264D00963CDA /* RootViewController.h */,
 				A12E73DB17E8264D00963CDA /* RootViewController.m */,
 				A12E745B17E982EE00963CDA /* ForBTOView */,
@@ -370,6 +375,7 @@
 				A12E745017E9814600963CDA /* MissionViewController.m in Sources */,
 				A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */,
 				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
+				DA9D53CA17EDCAB200180CEB /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

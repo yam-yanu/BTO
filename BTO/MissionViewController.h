@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMaps/GoogleMaps.h>
+#import "SSGentleAlertView.h"
+#import "R9HTTPRequest.h"
 
-@interface MissionViewController : UIViewController
+@interface MissionViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate>
+
+//@property (strong, nonatomic) UIWindow *window;
 
 @end
