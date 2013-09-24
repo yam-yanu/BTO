@@ -68,6 +68,9 @@
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    NSLog(@"ボタン押された");
+    UIViewController *next = [[MissionViewController alloc]init];
+    
     switch (buttonIndex) {
         case 0:
             //キャンセルのボタンが押されたときの処理を記述する
@@ -75,6 +78,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
+            next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:next animated:YES completion:^ {
+                // 完了時の処理をここに書きます
+                NSLog(@"完了した");
+            }];
             break;
     }
     

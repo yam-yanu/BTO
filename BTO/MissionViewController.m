@@ -31,6 +31,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
+                                                            longitude:136.5
+                                                                 zoom:5];
+    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.delegate = self;
+    self.view = mapView_;
+    
+    [DataBaseAccess PicAllLocation:1 Map:mapView_ View:self];
 
 }
 
