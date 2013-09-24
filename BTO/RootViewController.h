@@ -13,7 +13,9 @@
 #import "DataBaseAccess.h"
 #import "MissionViewController.h"
 
-@interface RootViewController : UIViewController<GMSMapViewDelegate>
+
+@interface RootViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate>
+
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, weak) GMSMapView *mapView;
 @property (strong, nonatomic) MissionViewController *missionViewController;
