@@ -36,34 +36,36 @@ BOOL alertFinished;
 {
     [super viewDidLoad];
     
-    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/hello.php"];
-    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
-    [request setHTTPMethod:@"POST"];
-    [request addBody:@"test" forKey:@"TestKey"];
-    [request setCompletionHandler:^(NSHTTPURLResponse *responseHeader, NSString *responseString){
-        NSLog(@"%@", responseString);
-    }];
-    [request startRequest];
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
+                                                            longitude:136.5
+                                                                 zoom:5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     self.view = mapView_;
     
-    // Creates a marker in the center of the map.
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
-    marker.map = mapView_;
+    [DataBaseAccess PicLocation:mapView_];
 
 }
 
+//マーカーをクリックしたとき
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(id)marker{
+    // ロード中インジケータを表示させる
+    UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] init];
+    ai.frame = CGRectMake(0, 0, 50, 50);
+    ai.center = self.view.center;
+    ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [self.view addSubview:ai];
+    [ai startAnimating];
+
+    //データベースから必要な情報を取得
     SSGentleAlertView* alert = [SSGentleAlertView new];
     alert.delegate = self;
+    DataBaseAccess *database = [[DataBaseAccess alloc]init];
+    [database DetailBTO:[[marker title] intValue] alert:alert];
+    
+    //ロードインジケータを止める
+    [ai stopAnimating];
+    
     alert.title = @"SSGentleAlertView";
     alert.message = [marker title];
     //    alert.dialogImageView.image = [UIImage imageNamed:@"alert.png"];
@@ -75,25 +77,25 @@ BOOL alertFinished;
     [alert addButtonWithTitle:@"OK"];
     alert.cancelButtonIndex = 0;
     
-   
-//    // ダイアログ部分の画像はなしにする
-//    alert.dialogImageView.image = nil;
-//    
-//    // タイトルラベルとメッセージラベルの色を変更
-//    alert.titleLabel.textColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
-//    alert.titleLabel.shadowColor = UIColor.clearColor;
-//    alert.messageLabel.textColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.0 alpha:1.0];
-//    alert.messageLabel.shadowColor = UIColor.clearColor;
-//    
-//    // ボタンの背景画像とフォント色を変更
-//    UIButton* button = [alert buttonBase];
-//    [button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:@"dialog_btn_normal"]] forState:UIControlStateNormal];
-//    [button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:@"dialog_btn_pressed"]] forState:UIControlStateHighlighted];
-//    [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-//    [button setTitleColor:UIColor.whiteColor forState:UIControlStateHighlighted];
-//    [alert setButtonBase:button];
-//    [alert setDefaultButtonBase:button];
-//    
+    
+    //    // ダイアログ部分の画像はなしにする
+    //    alert.dialogImageView.image = nil;
+    //
+    //    // タイトルラベルとメッセージラベルの色を変更
+    //    alert.titleLabel.textColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
+    //    alert.titleLabel.shadowColor = UIColor.clearColor;
+    //    alert.messageLabel.textColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.0 alpha:1.0];
+    //    alert.messageLabel.shadowColor = UIColor.clearColor;
+    //
+    //    // ボタンの背景画像とフォント色を変更
+    //    UIButton* button = [alert buttonBase];
+    //    [button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:@"dialog_btn_normal"]] forState:UIControlStateNormal];
+    //    [button setBackgroundImage:[SSDialogView resizableImage:[UIImage imageNamed:@"dialog_btn_pressed"]] forState:UIControlStateHighlighted];
+    //    [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+    //    [button setTitleColor:UIColor.whiteColor forState:UIControlStateHighlighted];
+    //    [alert setButtonBase:button];
+    //    [alert setDefaultButtonBase:button];
+    //
     [alert show];
     
     alertFinished = NO;  //グローバル変数
@@ -101,27 +103,34 @@ BOOL alertFinished;
     while (alertFinished == NO) {
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5f]];
     }
+
     return YES;
 }
 
+// アラートのボタンが押された時に呼ばれるデリゲート
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //MissionViewControllerの生成
-    // 次画面を指定して遷移
-//    MissionViewController *mission; //ページを定義
-//    mission = [[MissionViewController alloc]initWithNibName:@"mission" bundle:nil];
-      switch (buttonIndex) {
+    
+    NSLog(@"ボタン押された");
+    UIViewController *next = [[MissionViewController alloc]init];
+    
+    switch (buttonIndex) {
         case 0:
+            //キャンセルのボタンが押されたときの処理を記述する
             break;
-            
         case 1:
-            [self.view.window sendSubviewToBack:self.view];
-
-            NSLog(@"mission");
-
+            //「この人を捜す」のボタンが押されたときの処理を記述する
+            //ここに画面遷移を記述
+            next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentViewController:next animated:YES completion:^ {
+                // 完了時の処理をここに書きます
+                NSLog(@"完了した");
+            }];
             break;
     }
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {

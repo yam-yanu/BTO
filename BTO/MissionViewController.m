@@ -23,6 +23,7 @@ BOOL alertFinished;
 //ほかにも探している人数、見つけた人数、その人の情報などをのせたい
 @implementation MissionViewController{
     GMSMapView *mapView_;
+
     UIButton* button;
 
 }
@@ -41,6 +42,7 @@ BOOL alertFinished;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.view.backgroundColor = [UIColor whiteColor];
     button.frame = CGRectMake(0.0, 160.0, 320.0, 40.0);
     [button setTitle:@"成功" forState:UIControlStateNormal];
@@ -68,7 +70,7 @@ BOOL alertFinished;
 //    marker.snippet = @"Australia";
 //    marker.map = mapView_;
     
-	// Do any additional setup after loading the view.
+
 }
 
 
