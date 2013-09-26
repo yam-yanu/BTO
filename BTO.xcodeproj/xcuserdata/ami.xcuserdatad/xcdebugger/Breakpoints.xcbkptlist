@@ -8,12 +8,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BTO/DataBaseAccess.m"
-         timestampString = "401517378.697836"
+         timestampString = "401819479.894641"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
-         landmarkName = "-DetailBTO:alert:"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BTO/DataBaseAccess.m"
-         timestampString = "401517378.697836"
+         timestampString = "401819479.894641"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "-DetailBTO:alert:"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "BTO/DataBaseAccess.m"
-         timestampString = "401517378.697836"
+         timestampString = "401819479.894641"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
-         landmarkName = "-DetailBTO:alert:"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

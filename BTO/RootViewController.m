@@ -38,10 +38,23 @@
     mapView_.delegate = self;
     self.view = mapView_;
     
+    DataBaseAccess *database = [[DataBaseAccess alloc]init];
+    NSLog(@"あなたのIDは%d番です",[database RegisterUser]);
     [DataBaseAccess PicLocation:mapView_];
+    
+    
+    
+    NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+
+    
+}
 //マーカーをクリックしたとき
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(id)marker{
     // ロード中インジケータを表示させる
@@ -53,10 +66,8 @@
     [ai startAnimating];
 
     //データベースから必要な情報を取得
-    SSGentleAlertView* alert = [SSGentleAlertView new];
-    alert.delegate = self;
     DataBaseAccess *database = [[DataBaseAccess alloc]init];
-    [database DetailBTO:[[marker title] intValue] alert:alert];
+    [database DetailBTO:[[marker title] intValue] View:self];
     
     //ロードインジケータを止める
     [ai stopAnimating];
@@ -86,6 +97,20 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             break;
     }
     
+}
+
+
+
+- (void)applicationWillEnterForeground
+{
+    NSLog(@"applicationWillEnterForeground");
+    SSGentleAlertView* alert = [SSGentleAlertView new];
+    alert.delegate = self;
+    alert.title = @"BTOおらんパターン";
+    alert.message = @"やらかした！";
+    [alert addButtonWithTitle:@"OK"];
+    alert.cancelButtonIndex = 0;
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning
