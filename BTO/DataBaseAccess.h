@@ -15,11 +15,12 @@
 @interface DataBaseAccess : NSObject<GMSMapViewDelegate>
 
 @property (nonatomic)BOOL isFinished;
+@property (nonatomic)BOOL MyID;
 
 +(void) PicLocation:(GMSMapView *)mapView;
--(void) DetailBTO:(int)BTOid alert:(SSGentleAlertView *)alert;
+-(void) DetailBTO:(int)BTOid  View:(id)view;
 +(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view;
--(void) RegisterUser;
+-(int) RegisterUser;
 -(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
 +(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude;
 -(void) StopBTO:(int)BTOid;

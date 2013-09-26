@@ -10,6 +10,7 @@
 
 @implementation DataBaseAccess
 @synthesize isFinished;
+@synthesize MyID;
 
 
 //-------------------------------------SearchViewController-------------------------------------
@@ -47,9 +48,11 @@
 }
 
 //BTO一人の情報をダイアログで表示
--(void) DetailBTO :(int)BTOid alert:(SSGentleAlertView *)alert{
+-(void) DetailBTO :(int)BTOid View:(id)view{
     
     isFinished = NO;
+    SSGentleAlertView* alert = [SSGentleAlertView new];
+    alert.delegate = view;
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/detailBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
@@ -110,7 +113,6 @@
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
         // stringの中身がfailedだった場合、アラートで知らせる
         if([responseString isEqualToString:@"failed"]) {
             SSGentleAlertView* alert = [SSGentleAlertView new];
@@ -121,6 +123,7 @@
             alert.cancelButtonIndex = 0;
             [alert show];
         }else{
+            // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
             NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
             
             // JSON を NSArray に変換する
@@ -158,9 +161,10 @@
 //-------------------------------------RootViewController-------------------------------------
 
 //ユーザーを登録
--(void) RegisterUser{
+-(int) RegisterUser{
     
     isFinished = NO;
+    MyID = 0;
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/RegisterUser.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
@@ -175,27 +179,25 @@
         NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                 options:NSJSONReadingAllowFragments
                                                                   error:&error];
-        int id = 0;
         for (NSDictionary *obj in array)
         {
-            id = [(NSNumber *)[obj objectForKey:@"id"] intValue];
-        }
-        if(id != 0){
-            //ユーザーデフォルトに自分のIDを登録
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setInteger:id forKey:@"myID"];
-        }else{
-            //もう一度通信を開始
-            [self RegisterUser];
+            MyID = [(NSNumber *)[obj objectForKey:@"id"] intValue];
         }
         
-        isFinished = YES;
+        //MyIDになにも入ってなかったら
+        if(MyID == 0){
+            //もう一度通信を開始
+            [self RegisterUser];
+        }else{
+            isFinished = YES;
+        }
+        
 
     }];
     [request setFailedHandler:^(NSError *error){
         //もう一度通信を開始
         [self RegisterUser];
-        isFinished = YES;
+        
     }];
     
     [request startRequest];
@@ -205,12 +207,15 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+    
+    return MyID;
 }
 
 
 //-------------------------------------MakeBTOViewController-------------------------------------
 
 //新しくBTOを始めるときに名前や特徴を更新+今までの位置情報を削除
+//写真をアップロードできるとgood
 -(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
     isFinished = NO;
     
