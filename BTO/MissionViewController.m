@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import "MainViewController.h"
 #import "MissionViewController.h"
 #import "SSDialogView.h"
 

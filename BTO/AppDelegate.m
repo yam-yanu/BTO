@@ -7,9 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "RootViewController.h"
-#import "MissionViewController.h"
-#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -20,45 +17,13 @@
     
     // メインウインドウ
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
     // フレームをデバイスのスクリーンサイズにセット
     self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height-20);
-    
-    //メインビューコントローラ生成
-    _mainViewController = [[MainViewController alloc] init];
-    //メインウインドウのmainViewControllerをセット
-    self.window.rootViewController = _mainViewController;
-    
-    
-    // ルートビューコントローラを生成
-    _rootViewController = [[RootViewController alloc] init];
-    [self.window addSubview:_rootViewController.view];
-
-    
-//    //タブビューコントローラーを生成
-//    _TabViewController = [[UITabBarController alloc] init];
-//    
-//    //タブビューを生成
-//    MissionViewController* tab1 = [[MissionViewController alloc] init];
-//    UIViewController* tab2 = [[UIViewController alloc] init];
-//    
-//    //作ったViewControllerをControllerにまとめて追加
-//    NSArray* controllers = [NSArray arrayWithObjects:tab1,tab2,nil];
-//    [(UITabBarController*)_TabViewController setViewControllers:controllers animated:NO];
-//    
-//    //windowにControllerのViewに追加
-//    [self.window addSubview:_TabViewController.view];
-    
-    
-    //ミッションビューコントローラを生成、サブビューとしてセット
-    _missionViewController = [[MissionViewController alloc] init];
-    [_window addSubview:_missionViewController.view];
-    
-    //rootViewを最前面に出す
-    [_window bringSubviewToFront:_rootViewController.view];
-
+    // メインウインドウのrootViewControllerをセット
+    self.window.rootViewController = [UserDefaultAcceess LaunchApp];;
     // レンダリング
-    [_window makeKeyAndVisible];
+    [self.window makeKeyAndVisible];
+    
     
     return YES;
 }

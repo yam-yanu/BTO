@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataBaseAccess.h"
+#import "RootViewController.h"
+#import "MissionViewController.h"
+#import "MissionForBTOViewController.h"
 
 @interface UserDefaultAcceess : NSObject
+
++ (id)LaunchApp;
++ (void)RegisterMyID:(int)myid;
++ (void)RegisterBTOid;
++ (int)getBTOid;
++ (void)ChangeState:(int)state;
+
 
 @end

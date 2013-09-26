@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMaps/GoogleMaps.h>
+#import "MissionViewController.h"
+#import "SSGentleAlertView.h"
 
 @interface SearchViewController : UIViewController
 
