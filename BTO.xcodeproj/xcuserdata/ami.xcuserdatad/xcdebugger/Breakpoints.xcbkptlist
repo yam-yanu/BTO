@@ -13,7 +13,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "51"
          endingLineNumber = "51"
-         landmarkName = "-DetailBTO:alert:"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -26,7 +26,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "90"
          endingLineNumber = "90"
-         landmarkName = "-DetailBTO:alert:"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "78"
          endingLineNumber = "78"
-         landmarkName = "-DetailBTO:alert:"
+         landmarkName = "-DetailBTO:View:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
