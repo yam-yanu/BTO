@@ -15,6 +15,7 @@
 //地図とピンを表示し、ピンをクリックするとその人を捜すかダイアログで聞かれる
 //OKならその人の地図と情報に画面遷移
 @implementation SearchViewController
+@synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +29,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
+                                                            longitude:136.5
+                                                                 zoom:5];
+    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView.delegate = self;
+    self.view = mapView;
+    
+    [DataBaseAccess PicLocation:mapView];
 }
 
 //マーカーをクリックしたとき

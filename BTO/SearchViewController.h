@@ -11,6 +11,8 @@
 #import "MissionViewController.h"
 #import "SSGentleAlertView.h"
 
-@interface SearchViewController : UIViewController
+@interface SearchViewController : UIViewController<GMSMapViewDelegate>
+
+@property GMSMapView *mapView;
 
 @end

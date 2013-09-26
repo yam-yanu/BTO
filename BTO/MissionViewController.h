@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import "SSGentleAlertView.h"
-#import "R9HTTPRequest.h"
 #import "DataBaseAccess.h"
 
 @interface MissionViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate>
