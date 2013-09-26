@@ -10,6 +10,8 @@
 
 @implementation UserDefaultAcceess
 
+//------------------------------最初に起動したときに使用---------------------------------------
+
 + (id)LaunchApp{
     //ユーザーデフォルトからMyIDを取得
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -40,19 +42,36 @@
     }
     
 }
-+ (void)RegisterMyID:(int)myid{
-    
+
+//-------------------------------BTO側で使用--------------------------------------------------
+
+//MyIDを返す
++ (int)getMyID{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:@"MyID"];
 }
-+ (void)RegisterBTOid{
-    
+
+//-------------------------------Searcher側で使用----------------------------------------------
+
+//参照するBTOidを登録(おそらくSearchViewで使用)
++ (void)RegisterBTOid:(int)BTOid{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:BTOid forKey:@"State"];
 }
+
+//BTOidを返す(おそらくMissionViewで使用)
 + (int)getBTOid{
-    //ユーザーデフォルトからBTOidを取得し、返す
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults integerForKey:@"BTOid"];
 }
+
+
+//-------------------------------すべてのviewで使用--------------------------------------------
+
+//現在の状態の変更を登録する
 + (void)ChangeState:(int)state{
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:state forKey:@"State"];
 }
 
 @end

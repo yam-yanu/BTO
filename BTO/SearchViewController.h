@@ -10,9 +10,10 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "MissionViewController.h"
 #import "SSGentleAlertView.h"
+#import "UserDefaultAcceess.h"
 
 @interface SearchViewController : UIViewController<GMSMapViewDelegate>
 
-@property GMSMapView *mapView;
+@property (nonatomic, weak) GMSMapView *mapView;
 
 @end

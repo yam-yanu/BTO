@@ -15,10 +15,9 @@
 @interface UserDefaultAcceess : NSObject
 
 + (id)LaunchApp;
-+ (void)RegisterMyID:(int)myid;
-+ (void)RegisterBTOid;
++ (int)getMyID;
++ (void)RegisterBTOid:(int)BTOid;
 + (int)getBTOid;
 + (void)ChangeState:(int)state;
-
 
 @end

@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "DataBaseAccess.h"
 
-@interface MissionViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate>
+@interface MissionViewController : UIViewController<GMSMapViewDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;
 
 @end

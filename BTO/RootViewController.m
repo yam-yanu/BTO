@@ -32,6 +32,20 @@ BOOL alertFinished;
     
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //テスト用にsearchviewに飛ぶやつ
+    //ボタン実装できたらすぐに消そう！！
+    UIViewController *next = [[SearchViewController alloc]init];
+    next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:next animated:YES completion:^ {
+        NSLog(@"BTO捜すviewにいく");
+    }];
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

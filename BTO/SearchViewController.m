@@ -54,6 +54,7 @@
     alert.delegate = self;
     DataBaseAccess *database = [[DataBaseAccess alloc]init];
     [database DetailBTO:[[marker title] intValue] View:self];
+    [UserDefaultAcceess RegisterBTOid:[[marker title] intValue]];
     
     //ロードインジケータを止める
     [ai stopAnimating];
@@ -65,7 +66,6 @@
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    NSLog(@"ボタン押された");
     UIViewController *next = [[MissionViewController alloc]init];
     
     switch (buttonIndex) {
@@ -77,8 +77,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             //ここに画面遷移を記述
             next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
             [self presentViewController:next animated:YES completion:^ {
-                // 完了時の処理をここに書きます
-                NSLog(@"完了した");
+                [UserDefaultAcceess ChangeState:1];
             }];
             break;
     }

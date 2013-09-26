@@ -17,10 +17,9 @@ BOOL alertFinished;
 
 //基本的には地図と過去の位置を表したピンが刺さっている。
 //ほかにも探している人数、見つけた人数、その人の情報などをのせたい
-@implementation MissionViewController{
-    GMSMapView *mapView_;
+@implementation MissionViewController
+@synthesize mapView;
 
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +33,13 @@ BOOL alertFinished;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
+                                                            longitude:136.5
+                                                                 zoom:5];
+    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView.delegate = self;
+    self.view = mapView;
+    [DataBaseAccess PicAllLocation:1 Map:mapView View:self];
 
 }
 

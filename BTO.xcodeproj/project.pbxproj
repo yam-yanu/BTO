@@ -187,12 +187,9 @@
 			children = (
 				A12E73B017E8214300963CDA /* AppDelegate.h */,
 				A12E73B117E8214300963CDA /* AppDelegate.m */,
-				A1A419E617F436D000157939 /* UserDefaultAcceess.h */,
-				A1A419E717F436D000157939 /* UserDefaultAcceess.m */,
 				A12E73DA17E8264D00963CDA /* RootViewController.h */,
 				A12E73DB17E8264D00963CDA /* RootViewController.m */,
-				A12E745C17E9F31400963CDA /* DataBaseAccess.h */,
-				A12E745D17E9F31400963CDA /* DataBaseAccess.m */,
+				A1A419E917F48A4400157939 /* COMMON */,
 				A12E745B17E982EE00963CDA /* ForBTOView */,
 				A12E745117E9820200963CDA /* ForSearcherView */,
 				A12E744A17E97BF000963CDA /* HTTP */,
@@ -292,6 +289,17 @@
 				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
 			);
 			name = ForBTOView;
+			sourceTree = "<group>";
+		};
+		A1A419E917F48A4400157939 /* COMMON */ = {
+			isa = PBXGroup;
+			children = (
+				A1A419E617F436D000157939 /* UserDefaultAcceess.h */,
+				A1A419E717F436D000157939 /* UserDefaultAcceess.m */,
+				A12E745C17E9F31400963CDA /* DataBaseAccess.h */,
+				A12E745D17E9F31400963CDA /* DataBaseAccess.m */,
+			);
+			name = COMMON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
