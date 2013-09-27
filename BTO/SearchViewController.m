@@ -35,8 +35,21 @@
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    
     [DataBaseAccess PicLocation:mapView];
+    
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    back.frame = CGRectMake(10, 10, 100, 30);
+    back.backgroundColor = [UIColor clearColor];
+    [back setTitle:@"←" forState:UIControlStateNormal];
+    [back addTarget:self
+            action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:back];
+}
+
+-(void)back:(UIButton*)button{
+    //SearchViewControllerに遷移
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 //マーカーをクリックしたとき

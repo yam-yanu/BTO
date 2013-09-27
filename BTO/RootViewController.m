@@ -29,22 +29,73 @@ BOOL alertFinished;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSLog(@"成功");
+    //タイトルラベルを追加
+	UILabel* title =[[UILabel alloc]initWithFrame:self.view.bounds];
+	title.text = @"BLACK THUNDER OJISAN！";
+    title.textAlignment = NSTextAlignmentCenter;
+	title.backgroundColor = [UIColor whiteColor];
+	title.textColor = [UIColor blackColor];
+	title.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[self.view addSubview:title];
+	
+    //探す側のボタン
+    UIButton *search = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    search.frame = CGRectMake(20, 300, 100, 30);
+    search.backgroundColor = [UIColor whiteColor];
+    [search setTitle:@"探しに行く" forState:UIControlStateNormal];
+    [search addTarget:self
+            action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:search];
+
+    //BTO側にいくボタン
+    UIButton *bto = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    bto.frame = CGRectMake(200, 300, 100, 30);
+    search.backgroundColor = [UIColor whiteColor];
+    [bto setTitle:@"BTO" forState:UIControlStateNormal];
+    [bto addTarget:self
+            action:@selector(bto:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bto];
+
+
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    //テスト用にsearchviewに飛ぶやつ
-    //ボタン実装できたらすぐに消そう！！
-    UIViewController *next = [[SearchViewController alloc]init];
-    next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:next animated:YES completion:^ {
-        NSLog(@"BTO捜すviewにいく");
+-(void)search:(UIButton*)button{
+    //SearchViewControllerに遷移
+    UIViewController *search = [[SearchViewController alloc]init];
+    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:search animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+
     }];
-    
+
+
 }
+
+-(void)bto:(UIButton*)button{
+    //MissionForBTOViewControllerに遷移
+    UIViewController *bto = [[MissionForBTOViewController alloc]init];
+    bto.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:bto animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+
+    }];
+
+}
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    
+//    //テスト用にsearchviewに飛ぶやつ
+//    //ボタン実装できたらすぐに消そう！！
+//    UIViewController *next = [[SearchViewController alloc]init];
+//    next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentViewController:next animated:YES completion:^ {
+//        NSLog(@"BTO捜すviewにいく");
+//    }];
+//    
+//}
 
 - (void)didReceiveMemoryWarning
 {

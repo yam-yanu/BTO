@@ -39,7 +39,7 @@ BOOL alertFinished;
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    [DataBaseAccess PicAllLocation:1 Map:mapView View:self];
+    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self];
 
 }
 
