@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MakeBTOViewController : UIViewController
+@interface MakeBTOViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UINavigationBarDelegate>
 
 @end

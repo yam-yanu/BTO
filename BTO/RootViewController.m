@@ -73,8 +73,8 @@ BOOL alertFinished;
 }
 
 -(void)bto:(UIButton*)button{
-    //MissionForBTOViewControllerに遷移
-    UIViewController *bto = [[MissionForBTOViewController alloc]init];
+    //MakeBTOViewControllerに遷移
+    UIViewController *bto = [[MakeBTOViewController alloc]init];
     bto.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:bto animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];

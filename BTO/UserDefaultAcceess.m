@@ -31,12 +31,9 @@
 
     //現在の状態から正しい画面に遷移する
     if(State == 1){//MissionViewに移動
-        RootViewController *rootViewController = [[RootViewController alloc]init];
-        NSLog(@"root");
-        return rootViewController;
-//        MissionViewController *missionViewController = [[MissionViewController alloc]init];
-//        NSLog(@"Mission");
-//        return missionViewController;
+        MissionViewController *missionViewController = [[MissionViewController alloc]init];
+        NSLog(@"Mission");
+        return missionViewController;
     }else if(State == 2){//MissionForViewに移動
         MissionForBTOViewController *missionForBTOViewController = [[MissionForBTOViewController alloc]init];
         return missionForBTOViewController;

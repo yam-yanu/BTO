@@ -7,7 +7,7 @@
 //
 
 #import "MissionViewController.h"
-
+#import "RootViewController.h"
 BOOL alertFinished;
 
 @interface MissionViewController ()
@@ -40,7 +40,26 @@ BOOL alertFinished;
     mapView.delegate = self;
     self.view = mapView;
     [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self];
+    
+    //rootViewに戻るボタン
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    back.frame = CGRectMake(10, 10, 30, 30);
+    back.backgroundColor = [UIColor clearColor];
+    [back setTitle:@"←" forState:UIControlStateNormal];
+    [back addTarget:self
+             action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:back];
+}
 
+-(void)back:(UIButton*)button{
+    //SearchViewControllerに遷移
+    UIViewController *root = [[RootViewController alloc]init];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:root animated:YES completion:^ {
+        NSLog(@"戻りてえ");
+        [UserDefaultAcceess ChangeState:0];
+        NSLog(@"戻った？");
+    }];
 }
 
 - (void)didReceiveMemoryWarning
