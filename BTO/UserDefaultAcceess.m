@@ -58,7 +58,7 @@
 //参照するBTOidを登録(おそらくSearchViewで使用)
 + (void)RegisterBTOid:(int)BTOid{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setInteger:BTOid forKey:@"State"];
+    [userDefaults setInteger:BTOid forKey:@"BTOid"];
 }
 
 //BTOidを返す(おそらくMissionViewで使用)
