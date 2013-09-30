@@ -117,8 +117,8 @@
         if([responseString isEqualToString:@"failed"]) {
             SSGentleAlertView* alert = [SSGentleAlertView new];
             alert.delegate = view;
-            alert.title = @"BTOおらんパターン";
-            alert.message = @"やらかした！";
+            alert.title = @"選択したBTOがいません";
+            alert.message = @"選択したBTOは現在リタイアしているようです。\n前の画面に戻ります。";
             [alert addButtonWithTitle:@"OK"];
             alert.cancelButtonIndex = 0;
             [alert show];

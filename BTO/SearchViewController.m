@@ -89,7 +89,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
-            mission.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            mission.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:mission animated:YES completion:^ {
                 [UserDefaultAcceess ChangeState:1];
             }];

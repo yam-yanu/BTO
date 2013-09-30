@@ -62,6 +62,17 @@ BOOL alertFinished;
     }];
 }
 
+// BTOが存在しなくなった時にアラートのボタンが表示され、ボタンが押された時に呼ばれる
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    UIViewController *search = [[SearchViewController alloc]init];
+    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:search animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+    }];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
