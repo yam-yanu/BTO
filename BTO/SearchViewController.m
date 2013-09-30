@@ -48,8 +48,12 @@
 }
 
 -(void)back:(UIButton*)button{
-    //SearchViewControllerに遷移
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //RootViewControllerに遷移
+    UIViewController *root = [[RootViewController alloc]init];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:root animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+    }];
     
 }
 

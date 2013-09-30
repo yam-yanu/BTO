@@ -118,7 +118,7 @@
             SSGentleAlertView* alert = [SSGentleAlertView new];
             alert.delegate = view;
             alert.title = @"選択したBTOがいません";
-            alert.message = @"選択したBTOは現在リタイアしているようです。\n前の画面に戻ります。";
+            alert.message = @"選択していたBTOは\n現在リタイアしているようです。\n前の画面に戻ります。";
             [alert addButtonWithTitle:@"OK"];
             alert.cancelButtonIndex = 0;
             [alert show];
