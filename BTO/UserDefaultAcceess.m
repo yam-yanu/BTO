@@ -53,6 +53,32 @@
     return [userDefaults integerForKey:@"MyID"];
 }
 
+//自分の名前、特徴、一言を登録
++ (void)RegisterMyStatus:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:name forKey:@"Name"];
+    [userDefaults setObject:feature forKey:@"Feature"];
+    [userDefaults setObject:greeting forKey:@"Greeting"];
+}
+
+//自分の名前を返す
++ (NSString *)getMyName{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults stringForKey:@"Name"];
+}
+
+//自分の特徴を返す
++ (NSString *)getMyFeature{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults stringForKey:@"Feature"];
+}
+
+//自分の一言を返す
++ (NSString *)getMyGreeting{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults stringForKey:@"Greeting"];
+}
+
 //-------------------------------Searcher側で使用----------------------------------------------
 
 //参照するBTOidを登録(おそらくSearchViewで使用)
