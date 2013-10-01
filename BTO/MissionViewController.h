@@ -13,5 +13,6 @@
 
 @interface MissionViewController : UIViewController<GMSMapViewDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;
+@property (nonatomic, weak) NSTimer *tm;
 
 @end
