@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MakeBTOViewController : UIViewController
+@interface MakeBTOViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UINavigationBarDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate>{
+    UITableView *table;
+    UILabel *label;
+    UIView *tablecell;
+    UITextField *textField;
+}
+@property(nonatomic, strong) UITapGestureRecognizer *singleTap;
+
+
 
 @end

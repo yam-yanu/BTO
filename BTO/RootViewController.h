@@ -12,5 +12,6 @@
 
 @interface RootViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate>
 
+@property (nonatomic, weak) UIViewController *RootViewController;
 
 @end

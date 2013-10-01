@@ -35,8 +35,26 @@
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    
     [DataBaseAccess PicLocation:mapView];
+    
+    //rootViewに戻るボタン
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    back.frame = CGRectMake(10, 10, 30, 30);
+    back.backgroundColor = [UIColor clearColor];
+    [back setTitle:@"←" forState:UIControlStateNormal];
+    [back addTarget:self
+            action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:back];
+}
+
+-(void)back:(UIButton*)button{
+    //RootViewControllerに遷移
+    UIViewController *root = [[RootViewController alloc]init];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:root animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+    }];
+    
 }
 
 //マーカーをクリックしたとき
@@ -66,7 +84,7 @@
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    UIViewController *next = [[MissionViewController alloc]init];
+    UIViewController *mission = [[MissionViewController alloc]init];
     
     switch (buttonIndex) {
         case 0:
@@ -75,8 +93,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
-            next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-            [self presentViewController:next animated:YES completion:^ {
+            mission.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:mission animated:YES completion:^ {
                 [UserDefaultAcceess ChangeState:1];
             }];
             break;
