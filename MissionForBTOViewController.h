@@ -11,7 +11,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "DataBaseAccess.h"
 #import "UserDefaultAcceess.h"
-#import "LocationAccess.h"
 
 @interface MissionForBTOViewController : UIViewController<GMSMapViewDelegate,CLLocationManagerDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;

@@ -268,9 +268,10 @@
 
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"detailのインサートに成功しました");
     }];
     [request setFailedHandler:^(NSError *error){
-
+        NSLog(@"detailのインサートに失敗しました");
     }];
     [request startRequest];
 }

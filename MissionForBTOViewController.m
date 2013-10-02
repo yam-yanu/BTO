@@ -38,7 +38,7 @@
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    [DataBaseAccess PicAllLocation:1/*[UserDefaultAcceess getMyID]*/ Map:mapView View:self SituationCheck:YES];
+    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     
     //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------
     //通知受信の設定(フォアグラウンドに戻ったとき＋バックグラウンド入ったときに使用)
@@ -90,7 +90,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 //フォアグラウンドに戻ったときにマーカーを再描写＋バックグラウンド用の位置情報取得の定期実行を終了
 - (void)applicationWillEnterForeground{
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
+    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     //タイマーの再設定
     tm = [NSTimer
           scheduledTimerWithTimeInterval:60.0f
@@ -103,7 +103,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 // 定期的に呼ばれるメソッド
 -(void)IntervalAction:(NSTimer*)timer{
     NSLog(@"定期実行");
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:NO];
+    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:NO];
     [locationManager startUpdatingLocation];
 }
 
@@ -137,7 +137,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
           [newLocation.timestamp timeIntervalSinceNow],
           newLocation.horizontalAccuracy);
     //自分の位置情報をデータベースに送信
-    [DataBaseAccess InsertDetailLocation:[UserDefaultAcceess getMyID] Latitude:[newLocation coordinate].latitude Longitude:[newLocation coordinate].latitude];
+    [DataBaseAccess InsertDetailLocation:[UserDefaultAcceess getMyID] Latitude:[newLocation coordinate].latitude Longitude:[newLocation coordinate].longitude];
     
     //一度位置情報を取得したらサービスを止める
     [manager stopUpdatingLocation];
