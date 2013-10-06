@@ -105,7 +105,7 @@
 
 //BTO一人の過去から現在までの現在地を取得し、マーカーを表示
 //対象のBTOが離脱した場合、アラートで知らせて前の画面に戻る
-+(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view{
++(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view SituationCheck:(BOOL)sc{
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/BetweenPandNLocation.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
@@ -117,8 +117,8 @@
         if([responseString isEqualToString:@"failed"]) {
             SSGentleAlertView* alert = [SSGentleAlertView new];
             alert.delegate = view;
-            alert.title = @"BTOおらんパターン";
-            alert.message = @"やらかした！";
+            alert.title = @"選択したBTOがいません";
+            alert.message = @"選択していたBTOは\n現在リタイアしているようです。\n前の画面に戻ります。";
             [alert addButtonWithTitle:@"OK"];
             alert.cancelButtonIndex = 0;
             [alert show];
@@ -131,6 +131,8 @@
             NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                     options:NSJSONReadingAllowFragments
                                                                       error:&error];
+            //マップの初期化（マーカーやラインなど）
+            [mapView clear];
             GMSMutablePath *path = [GMSMutablePath path];
             for (NSDictionary *obj in array)
             {
@@ -140,9 +142,12 @@
                 marker.title = [obj objectForKey:@"date"];
                 marker.map = mapView;
                 marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:0.0 green:[(NSNumber *)[obj objectForKey:@"depth"] doubleValue] blue:0.0 alpha:1.0]];
-                GMSCameraPosition *NewLocation = [GMSCameraPosition cameraWithLatitude:[(NSNumber *)[obj objectForKey:@"latitude"] doubleValue] longitude:[(NSNumber *)[obj objectForKey:@"longitude"] doubleValue] zoom:15];
-                [mapView setCamera:NewLocation];
                 [path addCoordinate:CLLocationCoordinate2DMake([(NSNumber *)[obj objectForKey:@"latitude"] doubleValue], [(NSNumber *)[obj objectForKey:@"longitude"] doubleValue])];
+                //定期実行以外でこのメソッドが呼ばれた場合は地図の中心を変更
+                if(sc){
+                    GMSCameraPosition *NewLocation = [GMSCameraPosition cameraWithLatitude:[(NSNumber *)[obj objectForKey:@"latitude"] doubleValue] longitude:[(NSNumber *)[obj objectForKey:@"longitude"] doubleValue] zoom:15];
+                    [mapView setCamera:NewLocation];
+                }
             }
             GMSPolyline *rectangle = [GMSPolyline polylineWithPath:path];
             rectangle.strokeWidth = 6;
@@ -250,7 +255,7 @@
     }
 }
 
-//-------------------------------------MissionBTOViewController-------------------------------------
+//-------------------------------------MissionForBTOViewController-------------------------------------
 
 //BTOの位置情報が更新されたときにデータベースに登録
 +(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude{
@@ -263,9 +268,10 @@
 
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"detailのインサートに成功しました");
     }];
     [request setFailedHandler:^(NSError *error){
-
+        NSLog(@"detailのインサートに失敗しました");
     }];
     [request startRequest];
 }

@@ -48,8 +48,12 @@
 }
 
 -(void)back:(UIButton*)button{
-    //SearchViewControllerに遷移
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //RootViewControllerに遷移
+    UIViewController *root = [[RootViewController alloc]init];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:root animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+    }];
     
 }
 
@@ -89,7 +93,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
-            mission.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            mission.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:mission animated:YES completion:^ {
                 [UserDefaultAcceess ChangeState:1];
             }];

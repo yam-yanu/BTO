@@ -286,10 +286,10 @@
 		A12E745B17E982EE00963CDA /* ForBTOView */ = {
 			isa = PBXGroup;
 			children = (
-				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
-				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
 				A12E745517E9828500963CDA /* MakeBTOViewController.h */,
 				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
+				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
+				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
 			);
 			name = ForBTOView;
 			sourceTree = "<group>";
