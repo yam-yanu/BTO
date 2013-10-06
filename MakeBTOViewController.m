@@ -33,19 +33,16 @@
     [super viewDidLoad];
     
     //　ナビゲーションバーの作成
-    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
     UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
     // ナビゲーションバーにナビゲーションアイテムを設置
     [navBar pushNavigationItem:title animated:YES];
 
     // 戻るボタンを生成
     UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
-    //　編集ボタンを生成
-    UIBarButtonItem *Editbtn = [[UIBarButtonItem alloc] initWithTitle:@"編集" style:UIBarButtonItemStyleBordered target:self action:@selector(clickEdit:)];
 
-    // ナビゲーションアイテムの左側に戻るボタン、右側に編集ボタンを設置
+    // ナビゲーションアイテムの左側に戻るボタンを設置
     title.leftBarButtonItem = Backbtn;
-    title.rightBarButtonItem = Editbtn;
 
     [self.view addSubview:navBar];
 
@@ -72,7 +69,7 @@
              action:@selector(complete:) forControlEvents:UIControlEventTouchUpInside];
     
     // 無効時のボタンタイトル設定
-    [complete setTitle:@"無効ボタン" forState:UIControlStateDisabled];
+    [complete setTitle:@"登録する" forState:UIControlStateDisabled];
     [self.view addSubview:complete];
     
     //　キーボードの外をタップした時
@@ -109,35 +106,26 @@
 
     //　戻るボタンが押されたときに呼ばれるメソッド
 -(void)clickBack:(UIBarButtonItem*)btn{
-     NSLog(@"ボタンを押されましたね");
     [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"戻りてえ");
         [UserDefaultAcceess ChangeState:0];
-        NSLog(@"戻った？");
-    }];
-
-    
+    }];    
 }
 
-    //　編集ボタンが押されたときに呼ばれるメソッド
--(void)clickEdit:(UIBarButtonItem*)btn{
-     //　編集モードにする
-    [table setEditing:YES animated:YES];
-    //編集モード解除
-//    [table setEditing:NO animated:YES];
-
-}
-
-    //　編集ボタンが押されたときに呼ばれるメソッド
+    //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     NSLog(@"保存するよ");
-    
+    //MiddionForBTOViewControllerに遷移
+    UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
+    mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:mfbv animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:2];
+    }];
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 40;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -161,25 +149,17 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        //ラベルとテキストの境界線を引く
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(60, 0, 2, cell.contentView.bounds.size.height)];
-        lineView.backgroundColor = [UIColor lightGrayColor];
-        lineView.autoresizingMask = 0x3f;
-        
-        [cell.contentView addSubview:lineView];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UIFont *textFont = [UIFont systemFontOfSize:17.0];
+        UIFont *textFont = [UIFont systemFontOfSize:15.0];
         
         // ラベル
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 130, 50)];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, 130, 40)];
         nameLabel.backgroundColor = [UIColor clearColor];
         [nameLabel setFont:textFont];
         //nameLabel.textAlignment = NSTextAlignmentCenter;
         [cell.contentView addSubview:nameLabel];
         
         // テキスト
-        textField = [[UITextField alloc] initWithFrame:CGRectMake(70.0f, 0.0f, 220.0f, 50.0f)];
+        textField = [[UITextField alloc] initWithFrame:CGRectMake(70.0f, 0.0f, 220.0f, 40.0f)];
         textField.delegate = self;
         [textField setFont:textFont];
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;

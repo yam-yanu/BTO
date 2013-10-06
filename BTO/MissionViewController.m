@@ -56,9 +56,7 @@ BOOL alertFinished;
     UIViewController *root = [[RootViewController alloc]init];
     root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:root animated:YES completion:^ {
-        NSLog(@"戻りてえ");
         [UserDefaultAcceess ChangeState:0];
-        NSLog(@"戻った？");
     }];
 }
 
