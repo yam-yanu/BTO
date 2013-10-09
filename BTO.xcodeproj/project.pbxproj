@@ -49,7 +49,9 @@
 		A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745617E9828500963CDA /* MakeBTOViewController.m */; };
 		A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745917E982BC00963CDA /* MissionForBTOViewController.m */; };
 		A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745D17E9F31400963CDA /* DataBaseAccess.m */; };
+		A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0F82A180566770056C2F5 /* EditViewController.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
+		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +113,12 @@
 		A12E745917E982BC00963CDA /* MissionForBTOViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MissionForBTOViewController.m; path = ../MissionForBTOViewController.m; sourceTree = "<group>"; };
 		A12E745C17E9F31400963CDA /* DataBaseAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseAccess.h; sourceTree = "<group>"; };
 		A12E745D17E9F31400963CDA /* DataBaseAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseAccess.m; sourceTree = "<group>"; };
+		A1A0F829180566770056C2F5 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		A1A0F82A180566770056C2F5 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		A1A419E617F436D000157939 /* UserDefaultAcceess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultAcceess.h; sourceTree = "<group>"; };
 		A1A419E717F436D000157939 /* UserDefaultAcceess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultAcceess.m; sourceTree = "<group>"; };
+		A1AF0B80180536F10057402D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		A1AF0B81180536F10057402D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -290,6 +296,8 @@
 				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
 				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
 				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
+				A1A0F829180566770056C2F5 /* EditViewController.h */,
+				A1A0F82A180566770056C2F5 /* EditViewController.m */,
 			);
 			name = ForBTOView;
 			sourceTree = "<group>";
@@ -301,6 +309,8 @@
 				A1A419E717F436D000157939 /* UserDefaultAcceess.m */,
 				A12E745C17E9F31400963CDA /* DataBaseAccess.h */,
 				A12E745D17E9F31400963CDA /* DataBaseAccess.m */,
+				A1AF0B80180536F10057402D /* Base64.h */,
+				A1AF0B81180536F10057402D /* Base64.m */,
 			);
 			name = COMMON;
 			sourceTree = "<group>";
@@ -394,6 +404,8 @@
 				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
 				A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */,
 				A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */,
+				A1AF0B82180536F10057402D /* Base64.m in Sources */,
+				A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

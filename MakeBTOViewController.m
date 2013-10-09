@@ -9,6 +9,7 @@
 #import "MakeBTOViewController.h"
 #import "RootViewController.h"
 #import "DataBaseAccess.h"
+#import "EditViewController.h"
 
 @interface MakeBTOViewController ()
 
@@ -77,7 +78,42 @@
     self.singleTap.delegate = self;
     self.singleTap.numberOfTapsRequired = 1;
     [table addGestureRecognizer:self.singleTap];
+    
+    //写真選択ボタン
+    UIButton *pic_button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    pic_button.frame = CGRectMake(160, 200, 150, 50);
+    [pic_button setTitle:@"自分の写真を選ぶ" forState:UIControlStateNormal];
+    [pic_button addTarget:self action:@selector(pic_button:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:pic_button];
+
 }
+
+//表示されるたびに呼ばれる（戻ってきたときも発動）
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //ユーザーデフォルトに保存してある写真を下に表示
+    NSData* imageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Picture"];
+    if(imageData) {
+        UIImageView *backImage = [[UIImageView alloc] init];
+        backImage.frame = CGRectMake(40, 185, 90, 90);
+        backImage.image = [UIImage imageWithData:imageData];;
+        [self.view addSubview:backImage];
+    }
+}
+
+- (void)pic_button:(UIButton *)button
+{
+    if([UIImagePickerController
+        isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = NO;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
 
     //　returnを押した時にキーボードが隠れる
 - (BOOL)textFieldShouldReturn:(UITextField *)keyboard {
@@ -114,7 +150,9 @@
     //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     NSLog(@"保存するよ");
-    //MiddionForBTOViewControllerに遷移
+    //MissionForBTOViewControllerに遷移
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
     UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
     mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:mfbv animated:YES completion:^ {
@@ -190,6 +228,21 @@
         }
     }
     return cell;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    EditViewController *editController =
+    [[EditViewController alloc] initWithPickerImage:image setInfo:editingInfo FrameSize:180];
+    [picker pushViewController:editController animated:YES];
+}
+
+// cancel
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"complete");
+    }];
 }
 
 - (void)didReceiveMemoryWarning

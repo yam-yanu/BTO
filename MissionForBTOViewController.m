@@ -40,6 +40,15 @@
     self.view = mapView;
     [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     
+    //rootViewに戻るボタン
+    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    back.frame = CGRectMake(10, 10, 30, 30);
+    back.backgroundColor = [UIColor clearColor];
+    [back setTitle:@"←" forState:UIControlStateNormal];
+    [back addTarget:self
+             action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:back];
+    
     //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------
     //通知受信の設定(フォアグラウンドに戻ったとき＋バックグラウンド入ったときに使用)
     NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -56,6 +65,15 @@
     
     //GPSサービスの開始
     [self StartLocationManager];
+}
+
+-(void)back:(UIButton*)button{
+    //RootViewControllerに遷移
+    UIViewController *root = [[RootViewController alloc]init];
+    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:root animated:YES completion:^ {
+        [UserDefaultAcceess ChangeState:0];
+    }];
 }
 
 // BTOが存在しなくなった時(自分が何らかの理由でBTOをリタイアした時)にアラートのボタンが表示され、ボタンが押された時に呼ばれる

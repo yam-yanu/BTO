@@ -54,7 +54,6 @@
     [self presentViewController:root animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
     }];
-    
 }
 
 //マーカーをクリックしたとき

@@ -100,6 +100,22 @@
 
 }
 
+//探している人数を増やす
++(void)AddSearcher:(int)BTOid{
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/AddSearcher.php"];
+    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request setCompletionHandler:^(
+                                    NSHTTPURLResponse *responseHeader, NSString *responseString){
+
+    }];
+    [request setFailedHandler:^(NSError *error){
+
+    }];
+    [request startRequest];
+}
+
 
 //-------------------------------------MissionViewController-------------------------------------
 
@@ -162,6 +178,48 @@
     [request startRequest];
 }
 
+//探している人数を減らす
++(void)RemoveSearcher:(int)BTOid{
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/RemoveSearcher.php"];
+    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request setCompletionHandler:^(
+                                    NSHTTPURLResponse *responseHeader, NSString *responseString){
+        
+    }];
+    [request setFailedHandler:^(NSError *error){
+        
+    }];
+    [request startRequest];
+}
+
+//見つけた人数を増やす
+-(void)AddDiscover:(int)myID BTOid:(int)BTOid{
+    
+    isFinished = NO;
+    
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/AddDiscover.php"];
+    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addBody:[NSString stringWithFormat:@"%d", myID] forKey:@"MyID"];
+    [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request setCompletionHandler:^(
+                                    NSHTTPURLResponse *responseHeader, NSString *responseString){
+        
+    }];
+    [request setFailedHandler:^(NSError *error){
+        //もう一度通信を開始
+        [self RegisterUser];
+    }];
+    [request startRequest];
+    
+    //通信処理が終了するまで待つ
+    while (!isFinished) {
+        [[NSRunLoop currentRunLoop]
+         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+}
 
 //-------------------------------------RootViewController-------------------------------------
 
