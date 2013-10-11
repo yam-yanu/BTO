@@ -51,6 +51,9 @@
 		A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745D17E9F31400963CDA /* DataBaseAccess.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
+		DA88B8AC180192D70029D5B3 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */; };
+		DA88B8AD180192D70029D5B3 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AA180192D70029D5B3 /* IIWrapController.m */; };
+		DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +117,12 @@
 		A1A419E617F436D000157939 /* UserDefaultAcceess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultAcceess.h; sourceTree = "<group>"; };
 		A1A419E717F436D000157939 /* UserDefaultAcceess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultAcceess.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
+		DA88B8A7180192D70029D5B3 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		DA88B8A9180192D70029D5B3 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		DA88B8AA180192D70029D5B3 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSlideMenuViewController.h; sourceTree = "<group>"; };
+		DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSlideMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +203,7 @@
 				A1A419E917F48A4400157939 /* COMMON */,
 				A12E745B17E982EE00963CDA /* ForBTOView */,
 				A12E745117E9820200963CDA /* ForSearcherView */,
+				DA88B8A4180192D70029D5B3 /* ViewDeck */,
 				A12E744A17E97BF000963CDA /* HTTP */,
 				A12E73DF17E831A700963CDA /* SSGentleAlertView */,
 				A12E73A817E8214300963CDA /* Supporting Files */,
@@ -279,6 +289,8 @@
 				A12E744C17E9808C00963CDA /* SearchViewController.m */,
 				A12E744E17E9814600963CDA /* MissionViewController.h */,
 				A12E744F17E9814600963CDA /* MissionViewController.m */,
+				DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */,
+				DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */,
 			);
 			name = ForSearcherView;
 			sourceTree = "<group>";
@@ -303,6 +315,18 @@
 				A12E745D17E9F31400963CDA /* DataBaseAccess.m */,
 			);
 			name = COMMON;
+			sourceTree = "<group>";
+		};
+		DA88B8A4180192D70029D5B3 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				DA88B8A7180192D70029D5B3 /* IIViewDeckController.h */,
+				DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */,
+				DA88B8A9180192D70029D5B3 /* IIWrapController.h */,
+				DA88B8AA180192D70029D5B3 /* IIWrapController.m */,
+			);
+			name = ViewDeck;
+			path = "../../ViewDeck-master/ViewDeck";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,8 +406,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A12E73AE17E8214300963CDA /* main.m in Sources */,
+				DA88B8AC180192D70029D5B3 /* IIViewDeckController.m in Sources */,
 				A12E73B217E8214300963CDA /* AppDelegate.m in Sources */,
 				A12E73DC17E8264D00963CDA /* RootViewController.m in Sources */,
+				DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */,
 				A12E73F317E831A700963CDA /* SSDialogView.m in Sources */,
 				A12E73F417E831A700963CDA /* SSGentleAlertView.m in Sources */,
 				A12E73FE17E831A700963CDA /* SSOverlayWindow.m in Sources */,
@@ -392,6 +418,7 @@
 				A12E745017E9814600963CDA /* MissionViewController.m in Sources */,
 				A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */,
 				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
+				DA88B8AD180192D70029D5B3 /* IIWrapController.m in Sources */,
 				A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */,
 				A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */,
 			);

@@ -7,7 +7,7 @@
 //
 
 #import "MissionForBTOViewController.h"
-
+#import "IIViewDeckController.h"
 @interface MissionForBTOViewController ()
 
 @end
@@ -61,12 +61,11 @@
 // BTOが存在しなくなった時(自分が何らかの理由でBTOをリタイアした時)にアラートのボタンが表示され、ボタンが押された時に呼ばれる
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    UIViewController *search = [[SearchViewController alloc]init];
-    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:search animated:YES completion:^ {
+    [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
     }];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
 }
 
 //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------

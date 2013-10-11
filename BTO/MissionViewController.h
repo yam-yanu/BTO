@@ -11,8 +11,12 @@
 #import "DataBaseAccess.h"
 #import "UserDefaultAcceess.h"
 
-@interface MissionViewController : UIViewController<GMSMapViewDelegate>
+@interface MissionViewController : UIViewController<UINavigationControllerDelegate,GMSMapViewDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;
 @property (nonatomic, weak) NSTimer *tm;
+
+//@property (strong, nonatomic) UIViewController *centerController;
+//@property (strong, nonatomic) UIViewController *leftslideMenuController;
+
 
 @end

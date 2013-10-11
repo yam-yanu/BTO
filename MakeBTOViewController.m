@@ -9,7 +9,7 @@
 #import "MakeBTOViewController.h"
 #import "RootViewController.h"
 #import "DataBaseAccess.h"
-
+#import "IIViewDeckController.h"
 @interface MakeBTOViewController ()
 
 @end
@@ -32,28 +32,26 @@
 {
     [super viewDidLoad];
     
-    //　ナビゲーションバーの作成
+    //----------------------------------ナビゲーションバー部分を書く---------------------------------------------------------
     UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
     UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
-    // ナビゲーションバーにナビゲーションアイテムを設置
+
     [navBar pushNavigationItem:title animated:YES];
 
-    // 戻るボタンを生成
     UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
 
-    // ナビゲーションアイテムの左側に戻るボタンを設置
     title.leftBarButtonItem = Backbtn;
 
     [self.view addSubview:navBar];
 
     
-    //　テーブルビューの作成
+    //----------------------------------テーブルビュー部分を書く---------------------------------------------------------
     table = [[UITableView alloc]initWithFrame:CGRectMake(0,45,320,480) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
     
-    //　作成完了ボタンの作成
+    //----------------------------------登録完了ボタンを書く---------------------------------------------------------
     UIButton *complete = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     UIImage *img = [UIImage imageNamed:@"btnR10.png"]; 
@@ -108,12 +106,16 @@
 -(void)clickBack:(UIBarButtonItem*)btn{
     [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
-    }];    
+    }];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
 }
 
     //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     NSLog(@"保存するよ");
+    //データベースに送信
+    
     //MiddionForBTOViewControllerに遷移
     UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
     mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
