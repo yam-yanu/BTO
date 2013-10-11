@@ -11,6 +11,7 @@
 #import "R9HTTPRequest.h"
 #import "SSGentleAlertView.h"
 #import "UserDefaultAcceess.h"
+#import "Base64.h"
 
 
 @interface DataBaseAccess : NSObject<GMSMapViewDelegate>
@@ -26,6 +27,7 @@
 -(void)AddDiscover:(int)MyID BTOid:(int)BTOid;
 -(int) RegisterUser;
 -(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
++(void) UploadPicture:(int)BTOid Picture:(NSData *)picture;
 +(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude;
 -(void) StopBTO:(int)BTOid;
 

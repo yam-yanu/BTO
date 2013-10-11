@@ -107,7 +107,6 @@
     
     self.toolbarItems = [NSArray arrayWithObjects:cancelBtn,spacer,saveBtn, nil];
     
-    
 }
 
 - (void)viewDidUnload
@@ -169,26 +168,15 @@
     [_screen setZoomScale:180/_iview.frame.size.width];
     [_screen addSubview:_iview];
     
-    NSData* pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation( cutImage )];
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:pngData forKey:@"Picture"];
+    NSData* pngData = UIImageJPEGRepresentation(cutImage, 0.3);
+    //NSData* pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(cutImage)];
+    [UserDefaultAcceess RegisterMyPicture:pngData];
+    
     
     [self dismissViewControllerAnimated:YES completion:^{
         NSLog(@"complete");
     }];
     
-}
-
--(void)savePhoto:(UIImage*)orizinalSizeImage{
-    UIImageWriteToSavedPhotosAlbum(orizinalSizeImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-}
-//写真保存後にコールバックされる
--(void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo{
-    if(error){//エラーのとき
-        
-    }else{//保存できたとき
-        
-    }
 }
 
 

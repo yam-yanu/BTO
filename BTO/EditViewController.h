@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserDefaultAcceess.h"
 
 @interface EditViewController : UIViewController
 <UIScrollViewDelegate>

@@ -60,6 +60,7 @@
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"%@",responseString);
         // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
         NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
         
@@ -72,7 +73,17 @@
         for (NSDictionary *obj in array)
         {
             alert.title = [NSString stringWithFormat:@"%@さんの情報",[obj objectForKey:@"name"]];
-            alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
+            alert.message = [NSString stringWithFormat:@"\n\n\n\n\n特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
+            NSLog(@"%@",[obj objectForKey:@"picture"]);
+            if([obj objectForKey:@"picture"]){
+                NSData *nsData = [NSData dataWithBase64String:[NSString stringWithFormat:@"%@",[obj objectForKey:@"picture"]]];
+                UIImageView *backImage = [[UIImageView alloc] init];
+                backImage.frame = CGRectMake(115, 155, 90, 90);
+                backImage.image = [UIImage imageWithData:nsData];
+                [alert addSubview:backImage];
+            }
+
+
         }
         [alert addButtonWithTitle:@"やめとく"];
         [alert addButtonWithTitle:@"この人を捜す"];
@@ -278,7 +289,6 @@
 //-------------------------------------MakeBTOViewController-------------------------------------
 
 //新しくBTOを始めるときに名前や特徴を更新+今までの位置情報を削除
-//写真をアップロードできるとgood
 -(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
     isFinished = NO;
     
@@ -311,6 +321,24 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+}
+
+//新しくBTOを始めるときに非同期で写真をアップロード
++(void) UploadPicture:(int)BTOid Picture:(NSData *)picture{
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/UploadPicture.php"];
+    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request addBody:[picture base64String] forKey:@"picture"];
+    //NSLog(@"%@",[picture base64String]);
+    [request setCompletionHandler:^(
+                                    NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"%@",responseString);
+    }];
+    [request setFailedHandler:^(NSError *error){
+
+    }];
+    [request startRequest];
 }
 
 //-------------------------------------MissionForBTOViewController-------------------------------------

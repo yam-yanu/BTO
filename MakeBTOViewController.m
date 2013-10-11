@@ -93,7 +93,8 @@
 {
     [super viewWillAppear:animated];
     //ユーザーデフォルトに保存してある写真を下に表示
-    NSData* imageData = [[NSUserDefaults standardUserDefaults] objectForKey:@"Picture"];
+    NSData* imageData = [UserDefaultAcceess getMyPicture];
+    NSLog(@"%@",imageData);
     if(imageData) {
         UIImageView *backImage = [[UIImageView alloc] init];
         backImage.frame = CGRectMake(40, 185, 90, 90);
@@ -102,6 +103,8 @@
     }
 }
 
+
+//写真を選ぶボタンを押したときに選ぶ画面に遷移
 - (void)pic_button:(UIButton *)button
 {
     if([UIImagePickerController
@@ -147,12 +150,26 @@
     }];    
 }
 
-    //　登録完了ボタンが押されたときに呼ばれるメソッド
+//　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     NSLog(@"保存するよ");
-    //MissionForBTOViewControllerに遷移
+    
+    //非同期で写真をBase64に変換しアップロードする
+    dispatch_queue_t main_queue;
+    dispatch_queue_t timeline_queue;
+    dispatch_queue_t image_queue;
+    main_queue = dispatch_get_main_queue();
+    timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
+    image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
+    dispatch_async(timeline_queue, ^{
+        [DataBaseAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture]];
+    });
+    
+    //データベースに名前、特徴一言をアップロード（完了するまで画面遷移しない）
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
+
+    //MissionForBTOViewControllerに遷移
     UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
     mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:mfbv animated:YES completion:^ {
