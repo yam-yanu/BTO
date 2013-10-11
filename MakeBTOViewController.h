@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MakeBTOViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UINavigationBarDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+@interface MakeBTOViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UINavigationBarDelegate,UITextFieldDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     UITableView *table;
     UILabel *label;
     UIView *tablecell;

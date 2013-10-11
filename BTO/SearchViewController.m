@@ -52,6 +52,7 @@
 //LeftSlideMenuViewの呼び出し
 -(void)back:(UIButton*)button{
     [self.viewDeckController toggleLeftViewAnimated:YES];
+
 }
 
 //マーカーをクリックしたとき

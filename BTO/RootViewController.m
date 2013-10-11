@@ -82,9 +82,8 @@ BOOL alertFinished;
     bto.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:bto animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
-
     }];
-
+    
 }
 
 

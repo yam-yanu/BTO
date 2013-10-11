@@ -17,10 +17,12 @@
 
 + (id)LaunchApp;
 + (int)getMyID;
++ (void)RegisterMyPicture:(NSData *)picture;
 + (void)RegisterMyStatus:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
 + (NSString *)getMyName;
 + (NSString *)getMyFeature;
 + (NSString *)getMyGreeting;
++ (NSData *)getMyPicture;
 + (void)RegisterBTOid:(int)BTOid;
 + (int)getBTOid;
 + (void)ChangeState:(int)state;

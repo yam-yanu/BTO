@@ -50,6 +50,14 @@
     return [userDefaults integerForKey:@"MyID"];
 }
 
+//自分の写真を登録
++ (void)RegisterMyPicture:(NSData *)picture{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //NSLog(@"%@",picture);
+    [userDefaults setObject:picture forKey:@"Picture"];
+}
+
 //自分の名前、特徴、一言を登録
 + (void)RegisterMyStatus:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -74,6 +82,12 @@
 + (NSString *)getMyGreeting{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults stringForKey:@"Greeting"];
+}
+
+//自分の写真を返す
++ (NSData *)getMyPicture{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:@"Picture"];
 }
 
 //-------------------------------Searcher側で使用----------------------------------------------
