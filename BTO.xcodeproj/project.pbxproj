@@ -52,9 +52,9 @@
 		A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0F82A180566770056C2F5 /* EditViewController.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
+		DA08F1E01809073B00E73160 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08F1DF1809073B00E73160 /* IIViewDeckController.m */; };
+		DA08F1E31809078C00E73160 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08F1E21809078C00E73160 /* IIWrapController.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
-		DA88B8AC180192D70029D5B3 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */; };
-		DA88B8AD180192D70029D5B3 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AA180192D70029D5B3 /* IIWrapController.m */; };
 		DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -122,13 +122,13 @@
 		A1A419E717F436D000157939 /* UserDefaultAcceess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultAcceess.m; sourceTree = "<group>"; };
 		A1AF0B80180536F10057402D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		A1AF0B81180536F10057402D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		DA08F1DE1809073B00E73160 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		DA08F1DF1809073B00E73160 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		DA08F1E11809078C00E73160 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		DA08F1E21809078C00E73160 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
-		DA88B8A7180192D70029D5B3 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
-		DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
-		DA88B8A9180192D70029D5B3 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
-		DA88B8AA180192D70029D5B3 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
-		DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSlideMenuViewController.h; sourceTree = "<group>"; };
-		DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSlideMenuViewController.m; sourceTree = "<group>"; };
+		DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftSlideMenuViewController.h; path = BTO/LeftSlideMenuViewController.h; sourceTree = "<group>"; };
+		DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftSlideMenuViewController.m; path = BTO/LeftSlideMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,7 +209,7 @@
 				A1A419E917F48A4400157939 /* COMMON */,
 				A12E745B17E982EE00963CDA /* ForBTOView */,
 				A12E745117E9820200963CDA /* ForSearcherView */,
-				DA88B8A4180192D70029D5B3 /* ViewDeck */,
+				DA08F1E41809087A00E73160 /* ViewDeck */,
 				A12E744A17E97BF000963CDA /* HTTP */,
 				A12E73DF17E831A700963CDA /* SSGentleAlertView */,
 				A12E73A817E8214300963CDA /* Supporting Files */,
@@ -295,8 +295,6 @@
 				A12E744C17E9808C00963CDA /* SearchViewController.m */,
 				A12E744E17E9814600963CDA /* MissionViewController.h */,
 				A12E744F17E9814600963CDA /* MissionViewController.m */,
-				DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */,
-				DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */,
 			);
 			name = ForSearcherView;
 			sourceTree = "<group>";
@@ -305,10 +303,10 @@
 			isa = PBXGroup;
 			children = (
 				A12E745517E9828500963CDA /* MakeBTOViewController.h */,
+				A1A0F829180566770056C2F5 /* EditViewController.h */,
 				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
 				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
 				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
-				A1A0F829180566770056C2F5 /* EditViewController.h */,
 				A1A0F82A180566770056C2F5 /* EditViewController.m */,
 			);
 			name = ForBTOView;
@@ -327,16 +325,18 @@
 			name = COMMON;
 			sourceTree = "<group>";
 		};
-		DA88B8A4180192D70029D5B3 /* ViewDeck */ = {
+		DA08F1E41809087A00E73160 /* ViewDeck */ = {
 			isa = PBXGroup;
 			children = (
-				DA88B8A7180192D70029D5B3 /* IIViewDeckController.h */,
-				DA88B8A8180192D70029D5B3 /* IIViewDeckController.m */,
-				DA88B8A9180192D70029D5B3 /* IIWrapController.h */,
-				DA88B8AA180192D70029D5B3 /* IIWrapController.m */,
+				DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */,
+				DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */,
+				DA08F1DF1809073B00E73160 /* IIViewDeckController.m */,
+				DA08F1E11809078C00E73160 /* IIWrapController.h */,
+				DA08F1E21809078C00E73160 /* IIWrapController.m */,
+				DA08F1DE1809073B00E73160 /* IIViewDeckController.h */,
 			);
 			name = ViewDeck;
-			path = "../../ViewDeck-master/ViewDeck";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,11 +416,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A12E73AE17E8214300963CDA /* main.m in Sources */,
-				DA88B8AC180192D70029D5B3 /* IIViewDeckController.m in Sources */,
 				A12E73B217E8214300963CDA /* AppDelegate.m in Sources */,
 				A12E73DC17E8264D00963CDA /* RootViewController.m in Sources */,
 				DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */,
 				A12E73F317E831A700963CDA /* SSDialogView.m in Sources */,
+				DA08F1E31809078C00E73160 /* IIWrapController.m in Sources */,
 				A12E73F417E831A700963CDA /* SSGentleAlertView.m in Sources */,
 				A12E73FE17E831A700963CDA /* SSOverlayWindow.m in Sources */,
 				A12E744917E97BD200963CDA /* R9HTTPRequest.m in Sources */,
@@ -428,8 +428,8 @@
 				A12E745017E9814600963CDA /* MissionViewController.m in Sources */,
 				A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */,
 				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
-				DA88B8AD180192D70029D5B3 /* IIWrapController.m in Sources */,
 				A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */,
+				DA08F1E01809073B00E73160 /* IIViewDeckController.m in Sources */,
 				A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */,
 				A1AF0B82180536F10057402D /* Base64.m in Sources */,
 				A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */,
