@@ -59,11 +59,6 @@ BOOL alertFinished;
   
 }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 671d164f6f774c3f2c85e5b78514557ad96c53f1
 -(void)search:(UIButton*)button{
     //SearchViewControllerに遷移
     UIViewController *search = [[SearchViewController alloc]init];

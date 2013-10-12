@@ -39,10 +39,6 @@
     [dbAccess PicLocation:mapView View:self];
     
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> 671d164f6f774c3f2c85e5b78514557ad96c53f1
     //LeftMenuに遷移するボタン
     UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     back.frame = CGRectMake(10, 20, 30, 30);

@@ -49,13 +49,13 @@
 		A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745617E9828500963CDA /* MakeBTOViewController.m */; };
 		A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745917E982BC00963CDA /* MissionForBTOViewController.m */; };
 		A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = A12E745D17E9F31400963CDA /* DataBaseAccess.m */; };
+		A1411B9B18091E720013299E /* LeftSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */; };
 		A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0F82A180566770056C2F5 /* EditViewController.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
 		DA08F1E01809073B00E73160 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08F1DF1809073B00E73160 /* IIViewDeckController.m */; };
 		DA08F1E31809078C00E73160 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08F1E21809078C00E73160 /* IIWrapController.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
-		DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,8 +127,8 @@
 		DA08F1E11809078C00E73160 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
 		DA08F1E21809078C00E73160 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
-		DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftSlideMenuViewController.h; path = BTO/LeftSlideMenuViewController.h; sourceTree = "<group>"; };
-		DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftSlideMenuViewController.m; path = BTO/LeftSlideMenuViewController.m; sourceTree = "<group>"; };
+		DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftSlideMenuViewController.h; path = /Users/ami/Desktop/BTO/BTO/LeftSlideMenuViewController.h; sourceTree = "<absolute>"; };
+		DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftSlideMenuViewController.m; path = /Users/ami/Desktop/BTO/BTO/LeftSlideMenuViewController.m; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,8 +330,6 @@
 		DA08F1E41809087A00E73160 /* ViewDeck */ = {
 			isa = PBXGroup;
 			children = (
-				DA88B8AE180195F20029D5B3 /* LeftSlideMenuViewController.h */,
-				DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */,
 				DA08F1DF1809073B00E73160 /* IIViewDeckController.m */,
 				DA08F1E11809078C00E73160 /* IIWrapController.h */,
 				DA08F1E21809078C00E73160 /* IIWrapController.m */,
@@ -417,11 +415,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1411B9B18091E720013299E /* LeftSlideMenuViewController.m in Sources */,
 				A12E73AE17E8214300963CDA /* main.m in Sources */,
-				DA88B8AC180192D70029D5B3 /* IIViewDeckController.m in Sources */,
 				A12E73B217E8214300963CDA /* AppDelegate.m in Sources */,
 				A12E73DC17E8264D00963CDA /* RootViewController.m in Sources */,
-				DA88B8B0180195F20029D5B3 /* LeftSlideMenuViewController.m in Sources */,
 				A12E73F317E831A700963CDA /* SSDialogView.m in Sources */,
 				DA08F1E31809078C00E73160 /* IIWrapController.m in Sources */,
 				A12E73F417E831A700963CDA /* SSGentleAlertView.m in Sources */,
@@ -431,7 +428,6 @@
 				A12E745017E9814600963CDA /* MissionViewController.m in Sources */,
 				A12E745717E9828500963CDA /* MakeBTOViewController.m in Sources */,
 				A12E745A17E982BC00963CDA /* MissionForBTOViewController.m in Sources */,
-				DA88B8AD180192D70029D5B3 /* IIWrapController.m in Sources */,
 				A12E745E17E9F31500963CDA /* DataBaseAccess.m in Sources */,
 				DA08F1E01809073B00E73160 /* IIViewDeckController.m in Sources */,
 				A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */,
