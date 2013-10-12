@@ -6,7 +6,6 @@
 //  Copyright (c) 2013年 AMI. All rights reserved.
 //
 #import "RootViewController.h"
-
 BOOL alertFinished;
 
 @interface RootViewController ()
@@ -57,16 +56,16 @@ BOOL alertFinished;
             action:@selector(bto:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bto];
 
-
-}
-
 -(void)search:(UIButton*)button{
     //SearchViewControllerに遷移
     UIViewController *search = [[SearchViewController alloc]init];
-    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:search animated:YES completion:^ {
+    UIViewController *left = [[LeftSlideMenuViewController alloc] init];
+    self.deckController = [[IIViewDeckController alloc] initWithCenterViewController:search leftViewController:left];
+    
+    self.deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:self.deckController animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
-
+        
     }];
 
 
@@ -78,34 +77,10 @@ BOOL alertFinished;
     bto.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:bto animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
-
     }];
     
-    
-//    //テストのためにBTO側のミッションに飛ぶようにしてる（make画面で遷移できるようになったらすぐにもとに戻そう）
-//    UIViewController *bto = [[MissionForBTOViewController alloc]init];
-//    bto.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    [self presentViewController:bto animated:YES completion:^ {
-//        [UserDefaultAcceess ChangeState:0];
-//        
-//    }];
-
-
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    [super viewDidAppear:animated];
-//    
-//    //テスト用にsearchviewに飛ぶやつ
-//    //ボタン実装できたらすぐに消そう！！
-//    UIViewController *next = [[SearchViewController alloc]init];
-//    next.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//    [self presentViewController:next animated:YES completion:^ {
-//        NSLog(@"BTO捜すviewにいく");
-//    }];
-//    
-//}
 
 - (void)didReceiveMemoryWarning
 {

@@ -7,9 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "MissionViewController.h"
+#import "IIViewDeckController.h"
+#import "LeftSlideMenuViewController.h"
 
 @implementation AppDelegate
 
+//@synthesize leftslideMenuController = _leftController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -21,12 +25,31 @@
     self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height-20);
     // メインウインドウのrootViewControllerをセット
     self.window.rootViewController = [UserDefaultAcceess LaunchApp];;
-    // レンダリング
+    UIViewController *root = [[RootViewController alloc] init];
+    self.window.rootViewController = root;
     [self.window makeKeyAndVisible];
-    
     
     return YES;
 }
+
+//-------------------------------------Facebook Likeのためのやつ-------------------------------------
+
+- (IIViewDeckController*)generateControllerStack {
+    LeftSlideMenuViewController* leftController = [[LeftSlideMenuViewController alloc] initWithNibName:@"LeftSlideMenuViewController" bundle:nil];
+    
+    UIViewController *missionController = [[MissionViewController alloc] initWithNibName:@"MissionViewController" bundle:nil];
+    
+//    centerController = [[UINavigationController alloc] initWithRootViewController:centerController];
+    IIViewDeckController* deckController =  [[IIViewDeckController alloc] initWithCenterViewController:missionController
+                                                                                    leftViewController:leftController];
+                                             
+    deckController.rightSize = 100;
+    
+    [deckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
+    return deckController;
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

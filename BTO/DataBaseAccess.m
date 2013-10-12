@@ -11,13 +11,14 @@
 @implementation DataBaseAccess
 @synthesize isFinished;
 @synthesize MyID;
+@synthesize FailedCount;
 
 
 //-------------------------------------SearchViewController-------------------------------------
 
 //BTO全員の位置情報を取得し、マーカーを表示
-+(void) PicLocation:(GMSMapView *)mapView{
-
+-(void) PicLocation:(GMSMapView *)mapView View:(id)view{
+    
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/allBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -40,11 +41,20 @@
             marker.snippet = [obj objectForKey:@"content"];
             marker.map = mapView;
         }
+        
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-        NSLog(@"失敗しました");
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self PicLocation:mapView View:view];
+        }
     }];
     [request startRequest];
+    
 }
 
 //BTO一人の情報をダイアログで表示
@@ -60,7 +70,6 @@
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        NSLog(@"%@",responseString);
         // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
         NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
         
@@ -73,17 +82,17 @@
         for (NSDictionary *obj in array)
         {
             alert.title = [NSString stringWithFormat:@"%@さんの情報",[obj objectForKey:@"name"]];
-            alert.message = [NSString stringWithFormat:@"\n\n\n\n\n特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
-            NSLog(@"%@",[obj objectForKey:@"picture"]);
-            if([obj objectForKey:@"picture"]){
+            //写真があるときとないときでダイアログを変更する
+            if(! ([NSString stringWithFormat:@"%@",[obj objectForKey:@"picture"]] == nil || [[NSString stringWithFormat:@"%@",[obj objectForKey:@"picture"]] isEqualToString:@""])){
+                alert.message = [NSString stringWithFormat:@"\n\n\n\n\n特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
                 NSData *nsData = [NSData dataWithBase64String:[NSString stringWithFormat:@"%@",[obj objectForKey:@"picture"]]];
                 UIImageView *backImage = [[UIImageView alloc] init];
                 backImage.frame = CGRectMake(115, 155, 90, 90);
                 backImage.image = [UIImage imageWithData:nsData];
                 [alert addSubview:backImage];
+            }else{
+                alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
             }
-
-
         }
         [alert addButtonWithTitle:@"やめとく"];
         [alert addButtonWithTitle:@"この人を捜す"];
@@ -112,17 +121,23 @@
 }
 
 //探している人数を増やす
-+(void)AddSearcher:(int)BTOid{
+-(void)AddSearcher:(int)BTOid View:(id)view{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/AddSearcher.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self AddSearcher:BTOid View:view];
+        }
     }];
     [request startRequest];
 }
@@ -132,7 +147,7 @@
 
 //BTO一人の過去から現在までの現在地を取得し、マーカーを表示
 //対象のBTOが離脱した場合、アラートで知らせて前の画面に戻る
-+(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view SituationCheck:(BOOL)sc{
+-(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view SituationCheck:(BOOL)sc{
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/BetweenPandNLocation.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
@@ -181,26 +196,39 @@
             rectangle.strokeColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.8];
             rectangle.map = mapView;
         }
-
+        
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-        NSLog(@"失敗しました");
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self PicAllLocation:BTOid Map:mapView View:view SituationCheck:sc];
+        }
     }];
     [request startRequest];
 }
 
 //探している人数を減らす
-+(void)RemoveSearcher:(int)BTOid{
+-(void)RemoveSearcher:(int)BTOid View:(id)view{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/RemoveSearcher.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-        
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self RemoveSearcher:BTOid View:view];
+        }
     }];
     [request startRequest];
 }
@@ -324,7 +352,7 @@
 }
 
 //新しくBTOを始めるときに非同期で写真をアップロード
-+(void) UploadPicture:(int)BTOid Picture:(NSData *)picture{
+-(void) UploadPicture:(int)BTOid Picture:(NSData *)picture View:(id)view{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/UploadPicture.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -333,10 +361,16 @@
     //NSLog(@"%@",[picture base64String]);
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        NSLog(@"%@",responseString);
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self UploadPicture:BTOid Picture:picture View:view];
+        }
     }];
     [request startRequest];
 }
@@ -344,7 +378,7 @@
 //-------------------------------------MissionForBTOViewController-------------------------------------
 
 //BTOの位置情報が更新されたときにデータベースに登録
-+(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude{
+-(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude View:(id)view{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/InsertDetailLocation.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -354,10 +388,16 @@
 
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        NSLog(@"detailのインサートに成功しました");
+        FailedCount = 0;
     }];
     [request setFailedHandler:^(NSError *error){
-        NSLog(@"detailのインサートに失敗しました");
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            [self FailedDialog:view];
+        }else{
+            FailedCount ++;
+            [self InsertDetailLocation:BTOid Latitude:latitude Longitude:longitude View:view];
+        }
     }];
     [request startRequest];
 }
@@ -398,6 +438,24 @@
         isFinished = YES;
     }];
     [request startRequest];
+}
+
+-(void)FailedDialog:(id)view{
+    SSGentleAlertView* alert = [SSGentleAlertView new];
+    alert.delegate = self;
+    alert.title = @"通信できませんでした";
+    alert.message = @"なにか通信に問題があるようです\nしばらく後に試してください";
+    [alert show];
+    [NSTimer scheduledTimerWithTimeInterval:3.0f
+                                     target:self
+                                   selector:@selector(performDismiss:)
+                                   userInfo:alert repeats:NO];
+}
+
+- (void)performDismiss:(NSTimer *)theTimer{
+    
+    [[theTimer userInfo] removeFromSuperview];
+    
 }
 
 @end

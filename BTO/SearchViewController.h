@@ -11,9 +11,14 @@
 #import "MissionViewController.h"
 #import "SSGentleAlertView.h"
 #import "UserDefaultAcceess.h"
+#import "IIViewDeckController.h"
 
 @interface SearchViewController : UIViewController<GMSMapViewDelegate>
 
 @property (nonatomic, weak) GMSMapView *mapView;
+
+
+@property (strong, nonatomic) IIViewDeckController *deckController;
+
 
 @end

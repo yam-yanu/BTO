@@ -7,7 +7,7 @@
 //
 
 #import "SearchViewController.h"
-
+#import "IIViewDeckController.h"
 @interface SearchViewController ()
 
 @end
@@ -35,25 +35,25 @@
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    [DataBaseAccess PicLocation:mapView];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicLocation:mapView View:self];
     
-    //rootViewに戻るボタン
+    
+    //LeftMenuに遷移するボタン
     UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    back.frame = CGRectMake(10, 10, 30, 30);
+    back.frame = CGRectMake(10, 20, 30, 30);
     back.backgroundColor = [UIColor clearColor];
+    [back.titleLabel setFont:[UIFont systemFontOfSize:40]];
     [back setTitle:@"←" forState:UIControlStateNormal];
     [back addTarget:self
-            action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+             action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:back];
 }
 
+//LeftSlideMenuViewの呼び出し
 -(void)back:(UIButton*)button{
-    //RootViewControllerに遷移
-    UIViewController *root = [[RootViewController alloc]init];
-    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:root animated:YES completion:^ {
-        [UserDefaultAcceess ChangeState:0];
-    }];
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+
 }
 
 //マーカーをクリックしたとき
@@ -84,7 +84,8 @@
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     UIViewController *mission = [[MissionViewController alloc]init];
-    
+    UIViewController *left = [[LeftSlideMenuViewController alloc] init];
+
     switch (buttonIndex) {
         case 0:
             //キャンセルのボタンが押されたときの処理を記述する
@@ -92,11 +93,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //ここに画面遷移を記述
-            mission.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentViewController:mission animated:YES completion:^ {
-                [UserDefaultAcceess ChangeState:1];
+            //SearchViewControllerに遷移
+            self.deckController = [[IIViewDeckController alloc] initWithCenterViewController:mission leftViewController:left];
+            self.deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:self.deckController animated:YES completion:^ {
+                [UserDefaultAcceess ChangeState:0];
+                
             }];
-            break;
+            
+break;
     }
     
 }

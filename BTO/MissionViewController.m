@@ -8,6 +8,9 @@
 
 #import "MissionViewController.h"
 #import "RootViewController.h"
+#import "IIViewDeckController.h"
+
+
 BOOL alertFinished;
 
 @interface MissionViewController ()
@@ -42,12 +45,16 @@ BOOL alertFinished;
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
     
-    //rootViewに戻るボタン
+    //----------------------------------facebookライクのためのボタン---------------------------------------------------------
+    
+    //LeftMenuに遷移するボタン
     UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    back.frame = CGRectMake(10, 10, 30, 30);
+    back.frame = CGRectMake(10, 20, 30, 30);
     back.backgroundColor = [UIColor clearColor];
+    [back.titleLabel setFont:[UIFont systemFontOfSize:40]];
     [back setTitle:@"←" forState:UIControlStateNormal];
     [back addTarget:self
              action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
@@ -69,13 +76,9 @@ BOOL alertFinished;
                    repeats:YES];
 }
 
+//LeftSlideMenuViewの呼び出し
 -(void)back:(UIButton*)button{
-    //SearchViewControllerに遷移
-    UIViewController *root = [[RootViewController alloc]init];
-    root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:root animated:YES completion:^ {
-        [UserDefaultAcceess ChangeState:0];
-    }];
+     [self.viewDeckController toggleLeftViewAnimated:YES];
 }
 
 // BTOが存在しなくなった時にアラートのボタンが表示され、ボタンが押された時に呼ばれる
@@ -106,7 +109,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 //フォアグラウンドに戻ったときにマーカーを再描写
 - (void)applicationWillEnterForeground{
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
     //タイマーの再設定
     tm = [NSTimer
           scheduledTimerWithTimeInterval:60.0f
@@ -119,7 +123,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 // 定期的に呼ばれるメソッド
 -(void)IntervalAction:(NSTimer*)timer{
     NSLog(@"定期実行");
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:NO];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:NO];
 }
 
 - (void)didReceiveMemoryWarning

@@ -18,17 +18,20 @@
 
 @property (nonatomic)BOOL isFinished;
 @property (nonatomic)BOOL MyID;
+@property (nonatomic)int FailedCount;
 
-+(void) PicLocation:(GMSMapView *)mapView;
--(void) DetailBTO:(int)BTOid  View:(id)view;
-+(void)AddSearcher:(int)BTOid;
-+(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view SituationCheck:(BOOL)sc;
-+(void)RemoveSearcher:(int)BTOid;
+
+-(void) PicLocation:(GMSMapView *)mapView View:(id)view;
+-(void) DetailBTO:(int)BTOid View:(id)view;
+-(void)AddSearcher:(int)BTOid View:(id)view;
+-(void) PicAllLocation:(int)BTOid Map:(GMSMapView *)mapView View:(id)view SituationCheck:(BOOL)sc;
+-(void)RemoveSearcher:(int)BTOid View:(id)view;
 -(void)AddDiscover:(int)MyID BTOid:(int)BTOid;
 -(int) RegisterUser;
 -(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
-+(void) UploadPicture:(int)BTOid Picture:(NSData *)picture;
-+(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude;
+-(void) UploadPicture:(int)BTOid Picture:(NSData *)picture View:(id)view;
+-(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude View:(id)view;
 -(void) StopBTO:(int)BTOid;
+-(void) FailedDialog:(id)view;
 
 @end

@@ -67,30 +67,28 @@
     [super viewDidLoad];
     //バックグラウンドに画像を設置
     self.view.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"trim_background.png"]];
-    
+    //スクロールできる部分を設定
     _screen = [[UIScrollView alloc] initWithFrame:
                CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    
+    //トリミングしたい画像を表示
     _iview = [[UIImageView alloc] initWithImage:imageData];
-    
     [self.view addSubview:_screen];
     [_screen addSubview:_iview];
     
+    //画像の最大、最小、初期サイズを設定
     _screen.maximumZoomScale = 2.0;
-    if(self.view.frame.size.width/_iview.frame.size.width){
-    _screen.minimumZoomScale = self.view.frame.size.width/_iview.frame.size.width;
+    if(_iview.frame.size.height < 180){
+        _screen.minimumZoomScale = 180/_iview.frame.size.height;
+    }else{
+        _screen.minimumZoomScale = 180/_iview.frame.size.width;
     }
     _screen.clipsToBounds = NO;
     _screen.delegate = self;
-    
-    [_screen setZoomScale:_screen.minimumZoomScale];
+    [_screen setZoomScale:(self.view.frame.size.width/_iview.frame.size.width)];
     
     _screen.contentSize = _iview.frame.size;
-    //  _screen.contentOffset = CGPointMake(0, -(self.view.frame.size.height/2-_iview.frame.size.height/2));
     _screen.contentOffset = CGPointMake(0, -(self.view.frame.size.height/2-_iview.frame.size.height/2));
-    NSLog(@"%f,%f",self.view.frame.size.width,_iview.frame.size.width);
     _screen.contentInset = UIEdgeInsetsMake(140, (_iview.frame.size.width/2 - trimmingSize/2), 139, ((_iview.frame.size.width/2 - trimmingSize/2)-1));
-    
     _screen.showsVerticalScrollIndicator = NO;
     _screen.showsHorizontalScrollIndicator = NO;
     
@@ -142,15 +140,16 @@
 
 #pragma mark - UIToolbar selector methods
 
+
+//指定された部分をトリミングしてユーザーデフォルトに保存
 - (void)save
 {
+    //指定された部分をトリミング
     CGPoint offset = _screen.contentOffset;
     float __x = (offset.x+(self.view.frame.size.width/2-90))/_screen.zoomScale;
     float __y = (offset.y+(self.view.frame.size.height/2-90))/_screen.zoomScale;
     float _w = 180/_screen.zoomScale;
     float _h = 180/_screen.zoomScale;
-    
-//    UIImage *temp =[[_iview.image cutImage:CGRectMake(__x, __y, _w, _h)] shrinkImage:CGSizeMake(1280, 720)];    
     UIGraphicsBeginImageContext(imageData.size);
     [imageData drawInRect:CGRectMake(0, 0, imageData.size.width, imageData.size.height)];
     imageData = UIGraphicsGetImageFromCurrentImageContext();
@@ -158,28 +157,17 @@
     CGImageRef cgImage = CGImageCreateWithImageInRect(imageData.CGImage, CGRectMake(__x, __y, _w, _h));
     UIImage *cutImage = [UIImage imageWithCGImage:cgImage];
     CGImageRelease(cgImage);
-
-    [_iview removeFromSuperview];
     
-    _iview = [[UIImageView alloc] initWithImage:cutImage];
-
-    _screen.minimumZoomScale = 180/_iview.frame.size.width;
-    NSLog(@"self= %f,image = %f",self.view.frame.size.width,_iview.frame.size.width);
-    [_screen setZoomScale:180/_iview.frame.size.width];
-    [_screen addSubview:_iview];
-    
+    //jpeg形式でNSdataに変換してユーザーデフォルトで保管
     NSData* pngData = UIImageJPEGRepresentation(cutImage, 0.3);
-    //NSData* pngData = [[NSData alloc] initWithData:UIImagePNGRepresentation(cutImage)];
     [UserDefaultAcceess RegisterMyPicture:pngData];
     
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"complete");
-    }];
+    //MakeBTOに戻る
+    [self dismissViewControllerAnimated:YES completion:^{ }];
     
 }
 
-
+//前の画面(写真選択画面)に戻る
 - (void)cancel
 {
     [self.navigationController popViewControllerAnimated:YES];

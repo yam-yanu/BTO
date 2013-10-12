@@ -7,7 +7,7 @@
 //
 
 #import "MissionForBTOViewController.h"
-
+#import "IIViewDeckController.h"
 @interface MissionForBTOViewController ()
 
 @end
@@ -38,7 +38,8 @@
     mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView.delegate = self;
     self.view = mapView;
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     
     //rootViewに戻るボタン
     UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -79,12 +80,11 @@
 // BTOが存在しなくなった時(自分が何らかの理由でBTOをリタイアした時)にアラートのボタンが表示され、ボタンが押された時に呼ばれる
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    UIViewController *search = [[SearchViewController alloc]init];
-    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:search animated:YES completion:^ {
+    [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
     }];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
 }
 
 //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------
@@ -107,7 +107,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 //フォアグラウンドに戻ったときにマーカーを再描写＋バックグラウンド用の位置情報取得の定期実行を終了
 - (void)applicationWillEnterForeground{
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     //タイマーの再設定
     tm = [NSTimer
           scheduledTimerWithTimeInterval:60.0f
@@ -120,7 +121,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 // 定期的に呼ばれるメソッド
 -(void)IntervalAction:(NSTimer*)timer{
     NSLog(@"定期実行");
-    [DataBaseAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:NO];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:NO];
     [locationManager startUpdatingLocation];
 }
 
@@ -154,7 +156,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
           [newLocation.timestamp timeIntervalSinceNow],
           newLocation.horizontalAccuracy);
     //自分の位置情報をデータベースに送信
-    [DataBaseAccess InsertDetailLocation:[UserDefaultAcceess getMyID] Latitude:[newLocation coordinate].latitude Longitude:[newLocation coordinate].longitude];
+    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+    [dbAccess InsertDetailLocation:[UserDefaultAcceess getMyID] Latitude:[newLocation coordinate].latitude Longitude:[newLocation coordinate].longitude View:self];
     
     //一度位置情報を取得したらサービスを止める
     [manager stopUpdatingLocation];

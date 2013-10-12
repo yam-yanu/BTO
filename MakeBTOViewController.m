@@ -9,6 +9,7 @@
 #import "MakeBTOViewController.h"
 #import "RootViewController.h"
 #import "DataBaseAccess.h"
+#import "IIViewDeckController.h"
 #import "EditViewController.h"
 
 @interface MakeBTOViewController ()
@@ -16,8 +17,7 @@
 @end
 
 
-//探されるときに必要な情報を入力する
-//だいたいの場所？、写真？、特徴、何時まで？
+//探されるときに必要な情報を入力する(名前、特徴、一言、写真)
 @implementation MakeBTOViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,28 +33,26 @@
 {
     [super viewDidLoad];
     
-    //　ナビゲーションバーの作成
+    //----------------------------------ナビゲーションバー部分を書く---------------------------------------------------------
     UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
     UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
-    // ナビゲーションバーにナビゲーションアイテムを設置
+
     [navBar pushNavigationItem:title animated:YES];
 
-    // 戻るボタンを生成
     UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
 
-    // ナビゲーションアイテムの左側に戻るボタンを設置
     title.leftBarButtonItem = Backbtn;
 
     [self.view addSubview:navBar];
 
     
-    //　テーブルビューの作成
+    //----------------------------------テーブルビュー部分を書く---------------------------------------------------------
     table = [[UITableView alloc]initWithFrame:CGRectMake(0,45,320,480) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
     
-    //　作成完了ボタンの作成
+    //----------------------------------登録完了ボタンを書く---------------------------------------------------------
     UIButton *complete = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     UIImage *img = [UIImage imageNamed:@"btnR10.png"]; 
@@ -104,20 +102,6 @@
 }
 
 
-//写真を選ぶボタンを押したときに選ぶ画面に遷移
-- (void)pic_button:(UIButton *)button
-{
-    if([UIImagePickerController
-        isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.allowsEditing = NO;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-}
-
-
     //　returnを押した時にキーボードが隠れる
 - (BOOL)textFieldShouldReturn:(UITextField *)keyboard {
     [textField resignFirstResponder];
@@ -147,12 +131,17 @@
 -(void)clickBack:(UIBarButtonItem*)btn{
     [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
-    }];    
+    }];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
 }
 
 //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     NSLog(@"保存するよ");
+    //データベースに送信
+    
+    //MiddionForBTOViewControllerに遷移
     
     //非同期で写真をBase64に変換しアップロードする
     dispatch_queue_t main_queue;
@@ -162,7 +151,8 @@
     timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
     image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
     dispatch_async(timeline_queue, ^{
-        [DataBaseAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture]];
+        DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+        [dbAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture] View:self];
     });
     
     //データベースに名前、特徴一言をアップロード（完了するまで画面遷移しない）
@@ -170,6 +160,7 @@
     [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
 
     //MissionForBTOViewControllerに遷移
+
     UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
     mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:mfbv animated:YES completion:^ {
@@ -247,6 +238,22 @@
     return cell;
 }
 
+//----------------------------------------------------------写真を選ぶ系---------------------------------------------------------------------------
+
+//写真を選ぶボタンを押したときに選ぶ画面に遷移
+- (void)pic_button:(UIButton *)button
+{
+    if([UIImagePickerController
+        isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = NO;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
+//写真が選ばれたときにトリミングを行う画面に遷移
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     EditViewController *editController =
@@ -254,7 +261,7 @@
     [picker pushViewController:editController animated:YES];
 }
 
-// cancel
+//MakeBTOに戻る
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:^{
