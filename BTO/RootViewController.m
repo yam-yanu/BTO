@@ -28,7 +28,6 @@ BOOL alertFinished;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"成功");
     //タイトルラベルを追加
 	UILabel* title =[[UILabel alloc]initWithFrame:self.view.bounds];
 	title.text = @"BLACK THUNDER OJISAN！";
@@ -56,7 +55,6 @@ BOOL alertFinished;
             action:@selector(bto:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bto];
     
-  
 }
 
 -(void)search:(UIButton*)button{

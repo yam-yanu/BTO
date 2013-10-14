@@ -27,11 +27,17 @@
     
     //ユーザーデフォルトからStateを取得
     int State = [userDefaults integerForKey:@"State"];
+    NSLog(@"%d",[userDefaults integerForKey:@"State"]);
 
     //現在の状態から正しい画面に遷移する
     if(State == 1){//MissionViewに移動
-        MissionViewController *missionViewController = [[MissionViewController alloc]init];
-        return missionViewController;
+//        MissionViewController *missionViewController = [[MissionViewController alloc]init];
+//        return missionViewController;
+        
+        UIViewController *mission = [[MissionViewController alloc]init];
+        UIViewController *left = [[LeftSlideMenuViewController alloc] init];
+        [[[DataBaseAccess alloc]init] AddSearcher:[UserDefaultAcceess getBTOid]];
+        return  [[IIViewDeckController alloc] initWithCenterViewController:mission leftViewController:left];
     }else if(State == 2){//MissionForViewに移動
         MissionForBTOViewController *missionForBTOViewController = [[MissionForBTOViewController alloc]init];
         return missionForBTOViewController;
@@ -39,6 +45,8 @@
         RootViewController *rootViewController = [[RootViewController alloc]init];
         return rootViewController;
     }
+    
+
     
 }
 

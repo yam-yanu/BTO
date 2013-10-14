@@ -48,6 +48,10 @@ BOOL alertFinished;
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
     
+    //探している人数、見つけた人数を表示
+    [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
+
+    
     //----------------------------------facebookライクのためのボタン---------------------------------------------------------
     
     //LeftMenuに遷移するボタン
@@ -111,6 +115,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 - (void)applicationWillEnterForeground{
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:YES];
+    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
     //タイマーの再設定
     tm = [NSTimer
           scheduledTimerWithTimeInterval:60.0f
@@ -122,9 +127,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 // 定期的に呼ばれるメソッド
 -(void)IntervalAction:(NSTimer*)timer{
-    NSLog(@"定期実行");
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getBTOid] Map:mapView View:self SituationCheck:NO];
+    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
 }
 
 - (void)didReceiveMemoryWarning

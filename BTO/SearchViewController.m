@@ -58,13 +58,6 @@
 
 //マーカーをクリックしたとき
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(id)marker{
-    // ロード中インジケータを表示させる
-    UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] init];
-    ai.frame = CGRectMake(0, 0, 50, 50);
-    ai.center = self.view.center;
-    ai.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [self.view addSubview:ai];
-    [ai startAnimating];
     
     //データベースから必要な情報を取得
     SSGentleAlertView* alert = [SSGentleAlertView new];
@@ -72,9 +65,6 @@
     DataBaseAccess *database = [[DataBaseAccess alloc]init];
     [database DetailBTO:[[marker title] intValue] View:self];
     [UserDefaultAcceess RegisterBTOid:[[marker title] intValue]];
-    
-    //ロードインジケータを止める
-    [ai stopAnimating];
     
     return YES;
 }
@@ -92,16 +82,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             break;
         case 1:
             //「この人を捜す」のボタンが押されたときの処理を記述する
-            //ここに画面遷移を記述
-            //SearchViewControllerに遷移
+            //MissionViewControllerに遷移
+            [[[DataBaseAccess alloc]init] AddSearcher:[UserDefaultAcceess getBTOid]];
             self.deckController = [[IIViewDeckController alloc] initWithCenterViewController:mission leftViewController:left];
             self.deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:self.deckController animated:YES completion:^ {
-                [UserDefaultAcceess ChangeState:0];
-                
+                [UserDefaultAcceess ChangeState:1];
             }];
-            
-break;
+            break;
     }
     
 }

@@ -70,6 +70,7 @@
     root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:root animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
+        [[[DataBaseAccess alloc]init] RemoveSearcher:[UserDefaultAcceess getBTOid]];
     }];
 
 }

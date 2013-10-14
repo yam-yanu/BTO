@@ -11,6 +11,7 @@
 @implementation DataBaseAccess
 @synthesize isFinished;
 @synthesize MyID;
+@synthesize SuccessCheck;
 @synthesize FailedCount;
 
 
@@ -18,15 +19,13 @@
 
 //BTO全員の位置情報を取得し、マーカーを表示
 -(void) PicLocation:(GMSMapView *)mapView View:(id)view{
-    
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/allBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
         // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
-        NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
-        
+        NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];        
         // JSON を NSArray に変換する
         NSError *error;
         NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -47,7 +46,7 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
             [self PicLocation:mapView View:view];
@@ -61,6 +60,7 @@
 -(void) DetailBTO :(int)BTOid View:(id)view{
     
     isFinished = NO;
+    [SVProgressHUD show];
     SSGentleAlertView* alert = [SSGentleAlertView new];
     alert.delegate = view;
     
@@ -102,12 +102,7 @@
         isFinished = YES;
     }];
     [request setFailedHandler:^(NSError *error){
-        alert.title = @"通信エラー";
-        alert.message = @"何かおかしいようです\n少し時間をおいてみてください";
-        [alert addButtonWithTitle:@"OK"];
-        alert.cancelButtonIndex = 0;
-        [alert show];
-        
+        [DataBaseAccess FailedAlert:view];
         isFinished = YES;
     }];
     [request startRequest];
@@ -117,11 +112,12 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+    [SVProgressHUD dismiss];
 
 }
 
 //探している人数を増やす
--(void)AddSearcher:(int)BTOid View:(id)view{
+-(void)AddSearcher:(int)BTOid{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/AddSearcher.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -133,10 +129,10 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
-            [self AddSearcher:BTOid View:view];
+            [self AddSearcher:BTOid];
         }
     }];
     [request startRequest];
@@ -202,7 +198,7 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
             [self PicAllLocation:BTOid Map:mapView View:view SituationCheck:sc];
@@ -211,8 +207,51 @@
     [request startRequest];
 }
 
+//探している人数、見つけた人数を取得し、表示
+-(void) PicSearcherAndDiscover:(int)BTOid View:(UIView *)view{
+    NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/PicSearcherAndDiscover.php"];
+    R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request setCompletionHandler:^(
+                                    NSHTTPURLResponse *responseHeader, NSString *responseString){
+        // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
+        NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
+        // JSON を NSArray に変換する
+        NSError *error;
+        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                options:NSJSONReadingAllowFragments
+                                                                  error:&error];
+        for (NSDictionary *obj in array)
+        {
+            UILabel *label =  [[UILabel alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width-235),([[UIScreen mainScreen] bounds].size.height-60), 250, 200)];
+            label.numberOfLines = 2;
+            label.text = [NSString stringWithFormat:@"このおっさんを見つけた人:%d人\nこのおっさんを探している人:%d人",[(NSNumber *)[obj objectForKey:@"discover"] intValue],[(NSNumber *)[obj objectForKey:@"searcher"] intValue]];
+            label.textAlignment = NSTextAlignmentRight;
+            label.font = [UIFont systemFontOfSize:15];
+            label.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+            [[label layer] setCornerRadius:7.0];
+            [label setClipsToBounds:YES];
+            [label sizeToFit];
+            [view addSubview:label];
+        }
+        
+        FailedCount = 0;
+    }];
+    [request setFailedHandler:^(NSError *error){
+        if(FailedCount >= 3){
+            FailedCount = 0;
+        }else{
+            FailedCount ++;
+            [self PicSearcherAndDiscover:BTOid View:view];
+        }
+    }];
+    [request startRequest];
+    
+}
+
 //探している人数を減らす
--(void)RemoveSearcher:(int)BTOid View:(id)view{
+-(void)RemoveSearcher:(int)BTOid{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/RemoveSearcher.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -224,18 +263,18 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
-            [self RemoveSearcher:BTOid View:view];
+            [self RemoveSearcher:BTOid];
         }
     }];
     [request startRequest];
 }
 
 //見つけた人数を増やす
--(void)AddDiscover:(int)myID BTOid:(int)BTOid{
-    
+-(BOOL)AddDiscover:(int)myID BTOid:(int)BTOid PassWord:(NSString *)password View:(id)view{
+    [SVProgressHUD show];
     isFinished = NO;
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/AddDiscover.php"];
@@ -243,13 +282,38 @@
     [request setHTTPMethod:@"POST"];
     [request addBody:[NSString stringWithFormat:@"%d", myID] forKey:@"MyID"];
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
+    [request addBody:[NSString stringWithFormat:@"%@", password] forKey:@"password"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        
+        // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
+        NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
+        // JSON を NSArray に変換する
+        NSError *error;
+        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                options:NSJSONReadingAllowFragments
+                                                                  error:&error];
+        SuccessCheck = NO;
+        //パスワード認証に成功していた場合と失敗していた場合で分ける
+        for (NSDictionary *obj in array)
+        {
+            if([(NSString *)[obj objectForKey:@"result"] isEqualToString:@"true"]){
+                SuccessCheck = YES;
+            }else{
+                SuccessCheck = NO;
+                SSGentleAlertView* alert = [SSGentleAlertView new];
+                alert.delegate = view;
+                alert.title = @"合言葉が間違っています";
+                alert.message = (NSString *)[obj objectForKey:@"message"];
+                [alert addButtonWithTitle:@"OK"];
+                alert.cancelButtonIndex = 0;
+                [alert show];
+            }
+        }
     }];
     [request setFailedHandler:^(NSError *error){
-        //もう一度通信を開始
-        [self RegisterUser];
+        [DataBaseAccess FailedAlert:view];
+        isFinished = YES;
+        SuccessCheck = NO;
     }];
     [request startRequest];
     
@@ -258,6 +322,8 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+    [SVProgressHUD show];
+    return SuccessCheck;
 }
 
 //-------------------------------------RootViewController-------------------------------------
@@ -316,9 +382,10 @@
 
 //-------------------------------------MakeBTOViewController-------------------------------------
 
-//新しくBTOを始めるときに名前や特徴を更新+今までの位置情報を削除
--(void) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
+//新しくBTOを始めるときに名前や特徴を更新
+-(BOOL) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
     isFinished = NO;
+    [SVProgressHUD show];
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/UpdateBTO.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
@@ -330,17 +397,12 @@
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
         isFinished = YES;
+        SuccessCheck = YES;
     }];
     [request setFailedHandler:^(NSError *error){
-        SSGentleAlertView* alert = [SSGentleAlertView new];
-        alert.delegate = view;
-        alert.title = @"通信エラー";
-        alert.message = @"何かおかしいようです\n少し時間をおいてみてください";
-        [alert addButtonWithTitle:@"OK"];
-        alert.cancelButtonIndex = 0;
-        [alert show];
-        
+        [DataBaseAccess FailedAlert:view];
         isFinished = YES;
+        SuccessCheck = NO;
     }];
     [request startRequest];
     
@@ -349,10 +411,12 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
+    [SVProgressHUD dismiss];
+    return SuccessCheck;
 }
 
 //新しくBTOを始めるときに非同期で写真をアップロード
--(void) UploadPicture:(int)BTOid Picture:(NSData *)picture View:(id)view{
+-(void) UploadPicture:(int)BTOid Picture:(NSData *)picture{
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/UploadPicture.php"];
     R9HTTPRequest *request = [[R9HTTPRequest alloc] initWithURL:URL];
     [request setHTTPMethod:@"POST"];
@@ -366,10 +430,10 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
-            [self UploadPicture:BTOid Picture:picture View:view];
+            [self UploadPicture:BTOid Picture:picture];
         }
     }];
     [request startRequest];
@@ -393,7 +457,7 @@
     [request setFailedHandler:^(NSError *error){
         if(FailedCount >= 3){
             FailedCount = 0;
-            [self FailedDialog:view];
+            [DataBaseAccess FailedInfomation];
         }else{
             FailedCount ++;
             [self InsertDetailLocation:BTOid Latitude:latitude Longitude:longitude View:view];
@@ -403,7 +467,8 @@
 }
 
 //BTOをやめるときにPROMOTEを０にする
--(void) StopBTO:(int)BTOid{
+-(BOOL) StopBTO:(int)BTOid View:(id)view{
+    [SVProgressHUD show];
     isFinished = NO;
     
     NSURL *URL = [NSURL URLWithString:@"http://49.212.200.39/techcamp/StopBTO.php"];
@@ -412,50 +477,36 @@
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
-        // JSON 文字列をそのまま NSJSONSerialization に渡せないので、NSData に変換する
-        NSData *jsonData = [responseString dataUsingEncoding:NSUnicodeStringEncoding];
-        // JSON を NSArray に変換する
-        NSError *error;
-        NSMutableArray *array = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:NSJSONReadingAllowFragments
-                                                                  error:&error];
-        int check = 1;
-        for (NSDictionary *obj in array)
-        {
-            check = [(NSNumber *)[obj objectForKey:@"check"] intValue];
-        }
-        if(check != 0){
-            //もう一度通信を開始
-            [self StopBTO:BTOid];
-        }
-        
         isFinished = YES;
+        SuccessCheck = YES;
     }];
     [request setFailedHandler:^(NSError *error){
-        //もう一度通信を開始
-        [self StopBTO:BTOid];
-        
+        [DataBaseAccess FailedAlert:view];
         isFinished = YES;
+        SuccessCheck = NO;
     }];
     [request startRequest];
+    
+    //通信処理が終了するまで待つ
+    while (!isFinished) {
+        [[NSRunLoop currentRunLoop]
+         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+    [SVProgressHUD dismiss];
+    return SuccessCheck;
 }
 
--(void)FailedDialog:(id)view{
++(void)FailedInfomation{
+    [SVProgressHUD showErrorWithStatus:@"通信に失敗しました\n電波を確認してみてください"];
+}
+
++(void)FailedAlert:(id)view{
     SSGentleAlertView* alert = [SSGentleAlertView new];
-    alert.delegate = self;
-    alert.title = @"通信できませんでした";
-    alert.message = @"なにか通信に問題があるようです\nしばらく後に試してください";
+    alert.delegate = view;
+    alert.title = @"通信エラー";
+    alert.message = @"何かおかしいようです\n少し時間をおいてみてください";
+    [alert addButtonWithTitle:@"OK"];
+    alert.cancelButtonIndex = 0;
     [alert show];
-    [NSTimer scheduledTimerWithTimeInterval:3.0f
-                                     target:self
-                                   selector:@selector(performDismiss:)
-                                   userInfo:alert repeats:NO];
 }
-
-- (void)performDismiss:(NSTimer *)theTimer{
-    
-    [[theTimer userInfo] removeFromSuperview];
-    
-}
-
 @end

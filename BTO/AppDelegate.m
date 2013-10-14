@@ -25,8 +25,8 @@
     self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height-20);
     // メインウインドウのrootViewControllerをセット
     self.window.rootViewController = [UserDefaultAcceess LaunchApp];;
-    UIViewController *root = [[RootViewController alloc] init];
-    self.window.rootViewController = root;
+//    UIViewController *root = [[RootViewController alloc] init];
+//    self.window.rootViewController = root;
     [self.window makeKeyAndVisible];
     
     return YES;

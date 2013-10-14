@@ -41,6 +41,9 @@
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     
+    //探している人数、見つけた人数を表示
+    [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
+    
     //rootViewに戻るボタン
     UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     back.frame = CGRectMake(10, 10, 30, 30);
@@ -109,6 +112,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 - (void)applicationWillEnterForeground{
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
+    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
     //タイマーの再設定
     tm = [NSTimer
           scheduledTimerWithTimeInterval:60.0f
@@ -120,10 +124,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 // 定期的に呼ばれるメソッド
 -(void)IntervalAction:(NSTimer*)timer{
-    NSLog(@"定期実行");
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:NO];
     [locationManager startUpdatingLocation];
+    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
 }
 
 //----------------------------------------------------------------GPSに関する部分-----------------------------------------------------------
@@ -149,12 +153,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (-[newLocation.timestamp timeIntervalSinceNow] > 5.0) return;
     if (newLocation.horizontalAccuracy > 100) return;
     
-    //緯度・経度を出力
-    NSLog(@"didUpdateToLocation latitude=%f, longitude=%f time = %f seikakusa= %f",
-          [newLocation coordinate].latitude,
-          [newLocation coordinate].longitude,
-          [newLocation.timestamp timeIntervalSinceNow],
-          newLocation.horizontalAccuracy);
     //自分の位置情報をデータベースに送信
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess InsertDetailLocation:[UserDefaultAcceess getMyID] Latitude:[newLocation coordinate].latitude Longitude:[newLocation coordinate].longitude View:self];

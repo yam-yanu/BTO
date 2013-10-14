@@ -92,7 +92,6 @@
     [super viewWillAppear:animated];
     //ユーザーデフォルトに保存してある写真を下に表示
     NSData* imageData = [UserDefaultAcceess getMyPicture];
-    NSLog(@"%@",imageData);
     if(imageData) {
         UIImageView *backImage = [[UIImageView alloc] init];
         backImage.frame = CGRectMake(40, 185, 90, 90);
@@ -138,34 +137,31 @@
 
 //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
-    NSLog(@"保存するよ");
-    //データベースに送信
-    
-    //MiddionForBTOViewControllerに遷移
-    
-    //非同期で写真をBase64に変換しアップロードする
-    dispatch_queue_t main_queue;
-    dispatch_queue_t timeline_queue;
-    dispatch_queue_t image_queue;
-    main_queue = dispatch_get_main_queue();
-    timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
-    image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
-    dispatch_async(timeline_queue, ^{
-        DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
-        [dbAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture] View:self];
-    });
     
     //データベースに名前、特徴一言をアップロード（完了するまで画面遷移しない）
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
-    [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
+    BOOL SuccessCheck = [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
 
-    //MissionForBTOViewControllerに遷移
-
-    UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
-    mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:mfbv animated:YES completion:^ {
-        [UserDefaultAcceess ChangeState:2];
-    }];
+    //BTOの情報送信に成功した場合はMissionForBTOViewControllerに遷移
+    if(SuccessCheck){
+        UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
+        mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:mfbv animated:YES completion:^ {
+            [UserDefaultAcceess ChangeState:2];
+            
+            //非同期で写真をBase64に変換しアップロードする
+            dispatch_queue_t main_queue;
+            dispatch_queue_t timeline_queue;
+            dispatch_queue_t image_queue;
+            main_queue = dispatch_get_main_queue();
+            timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
+            image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
+            dispatch_async(timeline_queue, ^{
+                DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+                [dbAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture]];
+            });
+        }];
+    }
 }
 
 
@@ -237,6 +233,7 @@
     }
     return cell;
 }
+
 
 //----------------------------------------------------------写真を選ぶ系---------------------------------------------------------------------------
 
