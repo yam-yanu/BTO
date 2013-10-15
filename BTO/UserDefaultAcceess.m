@@ -27,7 +27,6 @@
     
     //ユーザーデフォルトからStateを取得
     int State = [userDefaults integerForKey:@"State"];
-    NSLog(@"%d",[userDefaults integerForKey:@"State"]);
 
     //現在の状態から正しい画面に遷移する
     if(State == 1){//MissionViewに移動

@@ -55,6 +55,18 @@ BOOL alertFinished;
             action:@selector(bto:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bto];
     
+    //もしもMyIDに０が入っていた場合アラートで知らせる
+    if([UserDefaultAcceess getMyID] == 0){
+        SSGentleAlertView* alert = [SSGentleAlertView new];
+        alert.delegate = self;
+        alert.title = @"通信エラー";
+        alert.message = @"最初に通信エラーを起こしたためうまく動作できません\nもう一度通信を行います。";
+        [alert addButtonWithTitle:@"OK"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+    }
+    
+    
 }
 
 -(void)search:(UIButton*)button{
@@ -79,6 +91,24 @@ BOOL alertFinished;
     [self presentViewController:bto animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
     }];
+    
+}
+
+// アラートのボタンが押された時に呼ばれるデリゲート
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [SVProgressHUD show];
+    [UserDefaultAcceess LaunchApp];
+    if([UserDefaultAcceess getMyID] == 0){
+        SSGentleAlertView* alert = [SSGentleAlertView new];
+        alert.delegate = self;
+        alert.title = @"通信エラー";
+        alert.message = @"最初に通信エラーを起こしたため\nうまく動作できません\nもう一度通信を行います";
+        [alert addButtonWithTitle:@"OK"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+    }
+    [SVProgressHUD dismiss];
     
 }
 

@@ -354,18 +354,27 @@
         
         //MyIDになにも入ってなかったら
         if(MyID == 0){
-            //もう一度通信を開始
-            [self RegisterUser];
+            if(FailedCount >= 3){
+                FailedCount = 0;
+            }else{
+                FailedCount ++;
+                [self RegisterUser];
+            }
         }else{
             isFinished = YES;
+            FailedCount = 0;
         }
         
 
     }];
     [request setFailedHandler:^(NSError *error){
-        //もう一度通信を開始
-        [self RegisterUser];
-        
+        if(FailedCount >= 3){
+            FailedCount = 0;
+            isFinished = YES;
+        }else{
+            FailedCount ++;
+            [self RegisterUser];
+        }
     }];
     
     [request startRequest];

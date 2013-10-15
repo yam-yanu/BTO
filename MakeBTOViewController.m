@@ -150,16 +150,18 @@
             [UserDefaultAcceess ChangeState:2];
             
             //非同期で写真をBase64に変換しアップロードする
-            dispatch_queue_t main_queue;
-            dispatch_queue_t timeline_queue;
-            dispatch_queue_t image_queue;
-            main_queue = dispatch_get_main_queue();
-            timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
-            image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
-            dispatch_async(timeline_queue, ^{
-                DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
-                [dbAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture]];
-            });
+            if([UserDefaultAcceess getMyPicture]){
+                dispatch_queue_t main_queue;
+                dispatch_queue_t timeline_queue;
+                dispatch_queue_t image_queue;
+                main_queue = dispatch_get_main_queue();
+                timeline_queue = dispatch_queue_create("com.ey-office.gcd-sample.timeline", NULL);
+                image_queue = dispatch_queue_create("com.ey-office.gcd-sample.image", NULL);
+                dispatch_async(timeline_queue, ^{
+                    DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
+                    [dbAccess UploadPicture:[UserDefaultAcceess getMyID] Picture:[UserDefaultAcceess getMyPicture]];
+                });
+            }
         }];
     }
 }

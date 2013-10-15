@@ -52,6 +52,8 @@
 		A1411B9B18091E720013299E /* LeftSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA88B8AF180195F20029D5B3 /* LeftSlideMenuViewController.m */; };
 		A19FA744180979AC005E68CB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A19FA741180979AC005E68CB /* SVProgressHUD.bundle */; };
 		A19FA745180979AC005E68CB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A19FA743180979AC005E68CB /* SVProgressHUD.m */; };
+		A19FA748180D1A18005E68CB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A19FA747180D1A17005E68CB /* Icon@2x.png */; };
+		A19FA74A180D1AAD005E68CB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A19FA749180D1AAD005E68CB /* Icon.png */; };
 		A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0F82A180566770056C2F5 /* EditViewController.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
@@ -121,6 +123,8 @@
 		A19FA741180979AC005E68CB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		A19FA742180979AC005E68CB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		A19FA743180979AC005E68CB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A19FA747180D1A17005E68CB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		A19FA749180D1AAD005E68CB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		A1A0F829180566770056C2F5 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		A1A0F82A180566770056C2F5 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		A1A419E617F436D000157939 /* UserDefaultAcceess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultAcceess.h; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 		A12E73A817E8214300963CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A19FA749180D1AAD005E68CB /* Icon.png */,
+				A19FA747180D1A17005E68CB /* Icon@2x.png */,
 				A12E73A917E8214300963CDA /* BTO-Info.plist */,
 				A12E73AA17E8214300963CDA /* InfoPlist.strings */,
 				A12E73AD17E8214300963CDA /* main.m */,
@@ -422,6 +428,8 @@
 				A12E73FD17E831A700963CDA /* SSGentleAlertViewNative.xib in Resources */,
 				DA4D054F17F86100004DD083 /* btnR10.png in Resources */,
 				A19FA744180979AC005E68CB /* SVProgressHUD.bundle in Resources */,
+				A19FA748180D1A18005E68CB /* Icon@2x.png in Resources */,
+				A19FA74A180D1AAD005E68CB /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
