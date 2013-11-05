@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10B3E441828D933002C7A81 /* BTOdetail.png in Resources */ = {isa = PBXBuildFile; fileRef = A10B3E431828D933002C7A81 /* BTOdetail.png */; };
+		A10B3E461828DC44002C7A81 /* changeDetail.png in Resources */ = {isa = PBXBuildFile; fileRef = A10B3E451828DC44002C7A81 /* changeDetail.png */; };
+		A10B3E481828DE30002C7A81 /* retire.png in Resources */ = {isa = PBXBuildFile; fileRef = A10B3E471828DE30002C7A81 /* retire.png */; };
+		A10B3E4A1828E25E002C7A81 /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = A10B3E491828E25E002C7A81 /* discover.png */; };
 		A12E73A217E8214300963CDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12E73A117E8214300963CDA /* UIKit.framework */; };
 		A12E73A417E8214300963CDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12E73A317E8214300963CDA /* Foundation.framework */; };
 		A12E73A617E8214300963CDA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12E73A517E8214300963CDA /* CoreGraphics.framework */; };
@@ -63,6 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A10B3E431828D933002C7A81 /* BTOdetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BTOdetail.png; sourceTree = "<group>"; };
+		A10B3E451828DC44002C7A81 /* changeDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeDetail.png; sourceTree = "<group>"; };
+		A10B3E471828DE30002C7A81 /* retire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retire.png; sourceTree = "<group>"; };
+		A10B3E491828E25E002C7A81 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
 		A12E739E17E8214300963CDA /* BTO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12E73A117E8214300963CDA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A12E73A317E8214300963CDA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -167,6 +175,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A10B3E4B1828E267002C7A81 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				A10B3E451828DC44002C7A81 /* changeDetail.png */,
+				A10B3E431828D933002C7A81 /* BTOdetail.png */,
+				A10B3E471828DE30002C7A81 /* retire.png */,
+				A10B3E491828E25E002C7A81 /* discover.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		A12E739517E8214300963CDA = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +234,7 @@
 				A12E73B117E8214300963CDA /* AppDelegate.m */,
 				A12E73DA17E8264D00963CDA /* RootViewController.h */,
 				A12E73DB17E8264D00963CDA /* RootViewController.m */,
+				A10B3E4B1828E267002C7A81 /* Image */,
 				A1A419E917F48A4400157939 /* COMMON */,
 				A12E745117E9820200963CDA /* ForSearcherView */,
 				A12E745B17E982EE00963CDA /* ForBTOView */,
@@ -430,6 +450,10 @@
 				A19FA744180979AC005E68CB /* SVProgressHUD.bundle in Resources */,
 				A19FA748180D1A18005E68CB /* Icon@2x.png in Resources */,
 				A19FA74A180D1AAD005E68CB /* Icon.png in Resources */,
+				A10B3E441828D933002C7A81 /* BTOdetail.png in Resources */,
+				A10B3E461828DC44002C7A81 /* changeDetail.png in Resources */,
+				A10B3E481828DE30002C7A81 /* retire.png in Resources */,
+				A10B3E4A1828E25E002C7A81 /* discover.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

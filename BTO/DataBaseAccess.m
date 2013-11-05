@@ -94,8 +94,12 @@
                 alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
             }
         }
-        [alert addButtonWithTitle:@"やめとく"];
-        [alert addButtonWithTitle:@"この人を捜す"];
+        if([UserDefaultAcceess getState] == 0){
+            [alert addButtonWithTitle:@"やめとく"];
+            [alert addButtonWithTitle:@"この人を捜す"];
+        }else{
+            [alert addButtonWithTitle:@"OK"];
+        }
         alert.cancelButtonIndex = 0;
         [alert show];
         
@@ -155,8 +159,15 @@
         if([responseString isEqualToString:@"failed"]) {
             SSGentleAlertView* alert = [SSGentleAlertView new];
             alert.delegate = view;
-            alert.title = @"選択したBTOがいません";
-            alert.message = @"選択していたBTOは\n現在リタイアしているようです。\n前の画面に戻ります。";
+            //現在自分がsearch側かBTO側かでメッセージを変える
+            if([UserDefaultAcceess getState] == 1){
+                alert.title = @"選択したBTOがいません";
+                alert.message = @"選択していたBTOは\n現在リタイアしているようです。\n前の画面に戻ります。";
+                [UserDefaultAcceess ChangeButtonState:10];
+            }else if([UserDefaultAcceess getState] == 2){
+                alert.title = @"あなたは現在リタイアしています";
+                alert.message = @"何らかの理由であなたの位置情報が一定時間更新されなかったため、リタイアになってしまいました。";
+            }
             [alert addButtonWithTitle:@"OK"];
             alert.cancelButtonIndex = 0;
             [alert show];
@@ -300,15 +311,9 @@
                 SuccessCheck = YES;
             }else{
                 SuccessCheck = NO;
-                SSGentleAlertView* alert = [SSGentleAlertView new];
-                alert.delegate = view;
-                alert.title = @"合言葉が間違っています";
-                alert.message = (NSString *)[obj objectForKey:@"message"];
-                [alert addButtonWithTitle:@"OK"];
-                alert.cancelButtonIndex = 0;
-                [alert show];
             }
         }
+        isFinished = YES;
     }];
     [request setFailedHandler:^(NSError *error){
         [DataBaseAccess FailedAlert:view];
@@ -322,7 +327,7 @@
         [[NSRunLoop currentRunLoop]
          runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
-    [SVProgressHUD show];
+    [SVProgressHUD dismiss];
     return SuccessCheck;
 }
 
@@ -392,7 +397,7 @@
 //-------------------------------------MakeBTOViewController-------------------------------------
 
 //新しくBTOを始めるときに名前や特徴を更新
--(BOOL) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
+-(BOOL) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting Password:(NSString *)password{
     isFinished = NO;
     [SVProgressHUD show];
     
@@ -403,8 +408,10 @@
     [request addBody:name forKey:@"name"];
     [request addBody:feature forKey:@"feature"];
     [request addBody:greeting forKey:@"greeting"];
+    [request addBody:password forKey:@"password"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"%@",responseString);
         isFinished = YES;
         SuccessCheck = YES;
     }];
@@ -486,6 +493,7 @@
     [request addBody:[NSString stringWithFormat:@"%d", BTOid] forKey:@"BTOid"];
     [request setCompletionHandler:^(
                                     NSHTTPURLResponse *responseHeader, NSString *responseString){
+        NSLog(@"%@",responseString);
         isFinished = YES;
         SuccessCheck = YES;
     }];

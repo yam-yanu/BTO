@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //----------------------------------View部分を書く(マップやfacebookライクなバーなど)---------------------------------------------------------
+    //----------------------------------View部分を書く(マップやツールバーなど)---------------------------------------------------------
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
                                                             longitude:136.5
                                                                  zoom:5];
@@ -44,14 +44,65 @@
     //探している人数、見つけた人数を表示
     [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
     
-    //rootViewに戻るボタン
-    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    back.frame = CGRectMake(10, 10, 30, 30);
-    back.backgroundColor = [UIColor clearColor];
-    [back setTitle:@"←" forState:UIControlStateNormal];
-    [back addTarget:self
-             action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:back];
+    
+//    // ツールバーの表示
+//    for(int row=0 ;row < 3; row++){
+//        UIButton *tool = [UIButton buttonWithType:UIButtonTypeCustom];
+//        tool.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width*row/3+1), 0, ([[UIScreen mainScreen] bounds].size.width/3-2), 44);
+//        tool.backgroundColor = [UIColor blackColor];
+//        [tool.titleLabel setFont:[UIFont systemFontOfSize:15]];
+//        tool.layer.cornerRadius = 0;
+//        tool.clipsToBounds = true;
+//        if(row == 0){
+//            [tool setTitle:@"詳細" forState:UIControlStateNormal];
+//            [tool addTarget:self
+//                     action:@selector(detail:) forControlEvents:UIControlEventTouchUpInside];
+//        }else if(row == 1){
+//            [tool setTitle:@"詳細の変更" forState:UIControlStateNormal];
+//            [tool addTarget:self
+//                     action:@selector(changeProfile:) forControlEvents:UIControlEventTouchUpInside];
+//        }else{
+//            [tool setTitle:@"リタイア" forState:UIControlStateNormal];
+//            [tool addTarget:self
+//                     action:@selector(giveup:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+//        [self.view addSubview:tool];
+//    }
+    // ツールバーを作成
+    UIToolbar * toolBar = [ [ UIToolbar alloc ] initWithFrame:CGRectMake( 0, 0, [[UIScreen mainScreen] bounds].size.width, 60 ) ];
+    toolBar.tintColor = [UIColor darkGrayColor];
+    // ツールバーを親Viewに追加
+    [ self.view addSubview:toolBar ];
+    
+    // スペーサを生成する
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                               target:nil action:nil];
+    
+    //ボタンを３つ生成する
+    UIBarButtonItem *showDetail = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BTOdetail"]
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(detail:)];
+    UIBarButtonItem *changeDetail = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"changeDetail"]
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(changeProfile:)];
+    UIBarButtonItem *retaire = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"retire"]
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(giveup:)];
+
+    // スペーサー（小）を生成
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0,0,100,30)];
+    lbl.backgroundColor = [UIColor clearColor];
+    lbl.textColor = [UIColor yellowColor];
+    lbl.text = @"";
+    UIBarButtonItem *lblbtn = [[UIBarButtonItem alloc] initWithCustomView:lbl];
+    lblbtn.width = 20.0;
+    
+    // ボタン配列をツールバーに設定する
+    toolBar.items = [ NSArray arrayWithObjects:lblbtn, showDetail, spacer, changeDetail, spacer, retaire ,lblbtn, nil ];
     
     //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------
     //通知受信の設定(フォアグラウンドに戻ったとき＋バックグラウンド入ったときに使用)
@@ -79,16 +130,92 @@
         [UserDefaultAcceess ChangeState:0];
     }];
 }
+//------------------------------------------ボタンを押されたときの処理---------------------------------------------------------------------
 
-// BTOが存在しなくなった時(自分が何らかの理由でBTOをリタイアした時)にアラートのボタンが表示され、ボタンが押された時に呼ばれる
+//詳細を押したときの処理
+-(void)detail:(UIButton*)button{
+    [UserDefaultAcceess ChangeButtonState:1];
+    [[DataBaseAccess new]DetailBTO:[UserDefaultAcceess getMyID] View:self];
+}
+
+//詳細を変更を押したときの処理
+-(void)changeProfile:(UIButton*)button{
+
+    [UserDefaultAcceess ChangeButtonState:0];
+    UIViewController *make = [[MakeBTOViewController alloc]init];
+    make.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:make animated:YES completion:^ {}];
+    
+}
+
+
+//あきらめるを押したときの処理
+-(void)giveup:(UIButton*)button{
+    [UserDefaultAcceess ChangeButtonState:3];
+    SSGentleAlertView* alert = [SSGentleAlertView new];
+    alert.delegate = self;
+    alert.title = @"リタイア";
+    alert.message = @"本当にあきらめますか？";
+    [alert addButtonWithTitle:@"まだがんばる"];
+    [alert addButtonWithTitle:@"あきらめる"];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+// アラート内のボタンが押されたときに呼ばれる、表示されているアラートの種類によって何をするか変える
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [UserDefaultAcceess ChangeState:0];
-    }];
-    [self.viewDeckController closeLeftViewAnimated:YES];
-
+    
+    if([UserDefaultAcceess getButtonState] == 1){//詳細
+        [UserDefaultAcceess ChangeButtonState:0];
+    }else if ([UserDefaultAcceess getButtonState] == 2){//詳細変更
+        [UserDefaultAcceess ChangeButtonState:0];
+    }else if ([UserDefaultAcceess getButtonState] == 3){//あきらめる
+        if(buttonIndex == 1) {
+            //あきらめるのボタンが押されたときRootViewに移動
+            if([[DataBaseAccess new]StopBTO:[UserDefaultAcceess getMyID] View:self]){
+                UIViewController *root = [[RootViewController alloc]init];
+                root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                [self presentViewController:root animated:YES completion:^ {
+                    [UserDefaultAcceess ChangeState:0];
+                    [tm invalidate];
+                    tm = nil;
+                }];
+            }
+        }
+        [UserDefaultAcceess ChangeButtonState:0];
+    }else if([UserDefaultAcceess getButtonState] == 4){//GPSがONになってないとき
+        if(buttonIndex == 0){
+            SSGentleAlertView* alert = [SSGentleAlertView new];
+            alert.delegate = self;
+            alert.title = @"GPSがOFFになっています";
+            alert.message = @"このアプリは消費電力に\nとても気を使っています。\nだからほんとお願いします。";
+            [alert addButtonWithTitle:@"ONにしない"];
+            [alert addButtonWithTitle:@"ONにする"];
+            alert.cancelButtonIndex = 0;
+            [alert show];
+            [UserDefaultAcceess ChangeButtonState:4];
+        }else{
+//            NSString *schemeStr =  @"prefs:root=LOCATION_SERVICES";
+//            NSURL *schemeURL = [NSURL URLWithString:schemeStr];
+//            [[UIApplication sharedApplication] openURL:schemeURL];
+            [UserDefaultAcceess ChangeButtonState:0];
+        }
+    }else{// BTOが自動的にリタイアになったときに呼ばれる
+        if([[DataBaseAccess new]StopBTO:[UserDefaultAcceess getMyID] View:self]){
+            UIViewController *root = [[RootViewController alloc]init];
+            root.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:root animated:YES completion:^ {
+                [UserDefaultAcceess ChangeState:0];
+                [tm invalidate];
+                tm = nil;
+            }];
+        }
+        [UserDefaultAcceess ChangeButtonState:0];
+    }
+    
 }
+
 
 //----------------------------------裏側の処理（ホームからの復帰時のマーカーの更新＋マーカーの定期更新)------------------------------------------
 
@@ -134,7 +261,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 
 //位置情報サービスを開始するメソッド
 - (void)StartLocationManager{
-    if ([CLLocationManager locationServicesEnabled]) {
+//    if ([CLLocationManager locationServicesEnabled]) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         
@@ -142,7 +269,17 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         // GPSサービスの開始
         [locationManager startUpdatingLocation];
-    }
+//    }else{
+//        SSGentleAlertView* alert = [SSGentleAlertView new];
+//        alert.delegate = self;
+//        alert.title = @"GPSがOFFになっています";
+//        alert.message = @"GPSをONにしないと\n遊べません。\nONにする場合、設定画面で\n位置情報サービスをONにしてください";
+//        [alert addButtonWithTitle:@"ONにしない"];
+//        [alert addButtonWithTitle:@"ONにする"];
+//        alert.cancelButtonIndex = 0;
+//        [alert show];
+//        [UserDefaultAcceess ChangeButtonState:4];
+//    }
 }
 
 // 標準位置情報サービスの取得に成功した場合

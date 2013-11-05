@@ -38,23 +38,8 @@
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicLocation:mapView View:self];
     
-    
-    //LeftMenuに遷移するボタン
-    UIButton *back = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    back.frame = CGRectMake(10, 20, 30, 30);
-    back.backgroundColor = [UIColor clearColor];
-    [back.titleLabel setFont:[UIFont systemFontOfSize:40]];
-    [back setTitle:@"←" forState:UIControlStateNormal];
-    [back addTarget:self
-             action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:back];
 }
 
-//LeftSlideMenuViewの呼び出し
--(void)back:(UIButton*)button{
-    [self.viewDeckController toggleLeftViewAnimated:YES];
-
-}
 
 //マーカーをクリックしたとき
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(id)marker{

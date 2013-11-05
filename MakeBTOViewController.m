@@ -34,16 +34,20 @@
     [super viewDidLoad];
     
     //----------------------------------ナビゲーションバー部分を書く---------------------------------------------------------
-    UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
-    UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
-
-    [navBar pushNavigationItem:title animated:YES];
-
-    UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
-
-    title.leftBarButtonItem = Backbtn;
-
-    [self.view addSubview:navBar];
+    if([UserDefaultAcceess getState] == 0){
+        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
+        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
+        [navBar pushNavigationItem:title animated:YES];
+        
+        UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
+        title.leftBarButtonItem = Backbtn;
+        [self.view addSubview:navBar];
+    }else{
+        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
+        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール変更"];
+        [navBar pushNavigationItem:title animated:YES];
+        [self.view addSubview:navBar];
+    }
 
     
     //----------------------------------テーブルビュー部分を書く---------------------------------------------------------
@@ -56,7 +60,7 @@
     UIButton *complete = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     UIImage *img = [UIImage imageNamed:@"btnR10.png"]; 
-    complete.frame = CGRectMake(110, 320, 100, 40);
+    complete.frame = CGRectMake(110, 370, 100, 40);
     complete.backgroundColor = [UIColor clearColor];
 
     [complete setBackgroundImage:img forState:UIControlStateNormal];
@@ -79,7 +83,7 @@
     
     //写真選択ボタン
     UIButton *pic_button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    pic_button.frame = CGRectMake(160, 200, 150, 50);
+    pic_button.frame = CGRectMake(160, 250, 150, 50);
     [pic_button setTitle:@"自分の写真を選ぶ" forState:UIControlStateNormal];
     [pic_button addTarget:self action:@selector(pic_button:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:pic_button];
@@ -94,7 +98,7 @@
     NSData* imageData = [UserDefaultAcceess getMyPicture];
     if(imageData) {
         UIImageView *backImage = [[UIImageView alloc] init];
-        backImage.frame = CGRectMake(40, 185, 90, 90);
+        backImage.frame = CGRectMake(40, 235, 90, 90);
         backImage.image = [UIImage imageWithData:imageData];;
         [self.view addSubview:backImage];
     }
@@ -103,7 +107,13 @@
 
     //　returnを押した時にキーボードが隠れる
 - (BOOL)textFieldShouldReturn:(UITextField *)keyboard {
-    [textField resignFirstResponder];
+    if(keyboard.tag == 3){
+        [keyboard resignFirstResponder];
+    }else{
+        UITextField *tf = (UITextField *)[self.view viewWithTag:(keyboard.tag+1)];
+        [tf becomeFirstResponder];
+    }
+    
     return YES;
 }
 
@@ -138,9 +148,29 @@
 //　登録完了ボタンが押されたときに呼ばれるメソッド
 -(void)complete:(UIBarButtonItem*)btn{
     
+    if([[UserDefaultAcceess getMyName] length] == 0 || [[UserDefaultAcceess getMyFeature] length] == 0 || [[UserDefaultAcceess getMyGreeting] length] == 0 || [[UserDefaultAcceess getMyPassword] length] == 0){
+        SSGentleAlertView* alert = [SSGentleAlertView new];
+        alert.delegate = self;
+        alert.title = @"プロフィールに不備があります";
+        alert.message = @"入力していない\n項目がありませんか？";
+        [alert addButtonWithTitle:@"ＯＫ"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+        return;
+//    }else if(![CLLocationManager locationServicesEnabled]){
+//        SSGentleAlertView* alert = [SSGentleAlertView new];
+//        alert.delegate = self;
+//        alert.title = @"GPSがOFFになっています";
+//        alert.message = @"GPSをONにしないと\n遊べません。\nONにする場合、設定画面で\n位置情報サービスをONにしてください";
+//        [alert addButtonWithTitle:@"ONにする"];
+//        alert.cancelButtonIndex = 0;
+//        [alert show];
+//        return;
+    }
+    
     //データベースに名前、特徴一言をアップロード（完了するまで画面遷移しない）
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
-    BOOL SuccessCheck = [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:@"yanu" Feature:@"fdafa" Greeting:@"fdaf"];
+    BOOL SuccessCheck = [dbAccess UpdateBTO:self BTOid:[UserDefaultAcceess getMyID] Name:[UserDefaultAcceess getMyName] Feature:[UserDefaultAcceess getMyFeature] Greeting:[UserDefaultAcceess getMyGreeting] Password:[UserDefaultAcceess getMyPassword]];
 
     //BTOの情報送信に成功した場合はMissionForBTOViewControllerに遷移
     if(SuccessCheck){
@@ -180,7 +210,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -216,24 +246,61 @@
             [nameLabel setText:@"名前"];
             textField.placeholder = @"ニックネーム可";
             textField.returnKeyType = UIReturnKeyNext;
-            //passTextFld.tag = TAG_USER_ID;
+            textField.tag = 0;
+            textField.text = [UserDefaultAcceess getMyName];
         }
         else if(indexPath.row == 1)
         {
             [nameLabel setText:@"特徴"];
             textField.placeholder = @"チャームポイント";
-            textField.returnKeyType = UIReturnKeyDefault;
-            //passTextFld.tag = TAG_FEATURE;
-        }
-        else
-        {
+            textField.returnKeyType = UIReturnKeyNext;
+            textField.tag = 1;
+            textField.text = [UserDefaultAcceess getMyFeature];
+         }
+        else if(indexPath.row == 2){
             [nameLabel setText:@"一言"];
             textField.placeholder = @"なんでもどうぞ";
+            textField.returnKeyType = UIReturnKeyNext;
+            textField.tag = 2;
+            textField.text = [UserDefaultAcceess getMyGreeting];
+        }else{
+            [nameLabel setText:@"合言葉"];
+            textField.placeholder = @"見つけられたときに使います";
             textField.returnKeyType = UIReturnKeyDefault;
-            //passTextFld.tag = TAG_VOICE;
+            textField.tag = 3;
+            textField.text = [UserDefaultAcceess getMyPassword];
         }
     }
     return cell;
+}
+
+//文字入力を制限する
+- (BOOL)textField:(UITextField *)TextField
+shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // すでに入力されているテキストを取得
+    NSMutableString *text = [TextField.text mutableCopy];
+    // すでに入力されているテキストに今回編集されたテキストをマージ
+    [text replaceCharactersInRange:range withString:string];
+    // 結果が文字数をオーバーしていないならYES，オーバーしている場合はNO
+    if(TextField.tag == 0 || TextField.tag == 3){
+        return ([text length] <= 10);
+    }else{
+        return ([text length] <= 20);
+    }
+}
+
+//テキストの編集が終了したとき
+-(void)textFieldDidEndEditing:(UITextField*)TextField{
+    if(TextField.tag == 0){
+        [UserDefaultAcceess RegisterMyName:TextField.text];
+    }else if(TextField.tag == 1){
+        [UserDefaultAcceess RegisterMyFeature:TextField.text];
+    }else if(TextField.tag == 2){
+        [UserDefaultAcceess RegisterMyGreeting:TextField.text];
+    }else if(TextField.tag == 3){
+        [UserDefaultAcceess RegisterMyPassword:TextField.text];
+    }
 }
 
 

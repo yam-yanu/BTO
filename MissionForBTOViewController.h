@@ -12,7 +12,7 @@
 #import "DataBaseAccess.h"
 #import "UserDefaultAcceess.h"
 
-@interface MissionForBTOViewController : UIViewController<GMSMapViewDelegate,CLLocationManagerDelegate>
+@interface MissionForBTOViewController : UIViewController<GMSMapViewDelegate,CLLocationManagerDelegate,UITextFieldDelegate>
 @property (nonatomic, weak) GMSMapView *mapView;
 @property (nonatomic, weak) NSTimer *tm;
 @property (nonatomic, retain) CLLocationManager *locationManager;

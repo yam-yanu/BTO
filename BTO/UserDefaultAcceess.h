@@ -18,13 +18,20 @@
 + (id)LaunchApp;
 + (int)getMyID;
 + (void)RegisterMyPicture:(NSData *)picture;
-+ (void)RegisterMyStatus:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
++ (void)RegisterMyName:(NSString *)name;
++ (void)RegisterMyFeature:(NSString *)feature;
++ (void)RegisterMyGreeting:(NSString *)greeting;
++ (void)RegisterMyPassword:(NSString *)password;
 + (NSString *)getMyName;
 + (NSString *)getMyFeature;
 + (NSString *)getMyGreeting;
++ (NSString *)getMyPassword;
 + (NSData *)getMyPicture;
 + (void)RegisterBTOid:(int)BTOid;
 + (int)getBTOid;
 + (void)ChangeState:(int)state;
++ (int)getState;
++ (void)ChangeButtonState:(int)state;
++ (int)getButtonState;
 
 @end

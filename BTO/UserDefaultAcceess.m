@@ -30,13 +30,8 @@
 
     //現在の状態から正しい画面に遷移する
     if(State == 1){//MissionViewに移動
-//        MissionViewController *missionViewController = [[MissionViewController alloc]init];
-//        return missionViewController;
-        
-        UIViewController *mission = [[MissionViewController alloc]init];
-        UIViewController *left = [[LeftSlideMenuViewController alloc] init];
-        [[[DataBaseAccess alloc]init] AddSearcher:[UserDefaultAcceess getBTOid]];
-        return  [[IIViewDeckController alloc] initWithCenterViewController:mission leftViewController:left];
+        MissionViewController *missionViewController = [[MissionViewController alloc]init];
+        return missionViewController;
     }else if(State == 2){//MissionForViewに移動
         MissionForBTOViewController *missionForBTOViewController = [[MissionForBTOViewController alloc]init];
         return missionForBTOViewController;
@@ -65,12 +60,28 @@
     [userDefaults setObject:picture forKey:@"Picture"];
 }
 
-//自分の名前、特徴、一言を登録
-+ (void)RegisterMyStatus:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting{
+//自分の名前を登録
++ (void)RegisterMyName:(NSString *)name{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:name forKey:@"Name"];
+}
+
+//自分の特徴を登録
++ (void)RegisterMyFeature:(NSString *)feature{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:feature forKey:@"Feature"];
+}
+
+//自分の一言を登録
++ (void)RegisterMyGreeting:(NSString *)greeting{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:greeting forKey:@"Greeting"];
+}
+
+//自分の合言葉を登録
++ (void)RegisterMyPassword:(NSString *)password{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:password forKey:@"Password"];
 }
 
 //自分の名前を返す
@@ -89,6 +100,12 @@
 + (NSString *)getMyGreeting{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults stringForKey:@"Greeting"];
+}
+
+//自分の合言葉を返す
++ (NSString *)getMyPassword{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults stringForKey:@"Password"];
 }
 
 //自分の写真を返す
@@ -118,6 +135,24 @@
 + (void)ChangeState:(int)state{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:state forKey:@"State"];
+}
+
+//現在の状態を取得する
++ (int)getState{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:@"State"];
+}
+
+//どのボタンを押しているか登録する
++ (void)ChangeButtonState:(int)state{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:state forKey:@"ButtonState"];
+}
+
+//どのボタンを押しているかを取得する
++ (int)getButtonState{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults integerForKey:@"ButtonState"];
 }
 
 @end

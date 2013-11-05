@@ -10,17 +10,9 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "RootViewController.h"
 #import "UserDefaultAcceess.h"
-#import "IIViewDeckController.h"
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) UIViewController *leftslideMenuController;
-
-
-- (IIViewDeckController*)generateControllerStack;
-
 
 @end

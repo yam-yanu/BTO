@@ -31,7 +31,7 @@
 -(void)RemoveSearcher:(int)BTOid;
 -(BOOL)AddDiscover:(int)myID BTOid:(int)BTOid PassWord:(NSString *)password View:(id)view;
 -(int) RegisterUser;
--(BOOL) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting;
+-(BOOL) UpdateBTO:(id)view BTOid:(int)BTOid Name:(NSString *)name Feature:(NSString *)feature Greeting:(NSString *)greeting Password:(NSString *)password;
 -(void) UploadPicture:(int)BTOid Picture:(NSData *)picture;
 -(void) InsertDetailLocation:(int)BTOid Latitude:(double)latitude Longitude:(double)longitude View:(id)view;
 -(BOOL) StopBTO:(int)BTOid View:(id)view;
