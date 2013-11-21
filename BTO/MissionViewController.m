@@ -8,7 +8,6 @@
 
 #import "MissionViewController.h"
 #import "RootViewController.h"
-#import "IIViewDeckController.h"
 
 
 BOOL alertFinished;
@@ -76,11 +75,21 @@ BOOL alertFinished;
 //        [self.view addSubview:tool];
 //    }
     
-    // ツールバーを作成
-    UIToolbar * toolBar = [ [ UIToolbar alloc ] initWithFrame:CGRectMake( 0, 0, [[UIScreen mainScreen] bounds].size.width, 60 ) ];
-    toolBar.tintColor = [UIColor darkGrayColor];
-    // ツールバーを親Viewに追加
-    [ self.view addSubview:toolBar ];
+    UIToolbar *toolBar = [[UIToolbar alloc]init];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) { //ios7以上
+        // ツールバーを作成
+        toolBar.frame = CGRectMake( 0, 20, [[UIScreen mainScreen] bounds].size.width, 60 );
+        toolBar.tintColor = [UIColor darkGrayColor];
+        //上の隙間をラベルで埋める
+        UILabel *labelForToolBar = [[UILabel alloc] initWithFrame:CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,80)];
+        labelForToolBar.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:labelForToolBar];
+    } else { //ios7未満
+        // ツールバーを作成
+        toolBar.frame = CGRectMake( 0, 0, [[UIScreen mainScreen] bounds].size.width, 60 );
+        toolBar.tintColor = [UIColor darkGrayColor];
+    }
+    [self.view addSubview:toolBar];
     
     // スペーサを生成する
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
@@ -142,7 +151,7 @@ BOOL alertFinished;
     alert.delegate = self;
     alert.title = @"合言葉を入力してください";
     alert.message = @"合い言葉はおっさんが\n教えてくれます\n\n\n";
-    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(([[UIScreen mainScreen] bounds].size.width/2-90), 235, 180, 30)];
+    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake((([[UIScreen mainScreen]bounds].size.width/2)-90),(([[UIScreen mainScreen]bounds].size.height/2)-8), 180, 30)];
     tf.delegate = self;
     tf.tag = 2;
     tf.borderStyle = UITextBorderStyleRoundedRect;

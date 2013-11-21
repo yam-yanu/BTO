@@ -74,15 +74,10 @@ BOOL alertFinished;
 -(void)search:(UIButton*)button{
     //SearchViewControllerに遷移
     UIViewController *search = [[SearchViewController alloc]init];
-    UIViewController *left = [[LeftSlideMenuViewController alloc] init];
-    self.deckController = [[IIViewDeckController alloc] initWithCenterViewController:search leftViewController:left];
-    
-    self.deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:self.deckController animated:YES completion:^ {
+    search.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:search animated:YES completion:^ {
         [UserDefaultAcceess ChangeState:0];
-        
     }];
-
 
 }
 

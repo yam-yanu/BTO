@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "MissionViewController.h"
-#import "IIViewDeckController.h"
-#import "LeftSlideMenuViewController.h"
 
 @implementation AppDelegate
 
@@ -22,7 +20,7 @@
     // メインウインドウ
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // フレームをデバイスのスクリーンサイズにセット
-    self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height-20);
+    self.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height);
     // メインウインドウのrootViewControllerをセット
     self.window.rootViewController = [UserDefaultAcceess LaunchApp];;
     [self.window makeKeyAndVisible];

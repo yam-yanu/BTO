@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "IIViewDeckController.h"
 @interface SearchViewController ()
 
 @end
@@ -59,7 +58,6 @@
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     UIViewController *mission = [[MissionViewController alloc]init];
-    UIViewController *left = [[LeftSlideMenuViewController alloc] init];
 
     switch (buttonIndex) {
         case 0:
@@ -69,9 +67,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             //「この人を捜す」のボタンが押されたときの処理を記述する
             //MissionViewControllerに遷移
             [[[DataBaseAccess alloc]init] AddSearcher:[UserDefaultAcceess getBTOid]];
-            self.deckController = [[IIViewDeckController alloc] initWithCenterViewController:mission leftViewController:left];
-            self.deckController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentViewController:self.deckController animated:YES completion:^ {
+            mission.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:mission animated:YES completion:^ {
                 [UserDefaultAcceess ChangeState:1];
             }];
             break;

@@ -7,7 +7,6 @@
 //
 
 #import "MissionForBTOViewController.h"
-#import "IIViewDeckController.h"
 @interface MissionForBTOViewController ()
 
 @end
@@ -42,7 +41,7 @@
     [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:YES];
     
     //探している人数、見つけた人数を表示
-    [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
+    [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getMyID] View:self.view];
     
     
 //    // ツールバーの表示
@@ -68,11 +67,22 @@
 //        }
 //        [self.view addSubview:tool];
 //    }
-    // ツールバーを作成
-    UIToolbar * toolBar = [ [ UIToolbar alloc ] initWithFrame:CGRectMake( 0, 0, [[UIScreen mainScreen] bounds].size.width, 60 ) ];
-    toolBar.tintColor = [UIColor darkGrayColor];
-    // ツールバーを親Viewに追加
-    [ self.view addSubview:toolBar ];
+    
+    UIToolbar *toolBar = [[UIToolbar alloc]init];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) { //ios7以上
+        // ツールバーを作成
+        toolBar.frame = CGRectMake( 0, 20, [[UIScreen mainScreen] bounds].size.width, 60 );
+        toolBar.tintColor = [UIColor darkGrayColor];
+        //上の隙間をラベルで埋める
+        UILabel *labelForToolBar = [[UILabel alloc] initWithFrame:CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width,80)];
+        labelForToolBar.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:labelForToolBar];
+    } else { //ios7未満
+        // ツールバーを作成
+        toolBar.frame = CGRectMake( 0, 0, [[UIScreen mainScreen] bounds].size.width, 60 );
+        toolBar.tintColor = [UIColor darkGrayColor];
+    }
+    [self.view addSubview:toolBar];
     
     // スペーサを生成する
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc]
@@ -254,7 +264,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicAllLocation:[UserDefaultAcceess getMyID] Map:mapView View:self SituationCheck:NO];
     [locationManager startUpdatingLocation];
-    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getBTOid] View:self.view];
+    [dbAccess PicSearcherAndDiscover:[UserDefaultAcceess getMyID] View:self.view];
 }
 
 //----------------------------------------------------------------GPSに関する部分-----------------------------------------------------------

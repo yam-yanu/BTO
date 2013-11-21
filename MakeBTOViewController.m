@@ -9,7 +9,6 @@
 #import "MakeBTOViewController.h"
 #import "RootViewController.h"
 #import "DataBaseAccess.h"
-#import "IIViewDeckController.h"
 #import "EditViewController.h"
 
 @interface MakeBTOViewController ()
@@ -33,17 +32,25 @@
 {
     [super viewDidLoad];
     
+    
     //----------------------------------ナビゲーションバー部分を書く---------------------------------------------------------
+    
     if([UserDefaultAcceess getState] == 0){
-        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
+        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
         UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
         [navBar pushNavigationItem:title animated:YES];
-        
         UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
         title.leftBarButtonItem = Backbtn;
         [self.view addSubview:navBar];
+//        UIViewController *make = [[MakeBTOViewController alloc] init];
+//        UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:make];
+//        // UINavigationControllerを最初の画面とする
+//        self.v = navCon;
+//        self.window.rootViewController = self.viewController;
+//        [self.window makeKeyAndVisible];
+//        return YES;
     }else{
-        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
+        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
         UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール変更"];
         [navBar pushNavigationItem:title animated:YES];
         [self.view addSubview:navBar];
@@ -51,7 +58,7 @@
 
     
     //----------------------------------テーブルビュー部分を書く---------------------------------------------------------
-    table = [[UITableView alloc]initWithFrame:CGRectMake(0,45,320,480) style:UITableViewStyleGrouped];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0,45,[[UIScreen mainScreen]bounds].size.width,([[UIScreen mainScreen]bounds].size.height-45)) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -141,7 +148,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
     }];
-    [self.viewDeckController closeLeftViewAnimated:YES];
 
 }
 

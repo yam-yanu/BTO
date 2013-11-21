@@ -87,9 +87,10 @@
                 alert.message = [NSString stringWithFormat:@"\n\n\n\n\n特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
                 NSData *nsData = [NSData dataWithBase64String:[NSString stringWithFormat:@"%@",[obj objectForKey:@"picture"]]];
                 UIImageView *backImage = [[UIImageView alloc] init];
-                backImage.frame = CGRectMake(115, 155, 90, 90);
+                backImage.frame = CGRectMake((([[UIScreen mainScreen]bounds].size.width/2)-45),(([[UIScreen mainScreen]bounds].size.height/2)-83), 90, 90);
                 backImage.image = [UIImage imageWithData:nsData];
                 [alert addSubview:backImage];
+                
             }else{
                 alert.message = [NSString stringWithFormat:@"特徴：%@\n一言：%@\n",[obj objectForKey:@"feature"],[obj objectForKey:@"greeting"]];
             }
@@ -102,6 +103,7 @@
         }
         alert.cancelButtonIndex = 0;
         [alert show];
+        NSLog(@"%f",alert.window.frame.origin.x);
         
         isFinished = YES;
     }];

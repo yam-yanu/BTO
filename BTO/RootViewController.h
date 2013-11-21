@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SearchViewController.h"
 #import "MakeBTOViewController.h"
-#import "IIViewDeckController.h"
 #import "SSGentleAlertView.h"
 @interface RootViewController : UIViewController<GMSMapViewDelegate,UIAlertViewDelegate,UITabBarDelegate>
 
 @property (nonatomic, weak) UIViewController *RootViewController;
-@property (strong, nonatomic) IIViewDeckController *deckController;
 
 @end
