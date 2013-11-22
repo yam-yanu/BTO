@@ -43,18 +43,19 @@ BOOL alertFinished;
     
     //探す側のボタン
     UIButton *search = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    search.frame = CGRectMake(20, 300, 100, 30);
-    search.backgroundColor = [UIColor whiteColor];
-    [search setTitle:@"探しに行く" forState:UIControlStateNormal];
+    search.frame = CGRectMake(0, 320, 120, 50);
+    UIImage *button1 = [UIImage imageNamed:@"button1.png"];
+    [search setBackgroundImage:button1 forState:UIControlStateNormal];
     [search addTarget:self
             action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:search];
 
     //BTO側にいくボタン
     UIButton *bto = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    bto.frame = CGRectMake(200, 300, 100, 30);
-    search.backgroundColor = [UIColor whiteColor];
-    [bto setTitle:@"BTO" forState:UIControlStateNormal];
+    bto.frame = CGRectMake(200, 320, 120, 50);
+    UIImage *button2 = [UIImage imageNamed:@"button2.png"];
+    [bto setBackgroundImage:button2 forState:UIControlStateNormal];
+    
     [bto addTarget:self
             action:@selector(bto:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bto];

@@ -62,6 +62,8 @@
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
 		DAC1B88C183F6EBF005FCEA8 /* BTO(iPhone5）.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */; };
+		DAC1B89F183F89B8005FCEA8 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B89D183F89B8005FCEA8 /* button1.png */; };
+		DAC1B8A0183F89B8005FCEA8 /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B89E183F89B8005FCEA8 /* button2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +140,9 @@
 		A1AF0B80180536F10057402D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		A1AF0B81180536F10057402D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
-		DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BTO(iPhone5）.jpg"; sourceTree = "<group>"; };
+		DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BTO(iPhone5）.jpg"; sourceTree = SOURCE_ROOT; };
+		DAC1B89D183F89B8005FCEA8 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button1.png; path = ../button1.png; sourceTree = "<group>"; };
+		DAC1B89E183F89B8005FCEA8 /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button2.png; path = ../button2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,9 @@
 		A10B3E4B1828E267002C7A81 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DAC1B89D183F89B8005FCEA8 /* button1.png */,
+				DAC1B89E183F89B8005FCEA8 /* button2.png */,
+				DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */,
 				A10B3E451828DC44002C7A81 /* changeDetail.png */,
 				A10B3E431828D933002C7A81 /* BTOdetail.png */,
 				A10B3E471828DE30002C7A81 /* retire.png */,
@@ -182,7 +189,6 @@
 		A12E739517E8214300963CDA = {
 			isa = PBXGroup;
 			children = (
-				DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */,
 				A12E73A717E8214300963CDA /* BTO */,
 				A12E73A017E8214300963CDA /* Frameworks */,
 				A12E739F17E8214300963CDA /* Products */,
@@ -422,11 +428,13 @@
 				A12E73F717E831A700963CDA /* SSGentleAlertViewBlack.xib in Resources */,
 				A12E73F817E831A700963CDA /* SSGentleAlertButtonDefault.xib in Resources */,
 				A12E73F917E831A700963CDA /* SSGentleAlertViewDefault.bundle in Resources */,
+				DAC1B89F183F89B8005FCEA8 /* button1.png in Resources */,
 				A12E73FA17E831A700963CDA /* SSGentleAlertViewDefault.xib in Resources */,
 				A12E73FB17E831A700963CDA /* SSGentleAlertButtonNative.xib in Resources */,
 				A12E73FC17E831A700963CDA /* SSGentleAlertViewNative.bundle in Resources */,
 				A12E73FD17E831A700963CDA /* SSGentleAlertViewNative.xib in Resources */,
 				DA4D054F17F86100004DD083 /* btnR10.png in Resources */,
+				DAC1B8A0183F89B8005FCEA8 /* button2.png in Resources */,
 				A19FA744180979AC005E68CB /* SVProgressHUD.bundle in Resources */,
 				A19FA748180D1A18005E68CB /* Icon@2x.png in Resources */,
 				A19FA74A180D1AAD005E68CB /* Icon.png in Resources */,
