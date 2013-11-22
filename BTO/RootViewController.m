@@ -29,15 +29,18 @@ BOOL alertFinished;
 {
     [super viewDidLoad];
     
-    //タイトルラベルを追加
-	UILabel* title =[[UILabel alloc]initWithFrame:self.view.bounds];
-	title.text = @"BLACK THUNDER OJISAN！";
-    title.textAlignment = NSTextAlignmentCenter;
-	title.backgroundColor = [UIColor whiteColor];
-	title.textColor = [UIColor blackColor];
-	title.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	[self.view addSubview:title];
-	
+//    //タイトルラベルを追加
+//	UILabel* title =[[UILabel alloc]initWithFrame:self.view.bounds];
+//	title.text = @"BLACK THUNDER OJISAN！";
+//    title.textAlignment = NSTextAlignmentCenter;
+//	title.backgroundColor = [UIColor whiteColor];
+//	title.textColor = [UIColor blackColor];
+//	title.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//	[self.view addSubview:title];
+    
+    UIImage *backgroundImage = [UIImage imageNamed:@"BTO.jpg"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    
     //探す側のボタン
     UIButton *search = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     search.frame = CGRectMake(20, 300, 100, 30);

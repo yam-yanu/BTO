@@ -47,11 +47,7 @@
         navBar.frame = CGRectMake(0,0,320,55);
     }
     UINavigationItem *title = [[UINavigationItem alloc]init];
-    if([UserDefaultAcceess getState] == 0){
-        title.title = @"プロフィール作成";
-    }else{
-        title.title = @"プロフィール変更";
-    }
+        title.title = @"捜すBTOを探す";
     [navBar pushNavigationItem:title animated:YES];
     UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
     title.leftBarButtonItem = Backbtn;

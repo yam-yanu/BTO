@@ -173,6 +173,7 @@
 			children = (
 				A10B3E451828DC44002C7A81 /* changeDetail.png */,
 				A10B3E431828D933002C7A81 /* BTOdetail.png */,
+				DAC1B885183F5B16005FCEA8 /* BTO.jpg */,
 				A10B3E471828DE30002C7A81 /* retire.png */,
 				A10B3E491828E25E002C7A81 /* discover.png */,
 			);
@@ -328,7 +329,6 @@
 			children = (
 				A12E745517E9828500963CDA /* MakeBTOViewController.h */,
 				A12E745617E9828500963CDA /* MakeBTOViewController.m */,
-				DAC1B885183F5B16005FCEA8 /* BTO.jpg */,
 				A12E745817E982BC00963CDA /* MissionForBTOViewController.h */,
 				A12E745917E982BC00963CDA /* MissionForBTOViewController.m */,
 				A1A0F829180566770056C2F5 /* EditViewController.h */,
