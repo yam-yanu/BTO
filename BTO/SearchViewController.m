@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:38
                                                             longitude:136.5
                                                                  zoom:5];
@@ -37,6 +38,24 @@
     DataBaseAccess *dbAccess = [[DataBaseAccess alloc]init];
     [dbAccess PicLocation:mapView View:self];
     
+    //----------------------------------ナビゲーションバー(iOS6/7対応)を書く---------------------------------------------------------
+    
+    UINavigationBar *navBar = [[UINavigationBar alloc]init];
+    if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1){
+        navBar.frame = CGRectMake(0,0,320,45);
+    }else{
+        navBar.frame = CGRectMake(0,0,320,55);
+    }
+    UINavigationItem *title = [[UINavigationItem alloc]init];
+    if([UserDefaultAcceess getState] == 0){
+        title.title = @"プロフィール作成";
+    }else{
+        title.title = @"プロフィール変更";
+    }
+    [navBar pushNavigationItem:title animated:YES];
+    UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
+    title.leftBarButtonItem = Backbtn;
+    [self.view addSubview:navBar];
 }
 
 
@@ -74,6 +93,13 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             break;
     }
     
+}
+
+//　戻るボタンが押されたときに呼ばれるメソッド
+-(void)clickBack:(UIBarButtonItem*)btn{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [UserDefaultAcceess ChangeState:0];
+    }];
 }
 
 

@@ -34,52 +34,25 @@
 
     //----------------------------------ナビゲーションバー(iOS6/7対応)を書く---------------------------------------------------------
 
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        // Load resources for iOS 6.1 or earlier
-        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
-        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
-        [navBar pushNavigationItem:title animated:YES];
-        UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
-        title.leftBarButtonItem = Backbtn;
-        [self.view addSubview:navBar];
-        
-    } else {
-        // Load resources for iOS 7 or later
-        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 55)];
-        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール変更"];
-        [navBar pushNavigationItem:title animated:YES];
-        UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
-        title.leftBarButtonItem = Backbtn;
-        [self.view addSubview:navBar];
-
+    UINavigationBar *navBar = [[UINavigationBar alloc]init];
+    if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1){
+        navBar.frame = CGRectMake(0,0,320,45);
+    }else{
+        navBar.frame = CGRectMake(0,0,320,55);
     }
-    //----------------------------------ナビゲーションバー部分を書く---------------------------------------------------------
-//
-//    if([UserDefaultAcceess getState] == 0){
-//
-//        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
-//        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール作成"];
-//        [navBar pushNavigationItem:title animated:YES];
-//        UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
-//        title.leftBarButtonItem = Backbtn;
-//        [self.view addSubview:navBar];
-////        UIViewController *make = [[MakeBTOViewController alloc] init];
-////        UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:make];
-////        // UINavigationControllerを最初の画面とする
-////        self.v = navCon;
-////        self.window.rootViewController = self.viewController;
-////        [self.window makeKeyAndVisible];
-////        return YES;
-//    }else{
-//        UINavigationBar* navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
-//        UINavigationItem* title = [[UINavigationItem alloc] initWithTitle:@"プロフィール変更"];
-//        [navBar pushNavigationItem:title animated:YES];
-//        [self.view addSubview:navBar];
-//    }
-
+    UINavigationItem *title = [[UINavigationItem alloc]init];
+    if([UserDefaultAcceess getState] == 0){
+        title.title = @"プロフィール作成";
+    }else{
+        title.title = @"プロフィール変更";
+    }
+    [navBar pushNavigationItem:title animated:YES];
+    UIBarButtonItem* Backbtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(clickBack:)];
+    title.leftBarButtonItem = Backbtn;
+    [self.view addSubview:navBar];
     
     //----------------------------------テーブルビュー部分を書く---------------------------------------------------------
-    table = [[UITableView alloc]initWithFrame:CGRectMake(0,55,[[UIScreen mainScreen]bounds].size.width,([[UIScreen mainScreen]bounds].size.height-55)) style:UITableViewStyleGrouped];
+    table = [[UITableView alloc]initWithFrame:CGRectMake(0,navBar.frame.size.height,[[UIScreen mainScreen]bounds].size.width,([[UIScreen mainScreen]bounds].size.height-navBar.frame.size.height)) style:UITableViewStyleGrouped];
     table.delegate = self;
     table.dataSource = self;
     [self.view addSubview:table];
@@ -169,7 +142,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [UserDefaultAcceess ChangeState:0];
     }];
-
 }
 
 //　登録完了ボタンが押されたときに呼ばれるメソッド

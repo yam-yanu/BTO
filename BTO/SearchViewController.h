@@ -12,7 +12,7 @@
 #import "SSGentleAlertView.h"
 #import "UserDefaultAcceess.h"
 
-@interface SearchViewController : UIViewController<GMSMapViewDelegate>
+@interface SearchViewController : UIViewController<GMSMapViewDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, weak) GMSMapView *mapView;
 
