@@ -61,7 +61,7 @@
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
-		DAC1B88C183F6EBF005FCEA8 /* BTO(iPhone5）.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */; };
+		DAC1B88C183F6EBF005FCEA8 /* BTO.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B88B183F6EBF005FCEA8 /* BTO.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +138,7 @@
 		A1AF0B80180536F10057402D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		A1AF0B81180536F10057402D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
-		DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "BTO(iPhone5）.jpg"; sourceTree = "<group>"; };
+		DAC1B88B183F6EBF005FCEA8 /* BTO.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BTO.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,7 @@
 		A10B3E4B1828E267002C7A81 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				DAC1B88B183F6EBF005FCEA8 /* BTO.jpg */,
 				A10B3E451828DC44002C7A81 /* changeDetail.png */,
 				A10B3E431828D933002C7A81 /* BTOdetail.png */,
 				A10B3E471828DE30002C7A81 /* retire.png */,
@@ -182,7 +183,6 @@
 		A12E739517E8214300963CDA = {
 			isa = PBXGroup;
 			children = (
-				DAC1B88B183F6EBF005FCEA8 /* BTO(iPhone5）.jpg */,
 				A12E73A717E8214300963CDA /* BTO */,
 				A12E73A017E8214300963CDA /* Frameworks */,
 				A12E739F17E8214300963CDA /* Products */,
@@ -417,7 +417,7 @@
 				A12E73B817E8214300963CDA /* Default-568h@2x.png in Resources */,
 				A12E73C117E8243F00963CDA /* GoogleMaps.bundle in Resources */,
 				A12E73F517E831A700963CDA /* SSGentleAlertButtonBlack.xib in Resources */,
-				DAC1B88C183F6EBF005FCEA8 /* BTO(iPhone5）.jpg in Resources */,
+				DAC1B88C183F6EBF005FCEA8 /* BTO.jpg in Resources */,
 				A12E73F617E831A700963CDA /* SSGentleAlertViewBlack.bundle in Resources */,
 				A12E73F717E831A700963CDA /* SSGentleAlertViewBlack.xib in Resources */,
 				A12E73F817E831A700963CDA /* SSGentleAlertButtonDefault.xib in Resources */,
