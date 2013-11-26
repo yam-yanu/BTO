@@ -71,6 +71,10 @@
 		A10B3E451828DC44002C7A81 /* changeDetail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeDetail.png; sourceTree = "<group>"; };
 		A10B3E471828DE30002C7A81 /* retire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retire.png; sourceTree = "<group>"; };
 		A10B3E491828E25E002C7A81 /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
+		A12A22171840DAF40016CE83 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "../Icon-60@2x.png"; sourceTree = "<group>"; };
+		A12A22181840F56A0016CE83 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "../Icon-Small.png"; sourceTree = "<group>"; };
+		A12A22191840F6700016CE83 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "../Icon-Small-40@2x.png"; sourceTree = "<group>"; };
+		A12A221A1840F7140016CE83 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../Icon-Small@2x.png"; sourceTree = "<group>"; };
 		A12E739E17E8214300963CDA /* BTO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BTO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12E73A117E8214300963CDA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A12E73A317E8214300963CDA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -249,8 +253,12 @@
 		A12E73A817E8214300963CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A12A221A1840F7140016CE83 /* Icon-Small@2x.png */,
+				A12A22191840F6700016CE83 /* Icon-Small-40@2x.png */,
+				A12A22181840F56A0016CE83 /* Icon-Small.png */,
 				A19FA749180D1AAD005E68CB /* Icon.png */,
 				A19FA747180D1A17005E68CB /* Icon@2x.png */,
+				A12A22171840DAF40016CE83 /* Icon-60@2x.png */,
 				A12E73A917E8214300963CDA /* BTO-Info.plist */,
 				A12E73AA17E8214300963CDA /* InfoPlist.strings */,
 				A12E73AD17E8214300963CDA /* main.m */,
