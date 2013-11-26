@@ -18,6 +18,7 @@
 
 //探されるときに必要な情報を入力する(名前、特徴、一言、写真)
 @implementation MakeBTOViewController
+@synthesize height;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,8 +33,14 @@
 {
     [super viewDidLoad];
 
-    //----------------------------------ナビゲーションバー(iOS6/7対応)を書く---------------------------------------------------------
+    //-------------------------------iosバージョンを判断し、オブジェクトの高さを決定----------------------------------------------
+    height = 0;
+    NSLog(@"%f",[[UIScreen mainScreen]bounds].size.height );
+    if(floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1){
+        height += 30;
+    }
 
+    //----------------------------------ナビゲーションバー(iOS6/7対応)を書く--------------------------------------------------------
     UINavigationBar *navBar = [[UINavigationBar alloc]init];
     if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1){
         navBar.frame = CGRectMake(0,0,320,45);
@@ -60,8 +67,8 @@
     //----------------------------------登録完了ボタンを書く---------------------------------------------------------
     UIButton *complete = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    UIImage *img = [UIImage imageNamed:@"btnR10.png"]; 
-    complete.frame = CGRectMake(110, 370, 100, 40);
+    UIImage *img = [UIImage imageNamed:@"btnR10.png"];
+    complete.frame = CGRectMake(110, 340+height, 100, 40);
     complete.backgroundColor = [UIColor clearColor];
 
     [complete setBackgroundImage:img forState:UIControlStateNormal];
@@ -84,7 +91,7 @@
     
     //写真選択ボタン
     UIButton *pic_button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    pic_button.frame = CGRectMake(160, 250, 150, 50);
+    pic_button.frame = CGRectMake(160, 253+height, 150, 50);
     [pic_button setTitle:@"自分の写真を選ぶ" forState:UIControlStateNormal];
     [pic_button addTarget:self action:@selector(pic_button:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:pic_button];
@@ -99,7 +106,7 @@
     NSData* imageData = [UserDefaultAcceess getMyPicture];
     if(imageData) {
         UIImageView *backImage = [[UIImageView alloc] init];
-        backImage.frame = CGRectMake(40, 235, 90, 90);
+        backImage.frame = CGRectMake(40, 235+height, 90, 90);
         backImage.image = [UIImage imageWithData:imageData];;
         [self.view addSubview:backImage];
     }
@@ -156,15 +163,15 @@
         alert.cancelButtonIndex = 0;
         [alert show];
         return;
-//    }else if(![CLLocationManager locationServicesEnabled]){
-//        SSGentleAlertView* alert = [SSGentleAlertView new];
-//        alert.delegate = self;
-//        alert.title = @"GPSがOFFになっています";
-//        alert.message = @"GPSをONにしないと\n遊べません。\nONにする場合、設定画面で\n位置情報サービスをONにしてください";
-//        [alert addButtonWithTitle:@"ONにする"];
-//        alert.cancelButtonIndex = 0;
-//        [alert show];
-//        return;
+    }else if(![CLLocationManager locationServicesEnabled]){
+        SSGentleAlertView* alert = [SSGentleAlertView new];
+        alert.delegate = self;
+        alert.title = @"GPSがOFFになっています";
+        alert.message = @"GPSをONにしないと\n遊べません。\nONにする場合、設定画面で\n位置情報サービスをONにしてください";
+        [alert addButtonWithTitle:@"ONにする"];
+        alert.cancelButtonIndex = 0;
+        [alert show];
+        return;
     }
     
     //データベースに名前、特徴一言をアップロード（完了するまで画面遷移しない）
@@ -173,11 +180,10 @@
 
     //BTOの情報送信に成功した場合はMissionForBTOViewControllerに遷移
     if(SuccessCheck){
+        [UserDefaultAcceess ChangeState:2];
         UIViewController *mfbv = [[MissionForBTOViewController alloc]init];
         mfbv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:mfbv animated:YES completion:^ {
-            [UserDefaultAcceess ChangeState:2];
-            
             //非同期で写真をBase64に変換しアップロードする
             if([UserDefaultAcceess getMyPicture]){
                 dispatch_queue_t main_queue;

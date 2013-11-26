@@ -42,31 +42,7 @@
     
     //探している人数、見つけた人数を表示
     [[[DataBaseAccess alloc]init] PicSearcherAndDiscover:[UserDefaultAcceess getMyID] View:self.view];
-    
-    
-//    // ツールバーの表示
-//    for(int row=0 ;row < 3; row++){
-//        UIButton *tool = [UIButton buttonWithType:UIButtonTypeCustom];
-//        tool.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width*row/3+1), 0, ([[UIScreen mainScreen] bounds].size.width/3-2), 44);
-//        tool.backgroundColor = [UIColor blackColor];
-//        [tool.titleLabel setFont:[UIFont systemFontOfSize:15]];
-//        tool.layer.cornerRadius = 0;
-//        tool.clipsToBounds = true;
-//        if(row == 0){
-//            [tool setTitle:@"詳細" forState:UIControlStateNormal];
-//            [tool addTarget:self
-//                     action:@selector(detail:) forControlEvents:UIControlEventTouchUpInside];
-//        }else if(row == 1){
-//            [tool setTitle:@"詳細の変更" forState:UIControlStateNormal];
-//            [tool addTarget:self
-//                     action:@selector(changeProfile:) forControlEvents:UIControlEventTouchUpInside];
-//        }else{
-//            [tool setTitle:@"リタイア" forState:UIControlStateNormal];
-//            [tool addTarget:self
-//                     action:@selector(giveup:) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        [self.view addSubview:tool];
-//    }
+
     
     UIToolbar *toolBar = [[UIToolbar alloc]init];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) { //ios7以上

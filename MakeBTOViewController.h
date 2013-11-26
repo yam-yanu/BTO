@@ -15,6 +15,7 @@
     UITextField *textField;
 }
 @property(nonatomic, strong) UITapGestureRecognizer *singleTap;
+@property int height;
 
 
 
