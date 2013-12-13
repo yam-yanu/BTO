@@ -60,6 +60,7 @@
 		A1A0F82B180566770056C2F5 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0F82A180566770056C2F5 /* EditViewController.m */; };
 		A1A419E817F436D000157939 /* UserDefaultAcceess.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A419E717F436D000157939 /* UserDefaultAcceess.m */; };
 		A1AF0B82180536F10057402D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A1AF0B81180536F10057402D /* Base64.m */; };
+		A1BC4BE3184511DC00B78262 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1BC4BE2184511DC00B78262 /* Images.xcassets */; };
 		DA4D054F17F86100004DD083 /* btnR10.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4D054E17F86100004DD083 /* btnR10.png */; };
 		DAC1B88C183F6EBF005FCEA8 /* BTO.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B88B183F6EBF005FCEA8 /* BTO.jpg */; };
 		DAC1B89F183F89B8005FCEA8 /* button1.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC1B89D183F89B8005FCEA8 /* button1.png */; };
@@ -143,6 +144,7 @@
 		A1A419E717F436D000157939 /* UserDefaultAcceess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultAcceess.m; sourceTree = "<group>"; };
 		A1AF0B80180536F10057402D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		A1AF0B81180536F10057402D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		A1BC4BE2184511DC00B78262 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DA4D054E17F86100004DD083 /* btnR10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnR10.png; sourceTree = "<group>"; };
 		DAC1B88B183F6EBF005FCEA8 /* BTO.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = BTO.jpg; sourceTree = SOURCE_ROOT; };
 		DAC1B89D183F89B8005FCEA8 /* button1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button1.png; path = ../button1.png; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 		A12E73A817E8214300963CDA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1BC4BE2184511DC00B78262 /* Images.xcassets */,
 				A12A221A1840F7140016CE83 /* Icon-Small@2x.png */,
 				A12A22191840F6700016CE83 /* Icon-Small-40@2x.png */,
 				A12A22181840F56A0016CE83 /* Icon-Small.png */,
@@ -428,6 +431,7 @@
 				A12E73AC17E8214300963CDA /* InfoPlist.strings in Resources */,
 				A12E73B417E8214300963CDA /* Default.png in Resources */,
 				A12E73B617E8214300963CDA /* Default@2x.png in Resources */,
+				A1BC4BE3184511DC00B78262 /* Images.xcassets in Resources */,
 				A12E73B817E8214300963CDA /* Default-568h@2x.png in Resources */,
 				A12E73C117E8243F00963CDA /* GoogleMaps.bundle in Resources */,
 				A12E73F517E831A700963CDA /* SSGentleAlertButtonBlack.xib in Resources */,
@@ -520,8 +524,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "A0D94106-C412-41A9-8884-7CC7BB62A837";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -537,6 +542,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: YOUSUKE YANO (J6D45F78VY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -545,15 +551,18 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "7C482023-047B-412D-80C5-47590547DCF3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
 		A12E73BC17E8214300963CDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,7 +575,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "A0D94106-C412-41A9-8884-7CC7BB62A837";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -574,7 +584,9 @@
 		A12E73BD17E8214300963CDA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: YOUSUKE YANO (J6D45F78VY)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BTO\"",
@@ -586,7 +598,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "7C482023-047B-412D-80C5-47590547DCF3";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
